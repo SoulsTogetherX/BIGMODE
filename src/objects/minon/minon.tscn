@@ -1,0 +1,198 @@
+[gd_scene load_steps=19 format=3 uid="uid://ug3aissj7fqx"]
+
+[ext_resource type="Script" path="res://src/objects/minon/minon.gd" id="1_x86le"]
+[ext_resource type="Texture2D" uid="uid://8op1vsrf2hra" path="res://asset/sprites/minon/minon_spritesheet.png" id="2_d3kg8"]
+[ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="3_c2qfn"]
+[ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_machine.gd" id="4_x64ip"]
+[ext_resource type="Script" path="res://src/objects/minon/state/fall.gd" id="5_13mwt"]
+[ext_resource type="Script" path="res://src/objects/minon/state/idle.gd" id="6_cwrv1"]
+[ext_resource type="Script" path="res://src/objects/minon/state/move.gd" id="7_8qpba"]
+
+[sub_resource type="SystemFont" id="SystemFont_jxklu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcebg"]
+font = SubResource("SystemFont_jxklu")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2qha"]
+size = Vector2(52.5, 48.75)
+
+[sub_resource type="Animation" id="Animation_323fg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6m82t"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nvd7n"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mem16"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_xvard"]
+resource_name = "ded"
+length = 0.4
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juugu"]
+_data = {
+"RESET": SubResource("Animation_323fg"),
+"ded": SubResource("Animation_xvard"),
+"fall": SubResource("Animation_6m82t"),
+"idle": SubResource("Animation_nvd7n"),
+"walk": SubResource("Animation_mem16")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgdwk"]
+size = Vector2(37.5, 2.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guohv"]
+size = Vector2(50.0001, 20)
+
+[node name="Minon" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_layer = 4
+script = ExtResource("1_x86le")
+settings = SubResource("LabelSettings_qcebg")
+
+[node name="body" type="Sprite2D" parent="."]
+position = Vector2(0, 0.100125)
+scale = Vector2(1.002, 0.997146)
+texture = ExtResource("2_d3kg8")
+hframes = 4
+vframes = 2
+frame = 6
+
+[node name="bodyCollide" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.62499)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_j2qha")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_juugu")
+}
+
+[node name="weak_point" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weak_point"]
+self_modulate = Color(0, 1, 0, 1)
+position = Vector2(-5.21541e-07, -20)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_lgdwk")
+
+[node name="kill_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kill_area"]
+self_modulate = Color(0, 0, 1, 1)
+position = Vector2(-4.47035e-07, 20)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_guohv")
+
+[node name="fall_detect" type="RayCast2D" parent="."]
+position = Vector2(-26.25, 30)
+target_position = Vector2(-3.8147e-06, 1.25)
+
+[node name="forward_detect" type="RayCast2D" parent="."]
+position = Vector2(-26.25, 28.75)
+target_position = Vector2(-3.75, 0)
+collision_mask = 5
+
+[node name="StateOverhead" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
+script = ExtResource("3_c2qfn")
+_usesActor = true
+_actor = NodePath("..")
+_usesAnimationPlayer = true
+_animationPlayer = NodePath("../AnimationPlayer")
+
+[node name="x_pos" type="Node" parent="StateOverhead" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("4_x64ip")
+_name_id = "x_pos"
+starting_state = NodePath("move")
+
+[node name="move" type="Node" parent="StateOverhead/x_pos"]
+script = ExtResource("7_8qpba")
+
+[node name="y_pos" type="Node" parent="StateOverhead" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("4_x64ip")
+_name_id = "y_pos"
+starting_state = NodePath("idle")
+
+[node name="fall" type="Node" parent="StateOverhead/y_pos" node_paths=PackedStringArray("_idle")]
+script = ExtResource("5_13mwt")
+_idle = NodePath("../idle")
+
+[node name="idle" type="Node" parent="StateOverhead/y_pos" node_paths=PackedStringArray("fall")]
+script = ExtResource("6_cwrv1")
+fall = NodePath("../fall")
+
+[connection signal="body_entered" from="weak_point" to="." method="_jumped_on"]
+[connection signal="body_entered" from="kill_area" to="." method="_kill_player"]

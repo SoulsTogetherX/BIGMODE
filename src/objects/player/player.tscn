@@ -1,0 +1,166 @@
+[gd_scene load_steps=19 format=3 uid="uid://1l3xe5hihuta"]
+
+[ext_resource type="Script" path="res://src/objects/player/player.gd" id="1_h5kqw"]
+[ext_resource type="Texture2D" uid="uid://bj5bgnb0vngqv" path="res://asset/sprites/player/player_spritesheet.png" id="2_7i1gu"]
+[ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="3_q87t5"]
+[ext_resource type="Script" path="res://src/objects/player/state/x_pos/idle.gd" id="4_pcn8a"]
+[ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_machine.gd" id="4_s1g65"]
+[ext_resource type="Script" path="res://src/objects/player/state/x_pos/move.gd" id="5_gsreb"]
+[ext_resource type="Script" path="res://src/objects/player/state/x_pos/slow_down.gd" id="6_a5q55"]
+[ext_resource type="Script" path="res://src/objects/player/state/y_pos/fall.gd" id="7_6auso"]
+[ext_resource type="Script" path="res://src/objects/player/state/y_pos/jump.gd" id="8_g7xr0"]
+[ext_resource type="Script" path="res://src/objects/player/state/y_pos/idle.gd" id="8_ruw12"]
+
+[sub_resource type="SystemFont" id="SystemFont_uhc4g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ywm34"]
+font = SubResource("SystemFont_uhc4g")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7x4t"]
+height = 54.0
+
+[sub_resource type="Animation" id="Animation_323fg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_6m82t"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nvd7n"]
+resource_name = "idle"
+length = 2.41
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_mem16"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juugu"]
+_data = {
+"RESET": SubResource("Animation_323fg"),
+"fall": SubResource("Animation_6m82t"),
+"idle": SubResource("Animation_nvd7n"),
+"walk": SubResource("Animation_mem16")
+}
+
+[node name="player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_h5kqw")
+settings = SubResource("LabelSettings_ywm34")
+
+[node name="body" type="Sprite2D" parent="."]
+position = Vector2(0, 0.100125)
+scale = Vector2(1.002, 0.997146)
+texture = ExtResource("2_7i1gu")
+hframes = 6
+vframes = 2
+frame = 6
+
+[node name="bodyCollide" type="CollisionShape2D" parent="."]
+position = Vector2(4, 7)
+shape = SubResource("CapsuleShape2D_s7x4t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_juugu")
+}
+
+[node name="coyote_timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="jump_buffer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="StateOverhead" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
+script = ExtResource("3_q87t5")
+_usesActor = true
+_actor = NodePath("..")
+_usesAnimationPlayer = true
+_animationPlayer = NodePath("../AnimationPlayer")
+
+[node name="x_pos" type="Node" parent="StateOverhead" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("4_s1g65")
+_name_id = "x_pos"
+starting_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateOverhead/x_pos" node_paths=PackedStringArray("move")]
+script = ExtResource("4_pcn8a")
+move = NodePath("../move")
+
+[node name="move" type="Node" parent="StateOverhead/x_pos" node_paths=PackedStringArray("slow_down")]
+script = ExtResource("5_gsreb")
+slow_down = NodePath("../slow_down")
+
+[node name="slow_down" type="Node" parent="StateOverhead/x_pos" node_paths=PackedStringArray("idle", "move")]
+script = ExtResource("6_a5q55")
+idle = NodePath("../idle")
+move = NodePath("../move")
+
+[node name="y_pos" type="Node" parent="StateOverhead" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("4_s1g65")
+_name_id = "y_pos"
+starting_state = NodePath("idle")
+
+[node name="fall" type="Node" parent="StateOverhead/y_pos" node_paths=PackedStringArray("idle", "jump")]
+script = ExtResource("7_6auso")
+idle = NodePath("../idle")
+jump = NodePath("../jump")
+
+[node name="jump" type="Node" parent="StateOverhead/y_pos" node_paths=PackedStringArray("fall")]
+script = ExtResource("8_g7xr0")
+fall = NodePath("../fall")
+
+[node name="idle" type="Node" parent="StateOverhead/y_pos" node_paths=PackedStringArray("fall", "jump")]
+script = ExtResource("8_ruw12")
+fall = NodePath("../fall")
+jump = NodePath("../jump")
