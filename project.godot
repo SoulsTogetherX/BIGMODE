@@ -15,6 +15,10 @@ run/main_scene="res://room/test_room.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://asset/sprites/icon/icon.svg"
 
+[autoload]
+
+SoundManager="*res://global/SoundManager.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -39,6 +43,11 @@ jump={
 reset={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
+]
+}
+shoot={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(266, 13),"global_position":Vector2(270, 54),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":true,"script":null)
 ]
 }
 

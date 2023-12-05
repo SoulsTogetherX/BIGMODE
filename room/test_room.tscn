@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpx5erqcylul1"]
+[gd_scene load_steps=10 format=3 uid="uid://bpx5erqcylul1"]
 
 [ext_resource type="Texture2D" uid="uid://doms2dom2sm1e" path="res://asset/sprites/icon/icon.svg" id="1_ck6uf"]
 [ext_resource type="PackedScene" uid="uid://1l3xe5hihuta" path="res://src/objects/player/player.tscn" id="1_mfp8i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://room/test_room.gd" id="1_s5ksk"]
 [ext_resource type="Script" path="res://src/custom_nodes/cameraFollow2D/cameraFollow2D.gd" id="4_lqb6c"]
 [ext_resource type="PackedScene" uid="uid://ug3aissj7fqx" path="res://src/objects/minon/minon.tscn" id="4_rambk"]
+[ext_resource type="PackedScene" uid="uid://8tb1htuku7d4" path="res://src/GUI/gui.tscn" id="4_uhl87"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uid2w"]
 shader = ExtResource("1_mnylv")
@@ -20,14 +21,6 @@ script = ExtResource("1_s5ksk")
 [node name="player" parent="." instance=ExtResource("1_mfp8i")]
 
 [node name="Minon" parent="." instance=ExtResource("4_rambk")]
-position = Vector2(270, 8)
-move = true
-
-[node name="Minon2" parent="." instance=ExtResource("4_rambk")]
-position = Vector2(351, 8)
-move = true
-
-[node name="Minon3" parent="." instance=ExtResource("4_rambk")]
 position = Vector2(433, 8)
 move = true
 
@@ -36,13 +29,17 @@ script = ExtResource("4_lqb6c")
 follow = NodePath("../player")
 auto_follow = true
 
+[node name="GUI" parent="Camera2D" instance=ExtResource("4_uhl87")]
+follow_viewport_enabled = false
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(255.5, 52.5)
-scale = Vector2(5.91406, 0.320312)
+scale = Vector2(177.42, 0.32)
 texture = ExtResource("1_ck6uf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(256, 43)
+scale = Vector2(30, 1)
 shape = SubResource("RectangleShape2D_fnqom")

@@ -103,7 +103,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	for machine in _state_machines.values():
 		if machine:
-			await machine.process_physics(delta);
+			machine.process_physics(delta);
 
 func _process(delta: float) -> void:
 	for machine in _state_machines.values():
@@ -128,18 +128,18 @@ func get_actor() -> Node:
 ##
 ## [b]NOTE[/b]: This function will [i]stop the program[/i] if the given name identifier cannot be
 ## found in the accessible children.
-func change_state(state_name: String, machine_id: String) -> void:
+func change_state(machine_id: String, state_name: String) -> void:
 	if _state_machines.has(machine_id):
 		_state_machines[machine_id].change_state(state_name);
 
 ## Checks if the runnig [StateBase]'s name identifier is withing a passed [Array] of [String] objects.
-func compair_state_names(stateNames: Array[String], machine_id: String) -> bool:
+func compair_state_names(machine_id: String, stateNames: Array[String]) -> bool:
 	if _state_machines.has(machine_id):
 		return _state_machines[machine_id].current_state.get_state_name() in stateNames;
 	return false;
 
 ## Checks if the runnig [StateBase]'s name identifier is equal to a passed [String] object.
-func compair_state_name(stateName: String, machine_id: String) -> bool:
+func compair_state_name(machine_id: String, stateName: String) -> bool:
 	if _state_machines.has(machine_id):
 		return _state_machines[machine_id].current_state.get_state_name() == stateName;
 	return false;
@@ -185,4 +185,9 @@ func has_machine_state(machine_id : String, state_id : String) -> bool:
 func is_in_state(machine_id : String, state_id : String) -> bool:
 	if _state_machines.has(machine_id):
 		return _state_machines[machine_id].is_in_state(state_id);
+	return false;
+
+func is_in_states(machine_id : String, state_ids : Array[String]) -> bool:
+	if _state_machines.has(machine_id):
+		return _state_machines[machine_id].is_in_states(state_ids);
 	return false;

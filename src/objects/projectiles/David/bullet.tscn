@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dswddrk6bhuqm"]
+
+[ext_resource type="Script" path="res://src/objects/projectiles/David/HomingProject.gd" id="1_o24vl"]
+[ext_resource type="PackedScene" uid="uid://c5hvkqw3mt0xl" path="res://asset/particles/bullet_particle.tscn" id="2_xytn6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4kdl"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mgdfi"]
+radius = 121.004
+
+[node name="bullet" type="Node2D"]
+script = ExtResource("1_o24vl")
+continous_collition_checking = true
+
+[node name="BulletParticle" parent="." instance=ExtResource("2_xytn6")]
+
+[node name="CollisionDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetection"]
+shape = SubResource("CircleShape2D_d4kdl")
+
+[node name="HomeCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HomeCheck"]
+self_modulate = Color(0, 0, 0, 1)
+shape = SubResource("CircleShape2D_mgdfi")
+
+[connection signal="body_entered" from="HomeCheck" to="." method="_on_home_check_body_entered"]

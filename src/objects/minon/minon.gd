@@ -1,5 +1,5 @@
 @tool
-extends CharacterBody2D
+class_name Minon extends CharacterBody2D
 
 const GRAVITY : int   =  980;
 var move_speed : float = 250.;
@@ -11,10 +11,6 @@ var move_speed : float = 250.;
 			await ready;
 		
 		move = val;
-		if move:
-			$StateOverhead/x_pos.process_mode = Node.PROCESS_MODE_INHERIT;
-		else:
-			$StateOverhead/x_pos.process_mode = Node.PROCESS_MODE_DISABLED;
 
 @export var fall_move : bool = false;
 var _face_left : bool = false;
@@ -40,13 +36,22 @@ func _ready() -> void:
 	quotes.quotes = [
 		["Ow", 2],
 		["Painful", 2],
+		["Memory Damage", 2],
+		["Segfault", 2],
+		["Kill Switch", 2],
+		["Critical Falure", 1],
 		["Please contact IT", 1],
 		["Mission failed", 1],
-		["Invaild thread count", 0.6],
-		["Error 404 life not found", 0.6],
-		["Processes failing", 0.5],
+		["Invaild thread count", 0.7],
+		["Error 404 life not found", 0.7],
+		["Processes failing", 0.65],
+		["I hate you!", 0.5],
+		["Robot will remember", 0.2],
+		["You will regret this!", 0.1],
 		["0x596F7572204D6F6D", 0.2],
-		["I had a family!", 0.1]
+		["100 0 01 100", 0.2],
+		["I had a family!", 0.1],
+		["Pineapple Pizza is--", 0.05],
 		];
 	
 	if Engine.is_editor_hint():
@@ -54,16 +59,19 @@ func _ready() -> void:
 		set_physics_process(false);
 
 func _jumped_on(body: Node2D) -> void:
-	body.display = false;
 	body.force_jump();
+	body.velocity.x *= 1.3;
 	kill();
 
 func _kill_player(body: Node2D) -> void:
 	body.kill();
 
 func kill() -> void:
+	if $StateOverhead.is_in_state("main", "ded"):
+		return;
+	
 	TextSpawner.new(settings).spawn(get_tree(), global_position, quotes.pick_random());
-	queue_free();
+	$StateOverhead.change_state("main", "ded");
 
 func turn(left : bool = false) -> void:
 	var sign_c = (1 if left else -1);
@@ -72,5 +80,4 @@ func turn(left : bool = false) -> void:
 	forward_detect.position.x = fall_detect.position.x;
 	forward_detect.target_position.x = sign_c * 2;
 	
-	body.flip_h = left;
-	_face_left = left;
+	body.scale.x = sign_c;

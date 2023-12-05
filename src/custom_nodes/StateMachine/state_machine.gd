@@ -179,3 +179,6 @@ func has_state(state_id : String) -> bool:
 
 func is_in_state(state_id : String) -> bool:
 	return _current_state.get_id() == state_id;
+
+func is_in_states(state_ids : Array[String]) -> bool:
+	return _current_state.get_id() in state_ids;
