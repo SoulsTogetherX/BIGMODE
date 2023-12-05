@@ -60,6 +60,7 @@ func _ready() -> void:
 	shoot_quotes.quotes = [
 		["Shoot", 5],
 		["Bang", 5],
+		["Bang Bang", 1],
 		["Bamp", 5],
 		["Zoom", 2],
 		["Zeem", 2],
@@ -127,11 +128,12 @@ func _move_hor(overwrite : bool = false) -> bool:
 	if move == 0:
 		_prev_move = 0;
 		return false;
+	else:
+		turn(move < 0);
 	if _prev_move == move && !overwrite:
 		return true;
 	
 	_prev_move = move;
 	velocity.x = move * SPEED;
-	turn(velocity.x < 0);
 	
 	return true;

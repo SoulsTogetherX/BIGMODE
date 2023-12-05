@@ -14,7 +14,6 @@ func get_id():
 func enter() -> void:
 	_animationPlayer.play("walk");
 	if _actor.velocity.x != 0:
-		_actor.turn(_actor.velocity.x < 0);
 		_speed = abs(_actor.velocity.x);
 		return;
 	_speed = 0;

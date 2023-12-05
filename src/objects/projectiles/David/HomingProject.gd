@@ -31,7 +31,7 @@ func _move_to(delta : float) -> void:
 
 func on_collide(collide : Node2D) -> void:
 	if collide is Minon:
-		collide.kill();
+		collide.shot_at();
 	destroy();
 
 func _on_home_check_body_entered(body: Node2D) -> void:
