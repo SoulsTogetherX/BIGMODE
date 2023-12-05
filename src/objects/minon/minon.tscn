@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/objects/minon/state/ded.gd" id="8_43vlt"]
 
 [sub_resource type="SystemFont" id="SystemFont_jxklu"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_qcebg"]
 font = SubResource("SystemFont_jxklu")
@@ -47,6 +48,36 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xvard"]
+resource_name = "ded"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_6m82t"]
@@ -117,36 +148,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_xvard"]
-resource_name = "ded"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_juugu"]
 _data = {
 "RESET": SubResource("Animation_323fg"),
@@ -186,11 +187,9 @@ frame = 6
 
 [node name="WalkParticle" parent="body" instance=ExtResource("6_4ho5w")]
 position = Vector2(16.2176, 21.2104)
-scale = Vector2(1, 1)
 
 [node name="bodyCollide" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5.62499)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_j2qha")
 
 [node name="body_animate" type="AnimationPlayer" parent="."]

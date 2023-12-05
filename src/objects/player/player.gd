@@ -126,7 +126,6 @@ func _move_hor(overwrite : bool = false) -> bool:
 	var move : float = get_movement();
 	if move == 0:
 		_prev_move = 0;
-		velocity.x = 0;
 		return false;
 	if _prev_move == move && !overwrite:
 		return true;

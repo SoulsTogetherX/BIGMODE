@@ -5,14 +5,19 @@ extends State
 @export var idle : State;
 @export var move : State;
 
-var _friction : float = 500.;
+var _friction : float = 2000.;
 var _speed    : float;
 
 func get_id():
 	return "slow_down";
 
 func enter() -> void:
-	_speed = _actor.SPEED * sign(_actor.get_movement());
+	_animationPlayer.play("walk");
+	if _actor.velocity.x != 0:
+		_actor.turn(_actor.velocity.x < 0);
+		_speed = abs(_actor.velocity.x);
+		return;
+	_speed = 0;
 
 func process_physics(_delta: float) -> State:
 	if Input.is_action_just_pressed("jump"):
@@ -31,6 +36,6 @@ func process_physics(_delta: float) -> State:
 		_actor.velocity.x = 0;
 		return idle;
 	
-	_actor.velocity.x = _speed;
+	_actor.velocity.x = _speed * sign(_actor.velocity.x);
 	
 	return null;
