@@ -2,4 +2,6 @@
 extends CameraFollow2D
 
 func _ready() -> void:
-	GlobalInfo.camera = self;
+	super();
+	if !Engine.is_editor_hint():
+		GlobalInfo.camera = self;

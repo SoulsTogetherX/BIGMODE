@@ -35,7 +35,7 @@ func _player_entered(body: Node2D) -> void:
 		
 		if slow_down:
 			GlobalInfo.camera.zoom_event(Vector2(0.5, 0.5), Vector2(1.5, 1.5));
-			TimeManager.instant_time_scale(0.3, 0.5);
+			TimeManager.instant_time_scale(0.3, 0.5, true);
 			await get_tree().create_timer(0.5, true, false, true).timeout;
 			GlobalInfo.camera.zoom_event(Vector2(0.5, 0.5), Vector2(1, 1));
 	

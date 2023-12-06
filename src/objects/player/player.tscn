@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://1l3xe5hihuta"]
+[gd_scene load_steps=46 format=3 uid="uid://1l3xe5hihuta"]
 
 [ext_resource type="Script" path="res://src/objects/player/player.gd" id="1_h5kqw"]
 [ext_resource type="Texture2D" uid="uid://bj5bgnb0vngqv" path="res://asset/sprites/player/david_spritesheet.png" id="2_e2nie"]
@@ -25,7 +25,13 @@
 [ext_resource type="Script" path="res://src/objects/player/state/gun/shoot.gd" id="12_6e6o0"]
 [ext_resource type="AudioStream" uid="uid://d1xq0ox0s7rag" path="res://asset/sounds/land/land_3.wav" id="12_n670b"]
 [ext_resource type="AudioStream" uid="uid://dqibxhkqnqdrd" path="res://asset/sounds/land/land_4.wav" id="13_qvo43"]
+[ext_resource type="AudioStream" uid="uid://dp8l2vk1nuiyo" path="res://asset/sounds/gun/Gun_1.wav" id="14_buhvo"]
 [ext_resource type="PackedScene" uid="uid://dswddrk6bhuqm" path="res://src/objects/projectiles/David/bullet.tscn" id="14_fxwpd"]
+[ext_resource type="AudioStream" uid="uid://b6w6nilcp1773" path="res://asset/sounds/gun/Gun_2.wav" id="15_6s3cv"]
+[ext_resource type="AudioStream" uid="uid://cip1sb0fitqem" path="res://asset/sounds/gun/Gun_3.wav" id="16_hcwrn"]
+[ext_resource type="AudioStream" uid="uid://rp5ow8oftas3" path="res://asset/sounds/gun/Gun_4.wav" id="17_3u2qa"]
+[ext_resource type="AudioStream" uid="uid://cgnwkbc1ekyur" path="res://asset/sounds/gun/Gun_5.wav" id="18_n73su"]
+[ext_resource type="AudioStream" uid="uid://b4clxq2cx4qd0" path="res://asset/sounds/gun/Gun_6.wav" id="19_h8whg"]
 
 [sub_resource type="SystemFont" id="SystemFont_uhc4g"]
 subpixel_positioning = 0
@@ -243,6 +249,11 @@ audios = Array[AudioStream]([ExtResource("6_xpakn"), ExtResource("7_i3prd"), Ext
 [node name="land" parent="." instance=ExtResource("2_qo5up")]
 pitch_scale = 0.65
 audios = Array[AudioStream]([ExtResource("10_f6it4"), ExtResource("11_45om5"), ExtResource("12_n670b"), ExtResource("13_qvo43")])
+
+[node name="gun_shot" parent="." instance=ExtResource("2_qo5up")]
+volume_db = -20.0
+pitch_scale = 0.6
+audios = Array[AudioStream]([ExtResource("14_buhvo"), ExtResource("15_6s3cv"), ExtResource("16_hcwrn"), ExtResource("17_3u2qa"), ExtResource("18_n73su"), ExtResource("19_h8whg")])
 
 [node name="turn_node" type="Node2D" parent="."]
 

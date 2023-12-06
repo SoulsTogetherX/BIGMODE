@@ -51,4 +51,6 @@ func process_frame(_delta: float) -> State:
 						* 20, -30)\
 						);
 	
+	_actor.gun_sound();
+	
 	return _idle;

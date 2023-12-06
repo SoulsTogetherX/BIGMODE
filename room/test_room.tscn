@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpx5erqcylul1"]
+[gd_scene load_steps=16 format=3 uid="uid://bpx5erqcylul1"]
 
 [ext_resource type="Texture2D" uid="uid://doms2dom2sm1e" path="res://asset/sprites/icon/icon.svg" id="1_ck6uf"]
 [ext_resource type="PackedScene" uid="uid://1l3xe5hihuta" path="res://src/objects/player/player.tscn" id="1_mfp8i"]
 [ext_resource type="Shader" path="res://asset/shader/JitterFreePixelArt.gdshader" id="1_mnylv"]
 [ext_resource type="Script" path="res://room/test_room.gd" id="1_s5ksk"]
+[ext_resource type="TileSet" uid="uid://conm8l7uktq4s" path="res://asset/sprites/titlesheet/Standard_TileSheet.tres" id="3_evkj0"]
 [ext_resource type="PackedScene" uid="uid://ug3aissj7fqx" path="res://src/objects/minon/minon.tscn" id="4_rambk"]
 [ext_resource type="PackedScene" uid="uid://8tb1htuku7d4" path="res://src/GUI/gui.tscn" id="4_uhl87"]
 [ext_resource type="Script" path="res://room/Camera.gd" id="6_m88as"]
@@ -28,6 +29,10 @@ size = Vector2(57.008, 206)
 [node name="test_room" type="Node2D"]
 material = SubResource("ShaderMaterial_uid2w")
 script = ExtResource("1_s5ksk")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("3_evkj0")
+format = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
@@ -99,6 +104,7 @@ slow_down = true
 
 [node name="flip_area" parent="." instance=ExtResource("9_5cq2q")]
 slow_down = true
+quote = "I have my job!"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flip_area"]
 position = Vector2(18.504, -74.6438)

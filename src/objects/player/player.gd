@@ -20,6 +20,8 @@ const GRAVITY       : int   =  980;
 @onready var davids_gun     : Sprite2D         = $turn_node/DavidsGun
 @onready var on_wall        : Area2D           = $turn_node/on_wall
 
+@onready var gun_shot: Emitter = $gun_shot;
+
 var land_quotes      : QuotesInfo = QuotesInfo.new();
 var jump_quotes      : QuotesInfo = QuotesInfo.new();
 var coyote_quotes    : QuotesInfo = QuotesInfo.new();
@@ -192,3 +194,6 @@ func _move_hor(overwrite : bool = false) -> bool:
 		velocity.x = lerp(velocity.x, move * SPEED, 0.9);
 	
 	return true;
+
+func gun_sound() -> void:
+	gun_shot.play_random();
