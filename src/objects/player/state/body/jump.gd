@@ -16,7 +16,10 @@ func enter() -> void:
 	fall.has_jumped = true;
 	
 	_animationPlayer.play("jump");
-	_actor.velocity.y = _actor.JUMP_VELOCITY;
+	if _actor.boosted:
+		_actor.velocity.y += _actor.BOOST_JUMP;
+	else:
+		_actor.velocity.y += _actor.JUMP_VELOCITY;
 
 func process_physics(delta: float) -> State:
 	if _actor.is_on_floor():

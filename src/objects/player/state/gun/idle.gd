@@ -13,9 +13,9 @@ func reposition_gun() -> void:
 	var dir = sign(_actor.davids_gun.get_parent().scale.x);
 	var angle : float = rad_to_deg(_actor.davids_gun.global_position.angle_to_point(target));
 	if dir == 1:
-		if abs(angle) > 60:
+		if abs(angle) > 70:
 			return;
-	elif abs(angle) < 120:
+	elif abs(angle) < 110:
 		return;
 	
 	_actor.davids_gun.global_rotation_degrees = angle;

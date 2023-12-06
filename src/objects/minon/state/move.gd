@@ -7,7 +7,7 @@ func get_id():
 	return "walk";
 
 func enter() -> void:
-	_actor.velocity = Vector2(_actor.move_speed * (1 if _actor.face_left else -1), 0);
+	_actor.velocity = Vector2(_actor.move_speed * (-1 if _actor.face_left else 1), 0);
 	_animationPlayer.play("walk");
 
 func process_physics(_delta: float) -> State:
@@ -26,5 +26,5 @@ func process_physics(_delta: float) -> State:
 	return null;
 
 func turn() -> void:
-	_actor.turn(!_actor.face_left);
-	_actor.velocity.x *= -1;
+	_actor.face_left = !_actor.face_left;
+	_actor.velocity = Vector2(_actor.move_speed * (-1 if _actor.face_left else 1), 0);

@@ -13,21 +13,18 @@ var move_speed : float = 250.;
 		move = val;
 
 @export var fall_move : bool = false;
-var _face_left : bool = false;
 @export var face_left : bool:
-	get:
-		return _face_left;
 	set(val):
 		if not is_inside_tree():
 			await ready;
 		
-		turn(val);
-		_face_left = val;
+		body.scale.x = (1 if val else -1);
+		face_left = val;
 
 @onready var weak_point: Area2D = $weak_point;
 @onready var body: Sprite2D = $body
-@onready var fall_detect: RayCast2D = $fall_detect
-@onready var forward_detect: RayCast2D = $forward_detect;
+@onready var fall_detect: RayCast2D = $body/fall_detect
+@onready var forward_detect: RayCast2D = $body/forward_detect
 
 var crushed_quotes : QuotesInfo = QuotesInfo.new();
 var shot_quotes    : QuotesInfo = QuotesInfo.new();
@@ -74,6 +71,9 @@ func _ready() -> void:
 		["Pineapple Pizza is--", 0.05],
 		];
 	
+	fall_detect.add_exception(self);
+	forward_detect.add_exception(self);
+	
 	if Engine.is_editor_hint():
 		set_process(false);
 		set_physics_process(false);
@@ -89,18 +89,11 @@ func shot_at() -> void:
 	kill();
 
 func _kill_player(body: Node2D) -> void:
+	if $StateOverhead.is_in_state("main", "ded") || body.boosted:
+		return;
 	body.kill();
 
 func kill() -> void:
 	if $StateOverhead.is_in_state("main", "ded"):
 		return;
 	$StateOverhead.change_state("main", "ded");
-
-func turn(left : bool = false) -> void:
-	var sign_c = (1 if left else -1);
-	
-	fall_detect.position.x = 27 * sign_c;
-	forward_detect.position.x = fall_detect.position.x;
-	forward_detect.target_position.x = sign_c * 2;
-	
-	body.scale.x = sign_c;

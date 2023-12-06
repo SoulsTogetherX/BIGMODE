@@ -101,11 +101,6 @@ func _ready() -> void:
 	if !auto_follow:
 		set_physics_process(false);
 	
-	_shake_tween = create_tween();
-	_shake_tween.kill();
-	_zoom_tweem  = create_tween();
-	_zoom_tweem.kill();
-	
 	_shaker = RepeatCaller.new();
 	add_child(_shaker);
 	_shaker.call_func = _shake_func;
@@ -173,7 +168,8 @@ func shake_event(
 				decay_spd : Vector3 = Vector3.ZERO,
 				delay     : float   = 0.0
 				) -> void:
-	_shake_tween.kill();
+	if _shake_tween:
+		_shake_tween.kill();
 	_shake_tween = create_tween().set_parallel();
 	
 	_strength = strength;
@@ -221,7 +217,8 @@ func zoom_event(
 				trans       : Tween.TransitionType = Tween.TRANS_SINE,
 				ease        : Tween.EaseType       = Tween.EASE_IN_OUT
 				) -> void:
-	_zoom_tweem.kill();
+	if _zoom_tweem:
+		_zoom_tweem.kill();
 	
 	_zoom_tweem = create_tween().set_parallel();
 	_zoom_tweem.set_ease(ease);
@@ -230,7 +227,7 @@ func zoom_event(
 		_zoom_tweem.tween_property(self, "zoom:x", zoom_target.x, times.x);
 	if times.y > 0:
 		_zoom_tweem.tween_property(self, "zoom:y", zoom_target.y, times.y);
-	_shake_tween.tween_callback(func(): finish_zoom.emit());
+	_zoom_tweem.tween_callback(func(): finish_zoom.emit());
 
 ## Returns if the camera is still zooming.
 func is_zooming() -> bool:

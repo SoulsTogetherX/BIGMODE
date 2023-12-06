@@ -132,18 +132,6 @@ func change_state(machine_id: String, state_name: String) -> void:
 	if _state_machines.has(machine_id):
 		_state_machines[machine_id].change_state(state_name);
 
-## Checks if the runnig [StateBase]'s name identifier is withing a passed [Array] of [String] objects.
-func compair_state_names(machine_id: String, stateNames: Array[String]) -> bool:
-	if _state_machines.has(machine_id):
-		return _state_machines[machine_id].current_state.get_state_name() in stateNames;
-	return false;
-
-## Checks if the runnig [StateBase]'s name identifier is equal to a passed [String] object.
-func compair_state_name(machine_id: String, stateName: String) -> bool:
-	if _state_machines.has(machine_id):
-		return _state_machines[machine_id].current_state.get_state_name() == stateName;
-	return false;
-
 ## Returns the ids of all attached [StateMachine] objects.
 func get_machine_ids() -> Array[String]:
 	return _state_machines.keys();
@@ -182,11 +170,13 @@ func find_state(state_id : String) -> String:
 func has_machine_state(machine_id : String, state_id : String) -> bool:
 	return true;
 
+## Checks if the running [StateBase]'s name identifier is equal to a passed [String] object.
 func is_in_state(machine_id : String, state_id : String) -> bool:
 	if _state_machines.has(machine_id):
 		return _state_machines[machine_id].is_in_state(state_id);
 	return false;
 
+## Checks if the running [StateBase]'s name identifier is withing a passed [Array] of [String] objects.
 func is_in_states(machine_id : String, state_ids : Array[String]) -> bool:
 	if _state_machines.has(machine_id):
 		return _state_machines[machine_id].is_in_states(state_ids);

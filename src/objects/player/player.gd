@@ -1,29 +1,50 @@
 class_name Player extends CharacterBody2D
 
 const SPEED         : float =  500;
+const BOOST_SPEED   : float =  2000;
 const JUMP_VELOCITY : int   = -400;
+const BOOST_JUMP    : float = -500;
 const JUMP_CUTOFF   : float = -50.;
+const BOOST_CUTOFF  : float = -60;
 const GRAVITY       : int   =  980;
 
 @export var settings : LabelSettings;
 
 @onready var coyote_timer   : Timer            = $coyote_timer;
 @onready var jump_buffer    : Timer            = $jump_buffer;
-@onready var body_overhead  : StateOverhead    = $body;
+@onready var boost_timer    : Timer            = $boost_timer
 @onready var walk_time      : Timer            = $walk_time;
-@onready var emitter        : Emitter          = $Emitter;
+@onready var body_overhead  : StateOverhead    = $body;
 @onready var body_collide   : CollisionShape2D = $bodyCollide;
 @onready var turn_node      : Node2D           = $turn_node;
-@onready var davids_gun     : Sprite2D = $turn_node/DavidsGun
+@onready var davids_gun     : Sprite2D         = $turn_node/DavidsGun
+@onready var on_wall        : Area2D           = $turn_node/on_wall
 
-var land_quotes   : QuotesInfo = QuotesInfo.new();
-var jump_quotes   : QuotesInfo = QuotesInfo.new();
-var coyote_quotes : QuotesInfo = QuotesInfo.new();
-var shoot_quotes  : QuotesInfo = QuotesInfo.new();
+var land_quotes      : QuotesInfo = QuotesInfo.new();
+var jump_quotes      : QuotesInfo = QuotesInfo.new();
+var coyote_quotes    : QuotesInfo = QuotesInfo.new();
+var shoot_quotes     : QuotesInfo = QuotesInfo.new();
+var wall_kick_quotes : QuotesInfo = QuotesInfo.new();
 
 var fix_speed_when_next_on_ground : bool = false;
+var boosted : bool = false:
+	set(val):
+		if not is_inside_tree():
+			await ready;
+		
+		boosted = val;
+		if boosted:
+			boost_timer.start();
+			if body_overhead.is_in_states("main", ["idle", "slow_down"]):
+				body_overhead.change_state("main", "move");
+		else:
+			boost_timer.stop();
+			if body_overhead.is_in_state("main", "move"):
+				body_overhead.change_state("main", "slow_down");
 
 func _ready() -> void:
+	boost_timer.timeout.connect(func(): boosted = false);
+	
 	land_quotes.quotes = [
 		["Landed", 5],
 		["Puff", 2],
@@ -73,11 +94,31 @@ func _ready() -> void:
 		["I'm sure that will buff out", 0.11],
 		["I'm not paid enough", 0.09],
 		];
+	wall_kick_quotes.quotes = [
+		["Jump", 6],
+		["Boing", 6],
+		["Bounce", 6],
+		["Back Take", 3],
+		["Do a flip", 3],
+		["Jamp", 2.5],
+		["Stunt man here", 2.5],
+		["Don't hurt yourself", 2],
+		["Rude", 0.8],
+		["Walls do be like that", 1],
+		["Boosted", 3],
+		["Reversal", 2],
+		["No U", 2.2],
+		["Ram it with your head", 0.2],
+		["Turn off", 0.2],
+		];
 
 func get_movement() -> float:
 	return Input.get_axis("left", "right");
 
 func _physics_process(delta: float) -> void:
+	if boosted:
+		velocity.x = sign(velocity.x) * max(BOOST_SPEED, abs(velocity.x));
+	
 	move_and_slide();
 
 func turn(left : bool = false) -> void:
@@ -88,6 +129,9 @@ func turn(left : bool = false) -> void:
 	
 func force_jump() -> void:
 	body_overhead.change_state("main", "jump");
+
+func reset_fall() -> void:
+	body_overhead.change_state("main", "fall");
 
 func is_falling() -> bool:
 	return body_overhead.is_in_state("main", "fall");
@@ -122,10 +166,17 @@ func _coyote_message() -> void:
 		_:
 			TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, 30), coyote_quotes.pick_random());
 
+func _wall_kick_message() -> void:
+	TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, 30), wall_kick_quotes.pick_random());
+
+
 var _prev_move : float = INF;
 func _move_hor(overwrite : bool = false) -> bool:
 	var move : float = get_movement();
-	if move == 0:
+	if boosted:
+		if velocity.x != 0:
+			turn(velocity.x < 0);
+	elif move == 0:
 		_prev_move = 0;
 		return false;
 	else:
@@ -134,6 +185,10 @@ func _move_hor(overwrite : bool = false) -> bool:
 		return true;
 	
 	_prev_move = move;
-	velocity.x = move * SPEED;
+	if boosted:
+		if move != 0:
+			velocity.x = lerp(velocity.x, move * BOOST_SPEED, 0.9);
+	else:
+		velocity.x = lerp(velocity.x, move * SPEED, 0.9);
 	
 	return true;

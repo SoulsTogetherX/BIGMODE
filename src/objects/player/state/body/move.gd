@@ -9,6 +9,7 @@ func get_id():
 
 func enter() -> void:
 	_animationPlayer.play("walk");
+	_actor._prev_move = INF;
 
 func process_physics(_delta: float) -> State:
 	if Input.is_action_just_pressed("jump"):

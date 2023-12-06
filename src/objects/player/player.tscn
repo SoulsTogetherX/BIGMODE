@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://1l3xe5hihuta"]
+[gd_scene load_steps=40 format=3 uid="uid://1l3xe5hihuta"]
 
 [ext_resource type="Script" path="res://src/objects/player/player.gd" id="1_h5kqw"]
 [ext_resource type="Texture2D" uid="uid://bj5bgnb0vngqv" path="res://asset/sprites/player/david_spritesheet.png" id="2_e2nie"]
@@ -11,12 +11,20 @@
 [ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_machine.gd" id="4_s1g65"]
 [ext_resource type="AudioStream" uid="uid://dt34w6btqdnqa" path="res://asset/sounds/footsteps/player/Player_step_3.wav" id="5_ypwgq"]
 [ext_resource type="Script" path="res://src/objects/player/state/body/fall.gd" id="6_8v7he"]
+[ext_resource type="AudioStream" uid="uid://iqch5mrpppw" path="res://asset/sounds/jump/jump.wav" id="6_xpakn"]
 [ext_resource type="Script" path="res://src/objects/player/state/body/idle.gd" id="7_f5pla"]
+[ext_resource type="AudioStream" uid="uid://b8dwf4q02ac8m" path="res://asset/sounds/jump/jump_2.wav" id="7_i3prd"]
+[ext_resource type="AudioStream" uid="uid://6tcjusep4ooo" path="res://asset/sounds/jump/jump_3.wav" id="8_5skmr"]
 [ext_resource type="Script" path="res://src/objects/player/state/body/jump.gd" id="8_wm7n6"]
 [ext_resource type="Script" path="res://src/objects/player/state/body/move.gd" id="9_h6u4u"]
+[ext_resource type="AudioStream" uid="uid://yo03fydvvgtl" path="res://asset/sounds/jump/jump_4.wav" id="9_jtkep"]
 [ext_resource type="Script" path="res://src/objects/player/state/body/slow_down.gd" id="10_3rs7q"]
+[ext_resource type="AudioStream" uid="uid://b8hby6ijawugb" path="res://asset/sounds/land/land_1.wav" id="10_f6it4"]
+[ext_resource type="AudioStream" uid="uid://cn46l2oguu6o5" path="res://asset/sounds/land/land_2.wav" id="11_45om5"]
 [ext_resource type="Script" path="res://src/objects/player/state/gun/idle.gd" id="11_qd3hy"]
 [ext_resource type="Script" path="res://src/objects/player/state/gun/shoot.gd" id="12_6e6o0"]
+[ext_resource type="AudioStream" uid="uid://d1xq0ox0s7rag" path="res://asset/sounds/land/land_3.wav" id="12_n670b"]
+[ext_resource type="AudioStream" uid="uid://dqibxhkqnqdrd" path="res://asset/sounds/land/land_4.wav" id="13_qvo43"]
 [ext_resource type="PackedScene" uid="uid://dswddrk6bhuqm" path="res://src/objects/projectiles/David/bullet.tscn" id="14_fxwpd"]
 
 [sub_resource type="SystemFont" id="SystemFont_uhc4g"]
@@ -24,6 +32,9 @@ subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ywm34"]
 font = SubResource("SystemFont_uhc4g")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tsla"]
+size = Vector2(16, 40)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7x4t"]
 height = 60.0
@@ -142,6 +153,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1.2, 0.894), Vector2(1.05, 0.95), Vector2(1, 1)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("jump")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_mem16"]
 resource_name = "walk"
@@ -163,7 +188,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Emitter")
+tracks/1/path = NodePath("foot_steps")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -204,11 +229,20 @@ collision_layer = 2
 script = ExtResource("1_h5kqw")
 settings = SubResource("LabelSettings_ywm34")
 
-[node name="Emitter" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_qo5up")]
-volume_db = -25.0
+[node name="foot_steps" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_qo5up")]
+volume_db = -5.0
 pitch_scale = 1.4
 _particles = NodePath("../turn_node/WalkParticle")
 audios = Array[AudioStream]([ExtResource("3_yh6hu"), ExtResource("4_73evq"), ExtResource("5_ypwgq")])
+
+[node name="jump" parent="." instance=ExtResource("2_qo5up")]
+volume_db = -5.0
+pitch_scale = 0.5
+audios = Array[AudioStream]([ExtResource("6_xpakn"), ExtResource("7_i3prd"), ExtResource("8_5skmr"), ExtResource("9_jtkep")])
+
+[node name="land" parent="." instance=ExtResource("2_qo5up")]
+pitch_scale = 0.65
+audios = Array[AudioStream]([ExtResource("10_f6it4"), ExtResource("11_45om5"), ExtResource("12_n670b"), ExtResource("13_qvo43")])
 
 [node name="turn_node" type="Node2D" parent="."]
 
@@ -228,6 +262,14 @@ position = Vector2(13, -2.5)
 [node name="WalkParticle" parent="turn_node" instance=ExtResource("3_xgyx3")]
 position = Vector2(-21, 24)
 
+[node name="on_wall" type="Area2D" parent="turn_node"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="turn_node/on_wall"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(18, 3)
+shape = SubResource("RectangleShape2D_5tsla")
+
 [node name="bodyCollide" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_s7x4t")
@@ -245,10 +287,16 @@ libraries = {
 autoplay = "idle"
 
 [node name="coyote_timer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.25
+one_shot = true
 
 [node name="jump_buffer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.25
+one_shot = true
+
+[node name="boost_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="body" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("3_q87t5")
@@ -262,11 +310,11 @@ script = ExtResource("4_s1g65")
 _name_id = "main"
 starting_state = NodePath("idle")
 
-[node name="fall" type="Node" parent="body/main" node_paths=PackedStringArray("idle", "jump", "slow_down")]
+[node name="fall" type="Node" parent="body/main" node_paths=PackedStringArray("idle", "jump", "move")]
 script = ExtResource("6_8v7he")
 idle = NodePath("../idle")
 jump = NodePath("../jump")
-slow_down = NodePath("../slow_down")
+move = NodePath("../move")
 
 [node name="idle" type="Node" parent="body/main" node_paths=PackedStringArray("fall", "jump", "move", "slow_down")]
 script = ExtResource("7_f5pla")

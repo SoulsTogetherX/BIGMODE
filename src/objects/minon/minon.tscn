@@ -179,7 +179,7 @@ audios = Array[AudioStream]([ExtResource("3_0u5vd"), ExtResource("4_3i3ub"), Ext
 
 [node name="body" type="Sprite2D" parent="."]
 position = Vector2(0, 0.100125)
-scale = Vector2(1.002, 0.997146)
+scale = Vector2(-1, 0.997146)
 texture = ExtResource("2_d3kg8")
 hframes = 4
 vframes = 3
@@ -187,6 +187,21 @@ frame = 6
 
 [node name="WalkParticle" parent="body" instance=ExtResource("6_4ho5w")]
 position = Vector2(16.2176, 21.2104)
+
+[node name="fall_detect" type="RayCast2D" parent="body"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-25, 29.9855)
+scale = Vector2(1, 1.00286)
+exclude_parent = false
+target_position = Vector2(0, 1.25)
+
+[node name="forward_detect" type="RayCast2D" parent="body"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-26.25, 27.4783)
+scale = Vector2(1, 1.00286)
+exclude_parent = false
+target_position = Vector2(-1.25, 3.8147e-06)
+collision_mask = 5
 
 [node name="bodyCollide" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5.62499)
@@ -217,15 +232,6 @@ self_modulate = Color(0, 0, 1, 1)
 position = Vector2(-4.47034e-07, 15)
 scale = Vector2(0.999998, 0.999998)
 shape = SubResource("RectangleShape2D_guohv")
-
-[node name="fall_detect" type="RayCast2D" parent="."]
-position = Vector2(-26.25, 30)
-target_position = Vector2(-3.8147e-06, 1.25)
-
-[node name="forward_detect" type="RayCast2D" parent="."]
-position = Vector2(-26.25, 28.75)
-target_position = Vector2(-3.75, 0)
-collision_mask = 5
 
 [node name="StateOverhead" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("3_c2qfn")

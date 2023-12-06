@@ -24,11 +24,17 @@ func process_frame(_delta: float) -> State:
 	bullet.global_position = shoot_pos.global_position;
 	
 	var velocity : Vector2 = Vector2.RIGHT.rotated(_actor.davids_gun.global_rotation) * bullet_speed;
+	var norm : Vector2 = velocity.normalized();
 	
-	if velocity.length_squared() < _actor.velocity.length_squared():
-		velocity = velocity.normalized() * fall_back_speed;
+	if abs(velocity.x) < abs(_actor.velocity.x) && sign(velocity.x) != sign(_actor.velocity.x):
+		velocity.x = norm.x * fall_back_speed;
 	else:
-		velocity += _actor.velocity;
+		velocity.x += _actor.velocity.x;
+	
+	if abs(velocity.y) < abs(_actor.velocity.y) && sign(velocity.y) != sign(_actor.velocity.y):
+		velocity.y = norm.y * fall_back_speed;
+	else:
+		velocity.y += _actor.velocity.y;
 	
 	bullet.set_starting_velocity(velocity.angle(), velocity.length());
 	bullet.set_timer(2.5);

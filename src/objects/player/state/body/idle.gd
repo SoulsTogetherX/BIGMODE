@@ -9,6 +9,7 @@ func get_id():
 	return "idle";
 
 func enter() -> void:
+	_actor.velocity.y = 0;
 	_animationPlayer.play("idle");
 
 func process_physics(_delta: float) -> State:
@@ -20,7 +21,7 @@ func process_physics(_delta: float) -> State:
 	if !_actor.is_on_floor():
 		return fall;
 	
-	if _actor.get_movement() != 0:
+	if _actor.get_movement() != 0 || _actor.boosted:
 		return move;
 	
 	if _actor.velocity.x != 0:
