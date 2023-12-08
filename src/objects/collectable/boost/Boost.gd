@@ -1,8 +1,5 @@
 extends Node2D
 
-@onready var cooldown: Timer = $Cooldown
-var cool : bool = true;
-
 @export var settings : LabelSettings;
 @export var slow_down : bool = false;
 
@@ -27,19 +24,14 @@ func _ready() -> void:
 func _collect_message() -> void:
 	TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, -30), collect_quote.pick_random(), 10);
 
-func _player_entered(body: Node2D) -> void:
-	if cool:
+func _on_collect(body: Node2D) -> void:
+	if slow_down:
 		_collect_message();
-		cool = false;
-		cooldown.start();
 		
-		if slow_down:
-			GlobalInfo.camera.zoom_event(Vector2(0.5, 0.5), Vector2(1.5, 1.5));
-			TimeManager.instant_time_scale(0.3, 0.5, true);
-			await get_tree().create_timer(0.5, true, false, true).timeout;
-			GlobalInfo.camera.zoom_event(Vector2(0.5, 0.5), Vector2(1, 1));
-	
-	body.boosted = true;
+		GlobalInfo.camera.zoom_event(Vector2(0.5, 0.5), Vector2(1.5, 1.5));
+		TimeManager.instant_time_scale(0.3, 0.5, true);
+		await get_tree().create_timer(0.5, true, false, true).timeout;
+		GlobalInfo.camera.zoom_event(Vector2(0.5, 0.5), Vector2(1, 1));
 
-func _on_cooldown_timeout() -> void:
-	cool = true;
+func _on_entered(body: Node2D) -> void:
+	body.boosted = true;

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfl2pjvhh4d27"]
+
+[ext_resource type="Script" path="res://src/objects/oneway/oneway.gd" id="2_7xtxg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qsdyv"]
+load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7fbfeeb24.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wuin"]
+size = Vector2(138, 2)
+
+[node name="NinePatchRect" type="NinePatchRect"]
+offset_left = -28.0
+offset_top = -16.0
+offset_right = 110.0
+offset_bottom = -1.0
+texture = SubResource("CompressedTexture2D_qsdyv")
+patch_margin_left = 24
+patch_margin_right = 24
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("2_7xtxg")
+
+[node name="Oneway" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Oneway"]
+position = Vector2(69, 0)
+shape = SubResource("RectangleShape2D_1wuin")
+one_way_collision = true
+
+[connection signal="resized" from="." to="." method="_on_resized"]

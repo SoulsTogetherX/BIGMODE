@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://c7udaua4fxne2"]
+
+[node name="JumpPoint" type="Marker2D" groups=["Jump_point"]]
+gizmo_extents = 100.0

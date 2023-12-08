@@ -30,7 +30,7 @@ func _move_to(delta : float) -> void:
 	position += _current_velocity * delta;
 
 func on_collide(collide : Node2D) -> void:
-	if collide is Minon:
+	if collide is Minon || collide is Boss:
 		collide.shot_at();
 	destroy();
 

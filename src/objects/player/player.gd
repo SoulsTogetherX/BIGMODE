@@ -20,6 +20,7 @@ const GRAVITY       : int   =  980;
 @onready var davids_gun     : Sprite2D         = $turn_node/DavidsGun
 @onready var on_wall        : Area2D           = $turn_node/on_wall
 
+@onready var land: Emitter = $land
 @onready var gun_shot: Emitter = $gun_shot;
 
 var land_quotes      : QuotesInfo = QuotesInfo.new();
@@ -45,6 +46,8 @@ var boosted : bool = false:
 				body_overhead.change_state("main", "slow_down");
 
 func _ready() -> void:
+	GlobalInfo.player = self;
+	
 	boost_timer.timeout.connect(func(): boosted = false);
 	
 	land_quotes.quotes = [
@@ -187,13 +190,23 @@ func _move_hor(overwrite : bool = false) -> bool:
 		return true;
 	
 	_prev_move = move;
-	if boosted:
-		if move != 0:
-			velocity.x = lerp(velocity.x, move * BOOST_SPEED, 0.9);
-	else:
-		velocity.x = lerp(velocity.x, move * SPEED, 0.9);
+	if !boosted:
+		update_speed(move, SPEED);
+	elif move != 0:
+		update_speed(move, BOOST_SPEED);
 	
 	return true;
 
+func update_speed(move : int, speed : int) -> void:
+	if move <= -1:
+		velocity.x = min(velocity.x, move * speed);
+	elif move >= 1:
+		velocity.x = max(velocity.x, move * speed);
+	else:
+		velocity.x = 0;
+
 func gun_sound() -> void:
 	gun_shot.play_random();
+
+func land_sound() -> void:
+	land.play_random();

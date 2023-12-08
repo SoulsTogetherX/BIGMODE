@@ -34,3 +34,98 @@ func graduale_time_scale(
 ## A wrapper for [member AudioServer.playback_speed_scale].
 func adjust_sounds(scale : float) -> void:
 	AudioServer.playback_speed_scale = scale;
+
+
+var time : float = 0.0;
+var timer_on : bool = false;
+
+func toggle_timer(toggle : bool = true) -> void:
+	timer_on = toggle;
+
+func reset_timer(autostart : bool = false) -> void:
+	timer_on = autostart;
+	time = 0.0;
+
+func _process(delta: float) -> void:
+	if timer_on:
+		time += delta;
+
+func get_timer_raw() -> float:
+	return time;
+
+func get_miliseconds() -> int:
+	return floori(fmod(time, 1) * 1000);
+
+func get_seconds() -> int:
+	return floori(fmod(time, 60));
+
+func get_minutes(raw : bool = false) -> int:
+	var ret = fmod(time, 3600);
+	if raw:
+		return floori(ret / 60);
+	return floori(ret);
+
+func get_hours(raw : bool = false) -> int:
+	var ret = fmod(time, 216000);
+	if raw:
+		return floori(ret / 3600);
+	return floori(ret);
+
+func get_days(raw : bool = false) -> int:
+	var ret = fmod(time, 5184000);
+	if raw:
+		return floori(ret / 216000);
+	return floori(ret);
+
+func get_years(raw : bool = false) -> int:
+	var ret = fmod(time, 1845504000);
+	if raw:
+		return floori(ret / 5184000);
+	return floori(ret);
+
+func get_centuries(raw : bool = false) -> int:
+	var ret = fmod(time, 1845504000000);
+	if raw:
+		return floori(ret / 1845504000);
+	return floori(ret);
+
+func get_timer_string(
+					show_mill : bool = false,
+					show_secs : bool = true,
+					show_mins : bool = true,
+					show_hours : bool = true,
+					show_days : bool = false,
+					show_years : bool = false,
+					show_centuries : bool = false,
+					) -> String:
+	var ret : String = "";
+	
+	var mili  : int = floori(time * 1000);
+	if show_mill:
+		ret = "%03d:" % [mili % 1000];
+		
+	var secs  : int = mili / 60;
+	if show_secs:
+		ret = "%02d:" % [secs % 60] + ret;
+	
+	var mins  : int = secs / 60;
+	if show_mins:
+		ret = "%02d:" % [mins % 60] + ret;
+	
+	var hours : int = mins / 60;
+	if show_hours:
+		ret = "%02d:" % [hours % 60] + ret;
+	
+	var days  : int = hours / 24;
+	if show_days:
+		ret = "%02d:" % [hours % 24] + ret;
+	
+	var years : int = days / 356;
+	if show_years:
+		ret = "%03d:" % [years % 356] + ret;
+	
+	var cens  : int = years / 1000;
+	if show_centuries:
+		ret = "%03d:" % [cens % 1000] + ret;
+	
+	return ret.left(-1);

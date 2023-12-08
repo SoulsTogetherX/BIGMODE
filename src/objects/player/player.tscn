@@ -232,6 +232,7 @@ _data = {
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_h5kqw")
 settings = SubResource("LabelSettings_ywm34")
 
@@ -326,6 +327,7 @@ script = ExtResource("6_8v7he")
 idle = NodePath("../idle")
 jump = NodePath("../jump")
 move = NodePath("../move")
+wall_jump_speed = 850.0
 
 [node name="idle" type="Node" parent="body/main" node_paths=PackedStringArray("fall", "jump", "move", "slow_down")]
 script = ExtResource("7_f5pla")

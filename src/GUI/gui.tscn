@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://8tb1htuku7d4"]
+[gd_scene load_steps=2 format=3 uid="uid://8tb1htuku7d4"]
+
+[ext_resource type="Script" path="res://src/GUI/gui.gd" id="1_t5nsk"]
 
 [node name="GUI" type="CanvasLayer"]
 follow_viewport_enabled = true
+script = ExtResource("1_t5nsk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -17,28 +20,84 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
+size_flags_stretch_ratio = 5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Score" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Score"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="score" type="Label" parent="MarginContainer/HBoxContainer/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Score:
+"
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Score"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="Mid" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Mid"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="|    |" type="Label" parent="MarginContainer/HBoxContainer/Mid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Hello"
+text = "|       |
+|       |
+|       |"
 clip_text = true
 text_overrun_behavior = 1
 
-[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Mid"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="Time" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Time"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="time" type="Label" parent="MarginContainer/HBoxContainer/Time"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Time:"
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Time"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -48,5 +107,5 @@ size_flags_stretch_ratio = 0.0
 [node name="RightPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0

@@ -7,7 +7,7 @@ extends Area2D
 var message_show : bool = false;
 
 func _flip_message() -> void:
-	TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, -80), quote, 10);
+	TextSpawner.new(settings).spawn(get_tree(), GlobalInfo.player.global_position + Vector2(0, -80), quote, 10);
 
 func _on_player_enter(body: Node2D) -> void:
 	if !is_zero_approx(body.rotation):

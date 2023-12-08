@@ -22,6 +22,8 @@ var _animate_interval_timer : Array[SafeOneshot];
 var _current_animate_length : float;
 var _current_mode           : Animation.LoopMode
 
+signal state_changed;
+
 ## Initializes this [StateMachine] by giving each attached child [StateBase] a reference
 ## to the actor object it belongs to, then enters the default [member starting_state].
 ##
@@ -101,6 +103,9 @@ func _change_state(new_state: State) -> void:
 		_current_animate_length = _current_state._animationPlayer.get_animation(_current_state.get_animation()).length;
 		_connect_all_settup();
 	_current_state.enter();
+	
+	state_changed.emit();
+	_current_state._stateOverhead.state_changed.emit(get_id());
 
 func _disconnect_all_settup() -> void:
 	for timer in _animate_interval_timer:

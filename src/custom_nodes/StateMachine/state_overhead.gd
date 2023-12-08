@@ -27,6 +27,8 @@ var _animationPlayer;
 var _drawMod;
 var _state_machines : Dictionary;
 
+signal state_changed(machine_id : String);
+
 func _get_property_list():
 	var properties = [];
 	if _usesActor:

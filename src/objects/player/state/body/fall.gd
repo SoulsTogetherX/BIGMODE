@@ -9,6 +9,8 @@ var has_jumped : bool = false;
 
 @export var wall_jump_speed : float = 500;
 
+var prev_y : float;
+
 func get_id():
 	return "fall";
 
@@ -16,6 +18,7 @@ func enter() -> void:
 	if !has_jumped:
 		_actor.coyote_timer.start();
 	_animationPlayer.play("fall");
+	prev_y = 0;
 
 func exit() -> void:
 	has_jumped = false;
@@ -27,6 +30,7 @@ func process_physics(delta: float) -> State:
 		if direction != 0 && _actor.on_wall.get_overlapping_bodies().size() > 0:
 			_actor.velocity.x += -wall_jump_speed * sign(_actor.turn_node.scale.x);
 			_actor.turn(_actor.velocity.x > 0);
+			_actor.velocity.y = 0;
 			_actor._wall_kick_message();
 			return jump;
 		elif _actor.coyote_timer.is_stopped():
@@ -50,12 +54,14 @@ func process_physics(delta: float) -> State:
 			_actor.jump_buffer.stop();
 			return jump;
 		else:
-			$"../../../land".play_random();
+			if prev_y > 150:
+				_actor.land_sound();
 			if _actor.velocity.x != 0 || _actor.boosted:
 				return move;
 			return idle;
 	
 	_actor.velocity.y += _actor.GRAVITY * delta;
+	prev_y = _actor.velocity.y;
 	
 	_actor._move_hor();
 	

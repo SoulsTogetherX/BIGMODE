@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://co07fdp0koark"]
+
+[ext_resource type="Script" path="res://asset/particles/particle.gd" id="1_1uqjy"]
+[ext_resource type="Texture2D" uid="uid://dbrqgyk0khp3h" path="res://asset/sprites/orb/orb.png" id="1_3o5et"]
+
+[sub_resource type="Curve" id="Curve_qcihp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.654321, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0219779), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_obr67"]
+offsets = PackedFloat32Array(0, 0.334884, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="ScoreParticle" type="CPUParticles2D"]
+emitting = false
+amount = 1
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_3o5et")
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+damping_min = 200.0
+damping_max = 200.0
+scale_amount_curve = SubResource("Curve_qcihp")
+color_ramp = SubResource("Gradient_obr67")
+script = ExtResource("1_1uqjy")

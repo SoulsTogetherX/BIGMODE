@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://src/objects/flip_area/flip_area.gd" id="1_y3uq5"]
 
 [sub_resource type="SystemFont" id="SystemFont_fbg2e"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhmvp"]
 font = SubResource("SystemFont_fbg2e")
