@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://co07fdp0koark"]
 
 [ext_resource type="Script" path="res://asset/particles/particle.gd" id="1_1uqjy"]
-[ext_resource type="Texture2D" uid="uid://dbrqgyk0khp3h" path="res://asset/sprites/orb/orb.png" id="1_3o5et"]
+[ext_resource type="Texture2D" uid="uid://dbrqgyk0khp3h" path="res://asset/sprites/collectables/orb.png" id="1_3o5et"]
 
 [sub_resource type="Curve" id="Curve_qcihp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.654321, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0219779), 0.0, 0.0, 0, 0]

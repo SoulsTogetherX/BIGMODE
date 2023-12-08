@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://i201xjcwfuvk"]
+
+[node name="spawner_node" type="Marker2D" groups=["spawner_node"]]
+position = Vector2(-1384, -656)
+metadata/fall = false
+metadata/left = false

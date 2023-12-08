@@ -13,9 +13,9 @@ func show_danger_shape(fade_time : float) -> void:
 	tween = create_tween().set_parallel();
 	
 	scale = Vector2(0, 0);
-	modulate.a = 1.0;
+	modulate.a = 0.0;
 	
-	tween.tween_property(self, "modulate:a", 0.0, fade_time * 0.5);
+	tween.tween_property(self, "modulate:a", 1.0, fade_time * 0.5);
 	tween.tween_property(self, "scale", Vector2(radius, radius), fade_time * 0.5);
 
 func hide_danger_shape(fade_time : float) -> void:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2uk30vrr1b68"]
 
 [ext_resource type="Script" path="res://src/objects/collectable/orb/orb.gd" id="1_pt0u1"]
-[ext_resource type="Texture2D" uid="uid://dbrqgyk0khp3h" path="res://asset/sprites/orb/orb.png" id="2_7yf56"]
+[ext_resource type="Texture2D" uid="uid://dbrqgyk0khp3h" path="res://asset/sprites/collectables/orb.png" id="2_7yf56"]
 [ext_resource type="PackedScene" uid="uid://ck2fvp4120xx1" path="res://src/objects/collectable/collect.tscn" id="2_np638"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fhf4h"]
