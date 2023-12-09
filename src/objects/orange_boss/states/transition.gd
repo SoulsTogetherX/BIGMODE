@@ -7,59 +7,53 @@ extends State
 @export var spawn : State;
 @export var walk : State;
 
-var state_queue : Array[State] = [];
+var state_queue : Array[Array] = [];
+var timer : Timer;
+
+var move_to_state : State = null;
+var delay = 0;
 
 func get_id():
 	return "transition";
 
 func state_ready() -> void:
-	pass;
+	timer = Timer.new();
+	add_child(timer);
 
 func enter() -> void:
-	pass;
+	if state_queue.size() == 0:
+		state_queue = _actor.prioirtize();
+	if delay == 0:
+		delay = state_queue.back()[1];
+		get_move_to_state();
+		return;
+	get_tree().create_timer(delay).timeout.connect(get_move_to_state);
+	delay = state_queue.back()[1];
 
 func exit() -> void:
-	pass;
+	move_to_state = null;
 
-func process_input(event: InputEvent) -> State:
-	if event.is_action_pressed("1"):
-		print("attack1");
-		_actor.turn(GlobalInfo.player.global_position > _actor.global_position);
-		
-		return attack1;
-	if event.is_action_pressed("2"):
-		print("attack2");
-		_actor.turn(GlobalInfo.player.global_position > _actor.global_position);
-		
-		return attack2;
-	if event.is_action_pressed("3"):
-		print("idle");
-		idle.wait = 2.5;
-		return idle;
-	if event.is_action_pressed("4"):
-		print("jump");
-		jump.target = _actor.get_jump_target();
-		
-		return jump;
-	if event.is_action_pressed("5"):
-		print("spawn");
-		
-		return spawn;
+func process_physics(_delta : float) -> State:
+	return move_to_state;
+
+func get_move_to_state() -> void:
+	var info = state_queue.pop_back();
 	
-	if event.is_action_pressed("6"):
-		print("walk");
-		walk.target_x = _actor.get_walk_pos();
-		
-		return walk;
-	
-	return null;
-
-func process_physics(_delta: float) -> State:
-	return null;
-
-func process_frame(_delta: float) -> State:
-	return null;
-
-func update() -> State:
-	return null;
-
+	match info[0]:
+		Boss.ACTION.ATTACK1:
+			_actor.turn(GlobalInfo.player.global_position > _actor.global_position);
+			move_to_state = attack1;
+		Boss.ACTION.ATTACK2:
+			_actor.turn(GlobalInfo.player.global_position > _actor.global_position);
+			move_to_state = attack2;
+		Boss.ACTION.IDLE:
+			_actor.turn(GlobalInfo.player.global_position > _actor.global_position);
+			move_to_state = idle;
+		Boss.ACTION.JUMP:
+			jump.target = info[2];
+			move_to_state = jump;
+		Boss.ACTION.SPAWN:
+			move_to_state = spawn;
+		Boss.ACTION.WALK:
+			walk.target_x = info[2];
+			move_to_state = walk;

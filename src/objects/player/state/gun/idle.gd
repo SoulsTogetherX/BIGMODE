@@ -2,8 +2,13 @@ extends State
 
 @export var _shoot : State;
 
+@onready var shoot_timer: Timer = $"../../../shoot_timer"
+
 func get_id():
 	return "idle";
+
+func state_ready() -> void:
+	shoot_timer.timeout.connect(force_shoot);
 
 func enter() -> void:
 	_animationPlayer.play("idle");
@@ -21,8 +26,14 @@ func reposition_gun() -> void:
 	_actor.davids_gun.global_rotation_degrees = angle;
 
 func process_physics(delta: float) -> State:
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot", true):
+		shoot_timer.start();
 		return _shoot;
+	if Input.is_action_just_released("shoot", true):
+		shoot_timer.stop();
 	
 	reposition_gun();
 	return null;
+
+func force_shoot() -> void:
+	_stateOverhead.change_state("main", "shoot");

@@ -96,4 +96,5 @@ func _kill_player(body: Node2D) -> void:
 func kill() -> void:
 	if $StateOverhead.is_in_state("main", "ded"):
 		return;
+	collision_layer = 0;
 	$StateOverhead.change_state("main", "ded");

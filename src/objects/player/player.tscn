@@ -310,6 +310,10 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="shoot_timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
 [node name="body" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("3_q87t5")
 _usesActor = true
@@ -363,7 +367,7 @@ _animationPlayer = NodePath("../gun_animate")
 
 [node name="main" type="Node" parent="gun" node_paths=PackedStringArray("starting_state")]
 script = ExtResource("4_s1g65")
-_name_id = "gun"
+_name_id = "main"
 starting_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="gun/main" node_paths=PackedStringArray("_shoot")]

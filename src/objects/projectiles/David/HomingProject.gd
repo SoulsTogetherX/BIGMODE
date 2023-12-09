@@ -1,6 +1,6 @@
 class_name HomingProject extends Projectile
 
-@export var drag_factor  : float = 0.2;
+@export var drag_factor  : float = 0.07;
 
 @onready var home_check : Area2D  = $HomeCheck
 

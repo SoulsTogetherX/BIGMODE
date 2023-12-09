@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cansb3kwm4xd6"]
+[gd_scene load_steps=28 format=3 uid="uid://cansb3kwm4xd6"]
 
 [ext_resource type="Script" path="res://src/objects/orange_boss/orange_boss.gd" id="1_brcbv"]
 [ext_resource type="Texture2D" uid="uid://cdart7xey5174" path="res://asset/sprites/orange_boss/Orange Boss_sprites.png" id="1_uyld7"]
@@ -29,13 +29,14 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [24]
+"update": 0,
+"values": [29]
 }
 
 [sub_resource type="Animation" id="Animation_hbmhq"]
 resource_name = "attack1"
-length = 3.1
+length = 2.0
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,10 +44,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.8, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5, 2.7, 2.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 9, 8, 9, 8, 9, 8]
+"times": PackedFloat32Array(1, 1.1, 1.2, 1.3, 1.4, 1.8, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -55,20 +56,40 @@ tracks/1/path = NodePath("danger_mod")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.9),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.1, 1.8, 1.95),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [0.4],
 "method": &"show_danger_shape"
+}, {
+"args": [0.2],
+"method": &"active_danger"
 }, {
 "args": [0.6],
 "method": &"hide_danger_shape"
 }]
 }
 
+[sub_resource type="Animation" id="Animation_b4wnr"]
+resource_name = "attack1_hold"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 7]
+}
+
 [sub_resource type="Animation" id="Animation_akebi"]
 resource_name = "attack2"
-length = 1.5
+length = 1.1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -79,7 +100,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [16, 17, 18, 19, 18, 19, 18, 19, 20, 21, 22, 23]
 }
 tracks/1/type = "method"
@@ -99,6 +120,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_a0emh"]
 resource_name = "fall"
+length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -106,10 +129,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [34, 33, 32]
 }
 
 [sub_resource type="Animation" id="Animation_no4yv"]
@@ -125,12 +148,13 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [24, 25, 26, 27]
 }
 
 [sub_resource type="Animation" id="Animation_oqf3b"]
 resource_name = "jump"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -138,10 +162,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [28, 29, 27, 30, 31, 32, 33, 34]
 }
 
 [sub_resource type="Animation" id="Animation_vmyo7"]
@@ -155,7 +179,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [0]
 }
 
@@ -163,6 +187,7 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_smvj2"),
 "attack1": SubResource("Animation_hbmhq"),
+"attack1_hold": SubResource("Animation_b4wnr"),
 "attack2": SubResource("Animation_akebi"),
 "fall": SubResource("Animation_a0emh"),
 "idle": SubResource("Animation_no4yv"),
@@ -179,11 +204,12 @@ radius = 13.0
 height = 34.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gil3"]
-size = Vector2(44, 1.2)
+size = Vector2(44, 0.1)
 
 [node name="OrangeBoss" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_brcbv")
 
 [node name="danger_mod" type="Area2D" parent="."]
@@ -197,11 +223,11 @@ script = ExtResource("2_xsstn")
 shape = SubResource("CircleShape2D_awtqh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -47.5)
+position = Vector2(0, -49.5)
 texture = ExtResource("1_uyld7")
 hframes = 8
-vframes = 4
-frame = 24
+vframes = 5
+frame = 29
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -219,7 +245,7 @@ _animationPlayer = NodePath("../AnimationPlayer")
 [node name="StateMachine" type="Node" parent="StateOverhead" node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_kgcvr")
 _name_id = "main"
-starting_state = NodePath("transition")
+starting_state = NodePath("cutscene_start")
 
 [node name="attack1" type="Node" parent="StateOverhead/StateMachine" node_paths=PackedStringArray("transition")]
 script = ExtResource("4_741wx")
@@ -236,9 +262,8 @@ transition = NodePath("../transition")
 [node name="fall" type="Node" parent="StateOverhead/StateMachine"]
 script = ExtResource("7_sykwk")
 
-[node name="idle" type="Node" parent="StateOverhead/StateMachine" node_paths=PackedStringArray("fall", "transition")]
+[node name="idle" type="Node" parent="StateOverhead/StateMachine" node_paths=PackedStringArray("transition")]
 script = ExtResource("4_3k416")
-fall = NodePath("../fall")
 transition = NodePath("../transition")
 
 [node name="jump" type="Node" parent="StateOverhead/StateMachine" node_paths=PackedStringArray("transition")]
@@ -277,5 +302,10 @@ collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor_detect"]
 modulate = Color(0, 1, 0, 1)
-position = Vector2(0, -0.525)
 shape = SubResource("RectangleShape2D_4gil3")
+
+[node name="find_ground" type="RayCast2D" parent="."]
+position = Vector2(-2, -0.5)
+target_position = Vector2(0, 2)
+collision_mask = 17
+hit_from_inside = true

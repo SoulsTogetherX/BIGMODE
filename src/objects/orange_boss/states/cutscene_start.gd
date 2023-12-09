@@ -15,6 +15,9 @@ func exit() -> void:
 	pass;
 
 func process_physics(_delta: float) -> State:
+	if GlobalInfo.player.is_inside_tree():
+		return transition;
+	
 	return null;
 
 func process_frame(_delta: float) -> State:

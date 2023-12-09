@@ -2,3 +2,4 @@
 
 [node name="JumpPoint" type="Marker2D" groups=["Jump_point"]]
 gizmo_extents = 100.0
+metadata/mid = false

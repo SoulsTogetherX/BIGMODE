@@ -19,16 +19,19 @@ func state_ready() -> void:
 func enter() -> void:
 	_animationPlayer.play("jump");
 	
+	await get_tree().create_timer(0.09).timeout;
+	
 	_start = _actor.position;
 	_end = target.position;
 	_control = _start + ((_end - _start) * 0.5) + (Vector2.UP * arc_height)
 	
 	jump_tween = create_tween();
 	jump_tween.tween_method(_arc_shoot.bind(), 0.0, 1.0, speed);
-	jump_tween.tween_callback(get_parent()._change_state.bind(transition));
+	jump_tween.tween_callback(end_state);
 
 func exit() -> void:
 	_actor.global_position.y = target.global_position.y;
+	_animationPlayer.play("idle");
 
 func process_physics(_delta: float) -> State:
 	return null;
@@ -43,3 +46,10 @@ func _arc_shoot(gradient : float) -> void:
 	_actor.global_position = new_pos;
 	
 	_actor.turn(GlobalInfo.player.global_position > new_pos);
+
+func end_state() -> void:
+	_actor.global_position.y = _actor.find_floor();
+	
+	if _actor.wave_jump:
+		_actor.create_shockwave();
+	get_parent()._change_state(transition)

@@ -16,6 +16,7 @@ func exit() -> void:
 
 func process_physics(delta: float) -> State:
 	if _actor.on_floor():
+		_actor.global_position.y = _actor.find_floor();
 		return return_state;
 	
 	_actor.velocity.y += _actor.GRAVITY * delta;

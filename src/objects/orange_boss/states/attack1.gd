@@ -19,5 +19,6 @@ func enter() -> void:
 	charge_up.tween_property(_actor, "modulate", Color.WHITE, 0.1);
 
 func on_end_animation() -> State:
+	_animationPlayer.play("attack1_hold");
 	return transition;
 

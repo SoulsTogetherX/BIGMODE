@@ -27,8 +27,13 @@ func process_physics(delta: float) -> State:
 	if !_actor.on_floor():
 		return fall;
 	
-	if abs(_actor.position.x - target_x) <= speed * delta:
+	var check_dist = speed * delta;
+	
+	if abs(_actor.position.x - target_x) <= check_dist:
 		_actor.position.x = target_x;
+		return transition;
+	elif abs(_actor.global_position.x - GlobalInfo.player.global_position.x) <= check_dist:
+		_actor.position.x = GlobalInfo.player.global_position.x;
 		return transition;
 	
 	_actor.position.x += _velocity_x * delta;

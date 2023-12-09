@@ -85,7 +85,6 @@ func _animate_interval_end() -> void:
 	var new_state = _current_state.on_end_animation();
 	_disconnect_all_settup();
 	if new_state:
-		_current_state._animationPlayer.stop();
 		_change_state(new_state);
 	else:
 		match _current_mode:
@@ -132,7 +131,6 @@ func _connect_all_pinpong_settup() -> void:
 	_current_state._animationPlayer.play(_current_state.get_animation());
 
 func _prebake_intervals(state : AnimateState) -> void:
-	prints(state, state.get_animation())
 	assert(state._animationPlayer.has_animation(state.get_animation()), "Error - StateMachine::_prebake_intervals(state : AnimateState) - Attempted to access animation name '" + state.get_animation() + "' not in AnimationPlayer.");
 	var animation : Animation = state._animationPlayer.get_animation(state.get_animation());
 	_current_animate_length = animation.length;
