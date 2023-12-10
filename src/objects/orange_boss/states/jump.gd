@@ -4,6 +4,8 @@ extends State
 @export var arc_height : float = 500;
 @export var speed      : float = 1.2;
 
+@onready var land_emitter: Emitter = $"../../../Sprite2D/land_emitter"
+
 var target     : Marker2D;
 var _start     : Vector2;
 var _end       : Vector2;
@@ -19,7 +21,7 @@ func state_ready() -> void:
 func enter() -> void:
 	_animationPlayer.play("jump");
 	
-	await get_tree().create_timer(0.09).timeout;
+	await get_tree().create_timer(0.3).timeout;
 	
 	_start = _actor.position;
 	_end = target.position;
@@ -32,6 +34,7 @@ func enter() -> void:
 func exit() -> void:
 	_actor.global_position.y = target.global_position.y;
 	_animationPlayer.play("idle");
+	land_emitter.play_random();
 
 func process_physics(_delta: float) -> State:
 	return null;

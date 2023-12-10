@@ -14,6 +14,7 @@ const GRAVITY       : int   =  980;
 @onready var jump_buffer    : Timer            = $jump_buffer;
 @onready var boost_timer    : Timer            = $boost_timer
 @onready var walk_time      : Timer            = $walk_time;
+@onready var i_frames       : Timer            = $I_frames
 @onready var body_overhead  : StateOverhead    = $body;
 @onready var body_collide   : CollisionShape2D = $bodyCollide;
 @onready var turn_node      : Node2D           = $turn_node;
@@ -131,9 +132,12 @@ func turn(left : bool = false) -> void:
 	
 	turn_node.scale.x = sign_c;
 	body_collide.position.x = 4 * sign_c;
-	
+
+var force_jumped : bool = false;
 func force_jump() -> void:
-	body_overhead.change_state("main", "jump");
+	if !force_jumped:
+		body_overhead.change_state("main", "jump");
+		force_jumped = true;
 
 func reset_fall() -> void:
 	body_overhead.change_state("main", "fall");
@@ -141,9 +145,20 @@ func reset_fall() -> void:
 func is_falling() -> bool:
 	return body_overhead.is_in_state("main", "fall");
 
+const MAX_HEALTH = -1;
+var health = MAX_HEALTH;
 func kill() -> void:
-	queue_free();
-
+	if !i_frames.is_stopped():
+		return;
+	if health == 0:
+		queue_free();
+	
+	health -= 1;
+	i_frames.start();
+	
+	var tw = create_tween().set_loops(6);
+	tw.tween_property(self, "modulate:a", 0.0, 0.1);
+	tw.tween_property(self, "modulate:a", 1.0, 0.2).set_delay(0.2);
 
 func _shoot_message(pos : Vector2 = Vector2.ZERO) -> void:
 	TextSpawner.new(settings).spawn(get_tree(), pos, shoot_quotes.pick_random());

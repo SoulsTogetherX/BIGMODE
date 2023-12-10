@@ -1,5 +1,9 @@
-[gd_scene format=3 uid="uid://c7udaua4fxne2"]
+[gd_scene load_steps=2 format=3 uid="uid://c7udaua4fxne2"]
+
+[ext_resource type="Script" path="res://room/boss_room/markers/jump_point.gd" id="1_tkj0q"]
 
 [node name="JumpPoint" type="Marker2D" groups=["Jump_point"]]
 gizmo_extents = 100.0
+script = ExtResource("1_tkj0q")
 metadata/mid = false
+metadata/ground = false

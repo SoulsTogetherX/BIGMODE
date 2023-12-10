@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ug3aissj7fqx"]
+[gd_scene load_steps=31 format=3 uid="uid://ug3aissj7fqx"]
 
 [ext_resource type="Script" path="res://src/objects/minon/minon.gd" id="1_x86le"]
 [ext_resource type="PackedScene" uid="uid://cy6wdj1eolk4p" path="res://src/custom_nodes/emiter/emitter.tscn" id="2_ca1gw"]
@@ -9,10 +9,16 @@
 [ext_resource type="Script" path="res://src/objects/minon/state/fall.gd" id="5_13mwt"]
 [ext_resource type="AudioStream" uid="uid://dt34w6btqdnqa" path="res://asset/sounds/footsteps/player/Player_step_3.wav" id="5_g64f2"]
 [ext_resource type="PackedScene" uid="uid://21ninjibavp5" path="res://asset/particles/walk_particle.tscn" id="6_4ho5w"]
+[ext_resource type="AudioStream" uid="uid://b13cstqr0nbvy" path="res://asset/sounds/explotion/Explosion_part_1.wav" id="6_bxwhv"]
+[ext_resource type="AudioStream" uid="uid://8xk3jvffgkx8" path="res://asset/sounds/minon_hurt/player_1.wav" id="6_ce12s"]
 [ext_resource type="Script" path="res://src/objects/minon/state/idle.gd" id="6_cwrv1"]
 [ext_resource type="Script" path="res://src/objects/minon/state/move.gd" id="7_8qpba"]
+[ext_resource type="AudioStream" uid="uid://bq1aorcemvfqn" path="res://asset/sounds/explotion/milder_explosion.wav" id="7_bldtu"]
+[ext_resource type="AudioStream" uid="uid://b85giym34psy1" path="res://asset/sounds/minon_hurt/player_2.wav" id="7_p48or"]
 [ext_resource type="Script" path="res://src/objects/minon/state/ded.gd" id="8_43vlt"]
 [ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="8_soet5"]
+[ext_resource type="AudioStream" uid="uid://blwtilkp1tfn1" path="res://asset/sounds/minon_hurt/player_3.wav" id="8_vmmlj"]
+[ext_resource type="AudioStream" uid="uid://dvdvj0kp8eprh" path="res://asset/sounds/minon_hurt/player_4.wav" id="9_onac5"]
 
 [sub_resource type="SystemFont" id="SystemFont_jxklu"]
 subpixel_positioning = 0
@@ -158,10 +164,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgdwk"]
-size = Vector2(45, 0.674985)
+size = Vector2(40, 0.674992)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_guohv"]
-size = Vector2(50.0001, 30)
+size = Vector2(52.5001, 31.25)
 
 [node name="Minon" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)
@@ -173,10 +179,22 @@ settings = SubResource("LabelSettings_qcebg")
 [node name="Emitter" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
 volume_db = -20.0
 pitch_scale = 1.4
-max_distance = 500.0
+max_distance = 1000.0
 attenuation = 0.594604
 _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("3_0u5vd"), ExtResource("4_3i3ub"), ExtResource("5_g64f2")])
+
+[node name="death" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
+volume_db = -10.0
+attenuation = 0.143588
+_particles = NodePath("../body/WalkParticle")
+audios = Array[AudioStream]([ExtResource("6_bxwhv"), ExtResource("7_bldtu")])
+
+[node name="death_sound" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
+volume_db = -10.0
+attenuation = 0.133972
+_particles = NodePath("../body/WalkParticle")
+audios = Array[AudioStream]([ExtResource("6_ce12s"), ExtResource("7_p48or"), ExtResource("8_vmmlj"), ExtResource("9_onac5")])
 
 [node name="body" type="Sprite2D" parent="."]
 position = Vector2(0, 0.100125)
@@ -220,7 +238,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weak_point"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(-2.23517e-07, -19.0875)
+position = Vector2(-4.47035e-07, -19.0875)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_lgdwk")
 
@@ -230,7 +248,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kill_area"]
 self_modulate = Color(0, 0, 1, 1)
-position = Vector2(-4.47034e-07, 15)
+position = Vector2(-5.21541e-07, 14.375)
 scale = Vector2(0.999998, 0.999998)
 shape = SubResource("RectangleShape2D_guohv")
 

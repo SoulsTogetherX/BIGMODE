@@ -25,9 +25,13 @@ var move_speed : float = 250.;
 @onready var body: Sprite2D = $body
 @onready var fall_detect: RayCast2D = $body/fall_detect
 @onready var forward_detect: RayCast2D = $body/forward_detect
+@onready var death_sound: Emitter = $death_sound
+@onready var explode_sound: Emitter = $death
 
 var crushed_quotes : QuotesInfo = QuotesInfo.new();
 var shot_quotes    : QuotesInfo = QuotesInfo.new();
+var spike_quotes   : QuotesInfo = QuotesInfo.new();
+var blast_quotes   : QuotesInfo = QuotesInfo.new();
 
 func _ready() -> void:
 	crushed_quotes.quotes = [
@@ -66,10 +70,58 @@ func _ready() -> void:
 		["*Brutal death noises*", 0.3],
 		["Paycheck deductions", 0.2],
 		["Who gave you a gun?", 0.2],
+		["But I never got to--!", 0.14],
 		["Are you even licenced for that?", 0.12],
 		["I was the janitor!", 0.1],
 		["Pineapple Pizza is--", 0.05],
 		];
+	
+	spike_quotes.quotes = [
+		["Argh", 2],
+		["Ow", 2],
+		["Painful", 2],
+		["Cruel World", 2],
+		["Pointy", 1.6],
+		["Please contact IT", 1.4],
+		["ERROR", 1.4],
+		["Safety hazard.", 1.4],
+		["Sharp", 1],
+		["Owowowowow", 0.6],
+		["Puinty", 0.6],
+		["Medic!", 0.3],
+		["Shurp", 0.2],
+		["*Sounds of Impalement*", 0.3],
+		["Who placed these here?", 0.3],
+		["I see the light!", 0.2],
+		["Metal should be friendly!", 0.14],
+		["What a way to go...", 0.1],
+		[":D", 0.1],
+		["I still think pineapple Pizza is--", 0.05],
+		];
+	
+	blast_quotes.quotes = [
+		["Argh", 2],
+		["Ow", 2],
+		["Painful", 2],
+		["Cruel World", 2],
+		["Pointy", 1.6],
+		["Friendly Fire", 1.4],
+		["ERROR", 1.4],
+		["Why did you make me?", 1.4],
+		["Sizzel", 1.4],
+		["Target not reached!", 1.0],
+		["Flashy", 0.6],
+		["BIG GUY!", 0.3],
+		["Puinful!", 0.3],
+		["#@%@#^$^", 0.2],
+		["*Sounds of generic death*", 0.3],
+		["What was my purpose?", 0.3],
+		["Metal should be friendly!", 0.14],
+		["What a way to go...", 0.1],
+		["D:", 0.1],
+		["I still think pineapple Pizza is--", 0.05],
+		];
+	
 	
 	fall_detect.add_exception(self);
 	forward_detect.add_exception(self);
@@ -93,8 +145,21 @@ func _kill_player(body: Node2D) -> void:
 		return;
 	body.kill();
 
+func spike_kill() -> void:
+	TextSpawner.new(settings).spawn(get_tree(), global_position, spike_quotes.pick_random());
+	kill();
+
+func blast_kill() -> void:
+	TextSpawner.new(settings).spawn(get_tree(), global_position, blast_quotes.pick_random());
+	kill();
+
 func kill() -> void:
 	if $StateOverhead.is_in_state("main", "ded"):
 		return;
 	collision_layer = 0;
 	$StateOverhead.change_state("main", "ded");
+	
+	explode_sound.play_random();
+	explode_sound.pitch_scale = (randf() * 0.1) + 0.95;
+	if randf() <= 0.1:
+		death_sound.play_random();

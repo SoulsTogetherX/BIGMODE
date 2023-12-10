@@ -162,7 +162,6 @@ func change_state(new_state_name: String) -> void:
 	assert(new_state != null, "ERROR: given state_name cannot be found in state array.");
 	
 	if _current_state is AnimateState:
-		_current_state._animationPlayer.stop();
 		_disconnect_all_settup();
 	_change_state(new_state);
 

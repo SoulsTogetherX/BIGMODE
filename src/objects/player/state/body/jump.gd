@@ -21,6 +21,9 @@ func enter() -> void:
 	else:
 		_actor.velocity.y += _actor.JUMP_VELOCITY;
 
+func exit() -> void:
+	_actor.force_jumped = false;
+
 func process_physics(delta: float) -> State:
 	if _actor.is_on_floor():
 		return fall;

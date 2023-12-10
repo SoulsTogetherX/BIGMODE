@@ -2,6 +2,8 @@ extends AnimateState
 
 @export var transition : State;
 
+@onready var mod = $"../../../danger_mod";
+
 var charge_up : Tween;
 
 func get_id():
@@ -20,5 +22,7 @@ func enter() -> void:
 
 func on_end_animation() -> State:
 	_animationPlayer.play("attack1_hold");
+	if mod.shown:
+		mod.hide_danger_shape(0.6);
 	return transition;
 

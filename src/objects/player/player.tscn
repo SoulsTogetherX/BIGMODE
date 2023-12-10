@@ -231,6 +231,7 @@ _data = {
 }
 
 [node name="player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_h5kqw")
@@ -312,7 +313,10 @@ one_shot = true
 
 [node name="shoot_timer" type="Timer" parent="."]
 wait_time = 0.25
-autostart = true
+
+[node name="I_frames" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="body" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("3_q87t5")

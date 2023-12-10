@@ -5,31 +5,42 @@ const GRAVITY : int =  980;
 var max_health : int;
 var health : int;
 
-@onready var danger_mod: Area2D = $danger_mod
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var body: Sprite2D = $Sprite2D
-@onready var shoulder: CollisionShape2D = $shoulder
-@onready var floor_detect: Area2D = $floor_detect
-@onready var find_ground: RayCast2D = $find_ground
+@onready var state_overhead: StateOverhead = $StateOverhead
+@onready var body: Sprite2D = $Sprite2D;
+@onready var shoulder: CollisionShape2D = $shoulder;
+@onready var danger_mod: Area2D = $danger_mod;
+@onready var ground_punch: Area2D = $Sprite2D/ground_punch;
+@onready var floor_detect: Area2D = $floor_detect;
+@onready var find_ground: RayCast2D = $find_ground;
+@onready var blast_particles : Array[CPUParticles2D] = [$Sprite2D/BlastParticle_1, $Sprite2D/BlastParticle_2, $Sprite2D/BlastParticle_3];
+
+@export var floor_mid_marker : Marker2D;
+@export var warning : Node2D;
+@export var cam : CameraFollow2D;
 
 func _ready() -> void:
-	switch_phase(0);
+	switch_phase(2);
 
 func shot_at() -> void:
 	health -= 1;
 	if health == 0:
-		die();
+		if phase == 2:
+			die();
+			return;
+		switch_phase(phase + 1);
 	else:
 		var tw = create_tween();
 		tw.set_trans(Tween.TRANS_SINE);
-		tw.tween_property(sprite, "modulate", Color("#ff4646"), 0.05);
-		tw.tween_property(sprite, "modulate", Color.WHITE, 0.05);
+		tw.tween_property(body, "modulate", Color("#ff4646"), 0.05);
+		tw.tween_property(body, "modulate", Color.WHITE, 0.05);
 
 func die() -> void:
 	queue_free();
 
 func turn(left : bool) -> void:
-	body.flip_h = left;
+	var change : int = (-1 if left else 1);
+	
+	body.scale.x = change;
 
 func get_walk_pos(max_walk : float = 1000) -> float:
 	var target = GlobalInfo.player.position.x + 100 * sign(position.x - GlobalInfo.player.position.x);
@@ -43,17 +54,22 @@ func _first_pair_sort(val1 : Array, val2 : Array) -> bool:
 	return val1[0] < val2[0];
 
 func get_jump_target(to_player : bool = true) -> Marker2D:
-	var jump_points : Array = get_tree().get_nodes_in_group("Jump_point");
 	var distances : Array[Array] = [];
 	if to_player:
-		for point : Node2D in jump_points:
-			distances.append([GlobalInfo.player.global_position.distance_to(point.global_position), point]);
+		for point : Node2D in get_tree().get_nodes_in_group("Jump_point"):
+			if phase > 0 && point.get_meta("floor", false):
+				continue;
+			
+			distances.append([GlobalInfo.player.global_position.distance_squared_to(point.global_position), point]);
 		distances.sort_custom(_first_pair_sort);
 		return distances[0][1];
 	else:
-		for point : Node2D in jump_points:
+		for point : Node2D in get_tree().get_nodes_in_group("Jump_point"):
+			if phase > 0 && point.get_meta("ground", false):
+				continue;
+			
 			if point.get_meta("mid", false):
-				distances.append([global_position.distance_to(point.global_position), point]);
+				distances.append([global_position.distance_squared_to(point.global_position), point]);
 		distances.sort_custom(_first_pair_sort);
 		return distances[randi_range(1, distances.size() - 1)][1];
 
@@ -63,6 +79,13 @@ func on_floor() -> bool:
 func find_floor() -> float:
 	find_ground.force_raycast_update();
 	return floor(find_ground.get_collision_point().y);
+
+func cam_shake() -> void:
+	if spike_attack:
+		cam.shake_event(Vector3(0.2, 0.2, 0), Vector3(2.5, 2.5, 0), Vector3(0.3, 0.3, 0), 0);
+
+func blast_particle() -> void:
+	blast_particles[phase].emitting = true;
 
 const shock_scene : PackedScene = preload("res://src/objects/orange_boss/shockwave/shockwave.tscn");
 func create_shockwave() -> void:
@@ -75,6 +98,40 @@ func create_shockwave() -> void:
 	shock.global_position = global_position;
 	get_tree().current_scene.add_child(shock);
 	shock.init(300, true);
+
+var activated_spikes : Array[Marker2D] = [];
+func activate_spikes() -> void:
+	for player in ground_punch.get_overlapping_bodies():
+		player.kill();
+	
+	if !wave_jump:
+		create_shockwave();
+	if !spike_attack:
+		return;
+	
+	var distances : Array[Array] = [];
+	for point : Node2D in get_tree().get_nodes_in_group("Jump_point"):
+		if phase > 0 && point.get_meta("floor", false):
+			continue;
+		if !point.get_meta("mid", true):
+			continue;
+		if abs(point.global_position.y - global_position.y) > 50:
+			continue;
+		
+		distances.append([abs(global_position - point.global_position), point]);
+	distances.sort_custom(_first_pair_sort);
+	
+	var spike = distances.front()[1];
+	if spike.activated:
+		return;
+	
+	spike.activate_spikes(global_position.x);
+	if spike != floor_mid_marker:
+		activated_spikes.append(spike);
+	
+	if activated_spikes.size() > phase:
+		activated_spikes.front().retract_spikes();
+		activated_spikes.pop_front();
 
 const minon_scene : PackedScene = preload("res://src/objects/minon/minon.tscn");
 func spawn_minons(spawn_falling : bool = false) -> void:
@@ -93,9 +150,10 @@ func spawn_minons(spawn_falling : bool = false) -> void:
 enum ACTION_SELECT {ATTACK1 = 0, ATTACK2 = 1, IDLE = 2, SPAWN = 3, SPAWN_MUl = 4, WALK = 5, JUMP_PLAYER = 6, JUMP_PLAYER_ATTACK2 = 7, JUMP_RANDOM = 8, JUMP_MUL = 9, JUMP_ATTACK2 = 10, MAX = 11};
 enum ACTION {ATTACK1 = 0, ATTACK2 = 1, IDLE = 2, SPAWN = 3, WALK = 4, JUMP = 5};
 
-var prev_idx  : int = -1;
-var phase     : int = 0;
-var wave_jump : bool = true;
+var prev_idx     : int = -1;
+var phase        : int = 0;
+var wave_jump    : bool = false;
+var spike_attack : bool = false;
 
 const STAGE_DELAYS : Array[Array] = [
 	# Stage 1
@@ -103,8 +161,8 @@ const STAGE_DELAYS : Array[Array] = [
 		[0.7,1.2], # ATTACK1
 		[0.5,0.7], # ATTACK2
 		[0.4,1.0], # IDLE
-		[0,0], # SPAWN
-		[0,0], # SPAWN_MUl
+		[0.1,0.1], # SPAWN
+		[0.1,0.1], # SPAWN_MUl
 		[0.2,0.3], # WALK
 		[0.3,0.5], # JUMP_PLAYER
 		[1.0,1.3], # JUMP_PLAYER_ATTACK2
@@ -112,18 +170,42 @@ const STAGE_DELAYS : Array[Array] = [
 		[0.5,0.7], # JUMP_MUL
 		[0.85,1.1], # JUMP_ATTACK2
 	],
+	
+	
 	# Stage 2
 	[
-		
+		[0.7,1.2], # ATTACK1
+		[0.5,0.7], # ATTACK2
+		[0.4,1.0], # IDLE
+		[0.1,0.1], # SPAWN
+		[0.1,0.1], # SPAWN_MUl
+		[0.2,0.3], # WALK
+		[0.3,0.5], # JUMP_PLAYER
+		[1.0,1.3], # JUMP_PLAYER_ATTACK2
+		[0.3,0.5], # JUMP_RANDOM
+		[0.5,0.7], # JUMP_MUL
+		[0.85,1.1], # JUMP_ATTACK2
 	],
+	
+	
 	# Stage 3
 	[
-		
+		[0.7,1.2], # ATTACK1
+		[0.5,0.7], # ATTACK2
+		[0.4,1.0], # IDLE
+		[0.1,0.1], # SPAWN
+		[0.1,0.1], # SPAWN_MUl
+		[0.2,0.3], # WALK
+		[0.3,0.5], # JUMP_PLAYER
+		[1.0,1.3], # JUMP_PLAYER_ATTACK2
+		[0.3,0.5], # JUMP_RANDOM
+		[0.5,0.7], # JUMP_MUL
+		[0.85,1.1], # JUMP_ATTACK2
 	],
 ]
 
-const STAGE_HEALHS = [100, 150, 200];
-const STAGE_RANGES = [200, 300, 400];
+const STAGE_HEALHS = [110, 150, 190];
+const STAGE_RANGES = [150, 200, 300];
 
 const VERY_SHORT_RANGE : float = 110.0;
 const SHORT_RANGE : float = 300.0;
@@ -191,7 +273,129 @@ const priorities = [
 			0,   # JUMP_MUL
 			0,   # JUMP_ATTACK2
 		],
-	]
+	],
+	
+	
+		# Stage 2
+	[
+		# Very short
+		[
+			10,  # ATTACK1
+			2,   # ATTACK2
+			2,   # IDLE
+			5,   # SPAWN
+			0,   # SPAWN_MUl
+			0,   # WALK
+			0,   # JUMP_PLAYER
+			0,   # JUMP_PLAYER_ATTACK2
+			1,   # JUMP_RANDOM
+			0,   # JUMP_MUL
+			2,   # JUMP_ATTACK2
+		],
+		# Short
+		[
+			8,   # ATTACK1
+			2,   # ATTACK2
+			2,   # IDLE
+			7,   # SPAWN
+			0,   # SPAWN_MUl
+			5,   # WALK
+			0,   # JUMP_PLAYER
+			0,   # JUMP_PLAYER_ATTACK2
+			1,   # JUMP_RANDOM
+			0,   # JUMP_MUL
+			2,   # JUMP_ATTACK2
+		],
+		# Mid
+		[
+			1,  # ATTACK1
+			2,  # ATTACK2
+			5,   # IDLE
+			15,  # SPAWN
+			0,   # SPAWN_MUl
+			3,   # WALK
+			10,  # JUMP_PLAYER
+			10,  # JUMP_PLAYER_ATTACK2
+			0,   # JUMP_RANDOM
+			8,   # JUMP_MUL
+			3,   # JUMP_ATTACK2
+		],
+		# Long
+		[
+			2,   # ATTACK1
+			2,   # ATTACK2
+			5,   # IDLE
+			18,  # SPAWN
+			1,   # SPAWN_MUl
+			1,   # WALK
+			17,  # JUMP_PLAYER
+			20,  # JUMP_PLAYER_ATTACK2
+			0,   # JUMP_RANDOM
+			10,  # JUMP_MUL
+			10,  # JUMP_ATTACK2
+		],
+	],
+	
+	
+		# Stage 3
+	[
+		# Very short
+		[
+			30,  # ATTACK1
+			13,  # ATTACK2
+			0,   # IDLE
+			15,  # SPAWN
+			15,  # SPAWN_MUl
+			0,   # WALK
+			5,  # JUMP_PLAYER
+			2,   # JUMP_PLAYER_ATTACK2
+			1,   # JUMP_RANDOM
+			0,   # JUMP_MUL
+			2,   # JUMP_ATTACK2
+		],
+		# Short
+		[
+			30,  # ATTACK1
+			2,   # ATTACK2
+			0,   # IDLE
+			15,  # SPAWN
+			15,  # SPAWN_MUl
+			2,   # WALK
+			6,  # JUMP_PLAYER
+			2,   # JUMP_PLAYER_ATTACK2
+			1,   # JUMP_RANDOM
+			0,   # JUMP_MUL
+			2,   # JUMP_ATTACK2
+		],
+		# Mid
+		[
+			20, # ATTACK1
+			1,  # ATTACK2
+			0,   # IDLE
+			18,  # SPAWN
+			18,  # SPAWN_MUl
+			2,   # WALK
+			16,  # JUMP_PLAYER
+			20,  # JUMP_PLAYER_ATTACK2
+			0,   # JUMP_RANDOM
+			0,   # JUMP_MUL
+			14,  # JUMP_ATTACK2
+		],
+		# Long
+		[
+			0,   # ATTACK1
+			0,   # ATTACK2
+			0,   # IDLE
+			18,  # SPAWN
+			18,  # SPAWN_MUl
+			0,   # WALK
+			16,  # JUMP_PLAYER
+			20,  # JUMP_PLAYER_ATTACK2
+			0,   # JUMP_RANDOM
+			0,   # JUMP_MUL
+			18,  # JUMP_ATTACK2
+		],
+	],
 ]
 
 func switch_phase(switch_phase : int) -> void:
@@ -202,6 +406,10 @@ func switch_phase(switch_phase : int) -> void:
 	
 	health = max_health;
 	wave_jump = (phase > 0);
+	spike_attack = (phase > 0);
+	
+	if phase == 1:
+		$StateOverhead/StateMachine/transition.cutscene_2 = true;
 
 var old : int = -1;
 func prioirtize() -> Array[Array]:
@@ -221,6 +429,8 @@ func prioirtize() -> Array[Array]:
 		distance_indx = 2;
 	else:
 		distance_indx = 3;
+	
+	prints(player_distance, distance_indx, phase)
 	
 	var unweighted : Array[float] = [];
 	var weighted   : Array[float] = [];
@@ -260,31 +470,42 @@ func prioirtize() -> Array[Array]:
 	var delay = randf_range(delays[0],delays[1]);
 	match selected_idx:
 		ACTION_SELECT.ATTACK1:
+			print("ATTACK1")
 			ret.append([ACTION.ATTACK1, delay]);
 		ACTION_SELECT.ATTACK2:
+			print("ATTACK2")
 			ret.append([ACTION.ATTACK2, delay]);
 		ACTION_SELECT.IDLE:
+			print("IDLE")
 			ret.append([ACTION.IDLE, delay]);
 		ACTION_SELECT.SPAWN:
+			print("SPAWN")
 			ret.append([ACTION.SPAWN, delay]);
 		ACTION_SELECT.SPAWN_MUl:
+			print("SPAWN_MUl")
 			for i in randi_range(1,4):
-				ret.append([ACTION.SPAWN, 0.1]);
+				ret.append([ACTION.SPAWN, 0.15]);
 			ret.append([ACTION.SPAWN, delay]);
 		ACTION_SELECT.WALK:
+			print("WALK")
 			ret.append([ACTION.WALK, delay, get_walk_pos()]);
 		ACTION_SELECT.JUMP_PLAYER:
+			print("JUMP_PLAYER")
 			ret.append([ACTION.JUMP, delay, get_jump_target(true)]);
 		ACTION_SELECT.JUMP_PLAYER_ATTACK2:
-			ret.append([ACTION.JUMP, 0, get_jump_target(true)]);
+			print("JUMP_PLAYER_ATTACK2")
+			ret.append([ACTION.JUMP, 0.0, get_jump_target(true)]);
 			ret.append([ACTION.ATTACK2, delay]);
 		ACTION_SELECT.JUMP_RANDOM:
+			print("JUMP_RANDOM")
 			ret.append([ACTION.JUMP, delay, get_jump_target(false)]);
 		ACTION_SELECT.JUMP_MUL:
+			print("JUMP_MUL")
 			for i in randi_range(1,4):
-				ret.append([ACTION.JUMP, 0.1, get_jump_target(false)]);
-			ret.append([ACTION.JUMP, delay]);
+				ret.append([ACTION.JUMP, 0.0, get_jump_target(false)]);
+			ret.append([ACTION.JUMP, delay, get_jump_target(false)]);
 		ACTION_SELECT.JUMP_ATTACK2:
+			print("JUMP_ATTACK2")
 			ret.append([ACTION.JUMP, 0, get_jump_target(false)]);
 			ret.append([ACTION.ATTACK2, delay]);
 	

@@ -1,3 +1,4 @@
+## @experimental
 class_name AnimateState extends State
 
 var _prebaked_intervals                : Array[float] = [];

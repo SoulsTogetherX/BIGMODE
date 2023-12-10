@@ -2,7 +2,7 @@ class_name SafeOneshot extends RefCounted
 
 enum SAFE_ONESHOT_STATE {RUNNING, KILLED}
 
-var state    : SAFE_ONESHOT_STATE = SAFE_ONESHOT_STATE.RUNNING;
+var state : SAFE_ONESHOT_STATE = SAFE_ONESHOT_STATE.RUNNING;
 
 signal timeout;
 signal killed_timeout;

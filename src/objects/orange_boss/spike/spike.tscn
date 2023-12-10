@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgha7n56idtwy"]
+[gd_scene load_steps=9 format=3 uid="uid://bgha7n56idtwy"]
 
+[ext_resource type="Script" path="res://src/objects/orange_boss/spike/spike.gd" id="1_ad60d"]
 [ext_resource type="Texture2D" uid="uid://blj5j5fai1c3g" path="res://asset/sprites/orange_boss/Spikes.png" id="1_y8oyy"]
+[ext_resource type="AudioStream" uid="uid://dt4cn6de4e6ki" path="res://asset/sounds/spike/spikes_pushing_through_floor.wav" id="3_ayk6b"]
 
 [sub_resource type="Animation" id="Animation_vywqn"]
 length = 0.001
@@ -15,6 +17,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/CollisionPolygon2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_k03kr"]
@@ -32,19 +58,29 @@ tracks/0/keys = {
 "update": 0,
 "values": [3, 2, 1, 0]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/CollisionPolygon2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_vmhkv"]
@@ -93,6 +129,30 @@ tracks/1/keys = {
 "method": &"play"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/CollisionPolygon2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n7he3"]
 _data = {
@@ -103,8 +163,11 @@ _data = {
 }
 
 [node name="Spike" type="Node2D"]
+visible = false
+script = ExtResource("1_ad60d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -18.5)
 texture = ExtResource("1_y8oyy")
 hframes = 7
 
@@ -112,4 +175,20 @@ hframes = 7
 libraries = {
 "": SubResource("AnimationLibrary_n7he3")
 }
-autoplay = "start"
+autoplay = "RESET"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2, -18.5)
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-17, 18.5, -6, 0, 0, 0, 9, 18.5)
+disabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ayk6b")
+volume_db = -30.0
+pitch_scale = 0.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_victum_entered"]

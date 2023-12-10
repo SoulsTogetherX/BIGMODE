@@ -7,11 +7,13 @@ extends State
 @export var spawn : State;
 @export var walk : State;
 
-var state_queue : Array[Array] = [];
+var state_queue : Array = [];
 var timer : Timer;
 
 var move_to_state : State = null;
 var delay = 0;
+
+var cutscene_2 : bool = false;
 
 func get_id():
 	return "transition";
@@ -21,6 +23,14 @@ func state_ready() -> void:
 	add_child(timer);
 
 func enter() -> void:
+	if cutscene_2:
+		cutscene_2 = false;
+		state_queue = [
+						[Boss.ACTION.JUMP, 0.7, _actor.get_jump_target(false)],
+						[Boss.ACTION.ATTACK2, 1.5],
+						[Boss.ACTION.JUMP, 0.2, _actor.floor_mid_marker],
+					  ]
+	
 	if state_queue.size() == 0:
 		state_queue = _actor.prioirtize();
 	if delay == 0:
@@ -53,6 +63,7 @@ func get_move_to_state() -> void:
 			jump.target = info[2];
 			move_to_state = jump;
 		Boss.ACTION.SPAWN:
+			_actor.warning.warn();
 			move_to_state = spawn;
 		Boss.ACTION.WALK:
 			walk.target_x = info[2];

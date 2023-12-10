@@ -2,6 +2,8 @@ extends State
 
 var return_state : State;
 
+@onready var land_emitter: Emitter = $"../../../Sprite2D/land_emitter"
+
 func get_id():
 	return "wall_fall";
 
@@ -13,6 +15,7 @@ func enter() -> void:
 
 func exit() -> void:
 	_actor.velocity.y = 0;
+	land_emitter.play_random();
 
 func process_physics(delta: float) -> State:
 	if _actor.on_floor():

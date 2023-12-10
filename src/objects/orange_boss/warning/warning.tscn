@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctom32pwhgkdl"]
+
+[ext_resource type="Texture2D" uid="uid://chjna2l3vjfp3" path="res://asset/sprites/warning/warning_sprites.png" id="1_ghux8"]
+[ext_resource type="Script" path="res://src/objects/orange_boss/warning/warning.gd" id="1_sm6nn"]
+
+[node name="Warning" type="Node2D"]
+script = ExtResource("1_sm6nn")
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("1_ghux8")
+hframes = 2
+frame = 1
+
+[node name="line" type="Sprite2D" parent="."]
+texture = ExtResource("1_ghux8")
+hframes = 2

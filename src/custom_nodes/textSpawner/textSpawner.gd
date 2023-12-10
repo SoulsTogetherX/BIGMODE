@@ -8,6 +8,7 @@ func _init(settings : LabelSettings) -> void:
 func spawn(tree : SceneTree, global_pos : Vector2, text : String, scale : float = 1., color : Color = Color.WHITE, w : float = 50, h_1 : float = -10, h_2 : float = -5) -> TextSpawner:
 	var rotation_point : Node2D = Node2D.new();
 	var label : Label = Label.new();
+	label.z_index = 2;
 	label.label_settings = _settings;
 	label.text = text;
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;

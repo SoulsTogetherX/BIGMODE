@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg1dopkt5q18t"]
+[gd_scene load_steps=13 format=3 uid="uid://dg1dopkt5q18t"]
 
 [ext_resource type="Script" path="res://room/room.gd" id="1_gavv5"]
 [ext_resource type="TileSet" uid="uid://conm8l7uktq4s" path="res://asset/sprites/titlesheet/Standard_TileSheet.tres" id="1_r3iom"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cfl2pjvhh4d27" path="res://src/objects/oneway/oneway.tscn" id="6_17dc7"]
 [ext_resource type="PackedScene" uid="uid://c7udaua4fxne2" path="res://room/boss_room/markers/jump_point.tscn" id="8_7n5od"]
 [ext_resource type="PackedScene" uid="uid://i201xjcwfuvk" path="res://room/boss_room/markers/spawner_node.tscn" id="9_5inhw"]
+[ext_resource type="PackedScene" uid="uid://bgha7n56idtwy" path="res://src/objects/orange_boss/spike/spike.tscn" id="10_w6nkk"]
+[ext_resource type="PackedScene" uid="uid://ctom32pwhgkdl" path="res://src/objects/orange_boss/warning/warning.tscn" id="11_66dfv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bso07"]
 load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7fbfeeb24.ctex"
@@ -18,12 +20,20 @@ script = ExtResource("1_gavv5")
 
 [node name="background" type="TileMap" parent="."]
 modulate = Color(0.392157, 0.392157, 0.392157, 1)
+z_index = -1
 tile_set = ExtResource("1_r3iom")
 format = 2
 layer_0/tile_data = PackedInt32Array(-589840, 0, 4, -524304, 0, 4, -458768, 0, 4, -393232, 0, 4, -327696, 0, 4, -262160, 0, 4, -196624, 0, 4, -131088, 0, 4, -65552, 0, 4, -16, 0, 4, 65520, 0, 4, 131056, 0, 4, -589839, 0, 4, -524303, 0, 4, -458767, 0, 4, -393231, 0, 4, -327695, 0, 4, -262159, 0, 4, -196623, 0, 4, -131087, 0, 4, -65551, 0, 4, -15, 0, 4, 65521, 0, 4, 131057, 0, 4, -589838, 0, 4, -524302, 0, 4, -458766, 0, 4, -393230, 0, 4, -327694, 0, 4, -262158, 0, 4, -196622, 0, 4, -131086, 0, 4, -65550, 0, 4, -14, 0, 4, 65522, 0, 4, 131058, 0, 4, -589837, 0, 4, -524301, 0, 4, -458765, 0, 4, -393229, 0, 4, -327693, 0, 4, -262157, 0, 4, -196621, 0, 4, -131085, 0, 4, -65549, 0, 4, -13, 0, 4, 65523, 0, 4, 131059, 0, 4, -589836, 0, 4, -524300, 0, 4, -458764, 0, 4, -393228, 0, 4, -327692, 0, 4, -262156, 0, 4, -196620, 0, 4, -131084, 0, 4, -65548, 0, 4, -12, 0, 4, 65524, 0, 4, 131060, 0, 4, -589835, 0, 4, -524299, 0, 4, -458763, 0, 4, -393227, 0, 4, -327691, 0, 4, -262155, 0, 4, -196619, 0, 4, -131083, 0, 4, -65547, 0, 4, -11, 0, 4, 65525, 0, 4, 131061, 0, 4, -589834, 0, 4, -524298, 0, 4, -458762, 0, 4, -393226, 0, 4, -327690, 0, 4, -262154, 0, 4, -196618, 0, 4, -131082, 0, 4, -65546, 0, 4, -10, 0, 4, 65526, 0, 4, 131062, 0, 4, -589833, 0, 4, -524297, 0, 4, -458761, 0, 4, -393225, 0, 4, -327689, 0, 4, -262153, 0, 4, -196617, 0, 4, -131081, 0, 4, -65545, 0, 4, -9, 0, 4, 65527, 0, 4, 131063, 0, 4, -589832, 0, 4, -524296, 0, 4, -458760, 0, 4, -393224, 0, 4, -327688, 0, 4, -262152, 0, 4, -196616, 0, 4, -131080, 0, 4, -65544, 0, 4, -8, 0, 4, 65528, 0, 4, 131064, 0, 4, -589831, 0, 4, -524295, 0, 4, -458759, 0, 4, -393223, 0, 4, -327687, 0, 4, -262151, 0, 4, -196615, 0, 4, -131079, 0, 4, -65543, 0, 4, -7, 0, 4, 65529, 0, 4, 131065, 0, 4, -589830, 0, 4, -524294, 0, 4, -458758, 0, 4, -393222, 0, 4, -327686, 0, 4, -262150, 0, 4, -196614, 0, 4, -131078, 0, 4, -65542, 0, 4, -6, 0, 4, 65530, 0, 4, 131066, 0, 4, -589829, 0, 4, -524293, 0, 4, -458757, 0, 4, -393221, 0, 4, -327685, 0, 4, -262149, 0, 4, -196613, 0, 4, -131077, 0, 4, -65541, 0, 4, -5, 0, 4, 65531, 0, 4, 131067, 0, 4, -589828, 0, 4, -524292, 0, 4, -458756, 0, 4, -393220, 0, 4, -327684, 0, 4, -262148, 0, 4, -196612, 0, 4, -131076, 0, 4, -65540, 0, 4, -4, 0, 4, 65532, 0, 4, 131068, 0, 4, -589827, 0, 4, -524291, 0, 4, -458755, 0, 4, -393219, 0, 4, -327683, 0, 4, -262147, 0, 4, -196611, 0, 4, -131075, 0, 4, -65539, 0, 4, -3, 0, 4, 65533, 0, 4, 131069, 0, 4, -589826, 0, 4, -524290, 0, 4, -458754, 0, 4, -393218, 0, 4, -327682, 0, 4, -262146, 0, 4, -196610, 0, 4, -131074, 0, 4, -65538, 0, 4, -2, 0, 4, 65534, 0, 4, 131070, 0, 4, -589825, 0, 4, -524289, 0, 4, -458753, 0, 4, -393217, 0, 4, -327681, 0, 4, -262145, 0, 4, -196609, 0, 4, -131073, 0, 4, -65537, 0, 4, -1, 0, 4, 65535, 0, 4, 131071, 0, 4, -655360, 0, 4, -589824, 0, 4, -524288, 0, 4, -458752, 0, 4, -393216, 0, 4, -327680, 0, 4, -262144, 0, 4, -196608, 0, 4, -131072, 0, 4, -65536, 0, 4, 0, 0, 4, 65536, 0, 4, -655359, 0, 4, -589823, 0, 4, -524287, 0, 4, -458751, 0, 4, -393215, 0, 4, -327679, 0, 4, -262143, 0, 4, -196607, 0, 4, -131071, 0, 4, -65535, 0, 4, 1, 0, 4, 65537, 0, 4, -655358, 0, 4, -589822, 0, 4, -524286, 0, 4, -458750, 0, 4, -393214, 0, 4, -327678, 0, 4, -262142, 0, 4, -196606, 0, 4, -131070, 0, 4, -65534, 0, 4, 2, 0, 4, 65538, 0, 4, -655357, 0, 4, -589821, 0, 4, -524285, 0, 4, -458749, 0, 4, -393213, 0, 4, -327677, 0, 4, -262141, 0, 4, -196605, 0, 4, -131069, 0, 4, -65533, 0, 4, 3, 0, 4, 65539, 0, 4, -655356, 0, 4, -589820, 0, 4, -524284, 0, 4, -458748, 0, 4, -393212, 0, 4, -327676, 0, 4, -262140, 0, 4, -196604, 0, 4, -131068, 0, 4, -65532, 0, 4, 4, 0, 4, 65540, 0, 4, -655355, 0, 4, -589819, 0, 4, -524283, 0, 4, -458747, 0, 4, -393211, 0, 4, -327675, 0, 4, -262139, 0, 4, -196603, 0, 4, -131067, 0, 4, -65531, 0, 4, 5, 0, 4, 65541, 0, 4, -655354, 0, 4, -589818, 0, 4, -524282, 0, 4, -458746, 0, 4, -393210, 0, 4, -327674, 0, 4, -262138, 0, 4, -196602, 0, 4, -131066, 0, 4, -65530, 0, 4, 6, 0, 4, 65542, 0, 4, -655353, 0, 4, -589817, 0, 4, -524281, 0, 4, -458745, 0, 4, -393209, 0, 4, -327673, 0, 4, -262137, 0, 4, -196601, 0, 4, -131065, 0, 4, -65529, 0, 4, 7, 0, 4, 65543, 0, 4, -655352, 0, 4, -589816, 0, 4, -524280, 0, 4, -458744, 0, 4, -393208, 0, 4, -327672, 0, 4, -262136, 0, 4, -196600, 0, 4, -131064, 0, 4, -65528, 0, 4, 8, 0, 4, 65544, 0, 4, -655351, 0, 4, -589815, 0, 4, -524279, 0, 4, -458743, 0, 4, -393207, 0, 4, -327671, 0, 4, -262135, 0, 4, -196599, 0, 4, -131063, 0, 4, -65527, 0, 4, 9, 0, 4, 65545, 0, 4, -655350, 0, 4, -589814, 0, 4, -524278, 0, 4, -458742, 0, 4, -393206, 0, 4, -327670, 0, 4, -262134, 0, 4, -196598, 0, 4, -131062, 0, 4, -65526, 0, 4, 10, 0, 4, 65546, 0, 4, -655349, 0, 4, -589813, 0, 4, -524277, 0, 4, -458741, 0, 4, -393205, 0, 4, -327669, 0, 4, -262133, 0, 4, -196597, 0, 4, -131061, 0, 4, -65525, 0, 4, 11, 0, 4, 65547, 0, 4, -655348, 0, 4, -589812, 0, 4, -524276, 0, 4, -458740, 0, 4, -393204, 0, 4, -327668, 0, 4, -262132, 0, 4, -196596, 0, 4, -131060, 0, 4, -65524, 0, 4, 12, 0, 4, 65548, 0, 4, -655347, 0, 4, -589811, 0, 4, -524275, 0, 4, -458739, 0, 4, -393203, 0, 4, -327667, 0, 4, -262131, 0, 4, -196595, 0, 4, -131059, 0, 4, -65523, 0, 4, 13, 0, 4, 65549, 0, 4, -655346, 0, 4, -589810, 0, 4, -524274, 0, 4, -458738, 0, 4, -393202, 0, 4, -327666, 0, 4, -262130, 0, 4, -196594, 0, 4, -131058, 0, 4, -65522, 0, 4, 14, 0, 4, 65550, 0, 4, -655345, 0, 4, -589809, 0, 4, -524273, 0, 4, -458737, 0, 4, -393201, 0, 4, -327665, 0, 4, -262129, 0, 4, -196593, 0, 4, -131057, 0, 4, -65521, 0, 4, 15, 0, 4, 65551, 0, 4, -655375, 0, 4, -655374, 0, 4, -655373, 0, 4, -655372, 0, 4, -655371, 0, 4, -655370, 0, 4, -655369, 0, 4, -655368, 0, 4, -655367, 0, 4, -655366, 0, 4, -655365, 0, 4, -655364, 0, 4, -655363, 0, 4, -655362, 0, 4, -655361, 0, 4, -720896, 0, 4, -720895, 0, 4, -720894, 0, 4, -720893, 0, 4, -720892, 0, 4, -720891, 0, 4, -720890, 0, 4, -720889, 0, 4, -720888, 0, 4, -720887, 0, 4, -720886, 0, 4, -720885, 0, 4, -720884, 0, 4, -720883, 0, 4, -720882, 0, 4, -655382, 0, 4, -655381, 0, 4, -655380, 0, 4, -655379, 0, 4, -655378, 0, 4, -655377, 0, 4, -655376, 0, 4, -1048577, 0, 4, -983041, 0, 4, -917505, 0, 4, -851969, 0, 4, -786433, 0, 4, -720897, 0, 4, -1114112, 0, 4, -1048576, 0, 4, -983040, 0, 4, -917504, 0, 4, -851968, 0, 4, -786432, 0, 4, -720881, 0, 4, -720880, 0, 4, -720879, 0, 4, -720878, 0, 4, -720877, 0, 4, -720876, 0, 4, -720875, 0, 4, -786447, 0, 4, -720911, 0, 4, -786446, 0, 4, -720910, 0, 4, -786445, 0, 4, -720909, 0, 4, -786444, 0, 4, -720908, 0, 4, -786443, 0, 4, -720907, 0, 4, -786442, 0, 4, -720906, 0, 4, -786441, 0, 4, -720905, 0, 4, -786440, 0, 4, -720904, 0, 4, -786439, 0, 4, -720903, 0, 4, -786438, 0, 4, -720902, 0, 4, -786437, 0, 4, -720901, 0, 4, -786436, 0, 4, -720900, 0, 4, -786435, 0, 4, -720899, 0, 4, -786434, 0, 4, -720898, 0, 4, -851967, 0, 4, -786431, 0, 4, -851966, 0, 4, -786430, 0, 4, -851965, 0, 4, -786429, 0, 4, -851964, 0, 4, -786428, 0, 4, -851963, 0, 4, -786427, 0, 4, -851962, 0, 4, -786426, 0, 4, -851961, 0, 4, -786425, 0, 4, -851960, 0, 4, -786424, 0, 4, -851959, 0, 4, -786423, 0, 4, -851958, 0, 4, -786422, 0, 4, -851957, 0, 4, -786421, 0, 4, -851956, 0, 4, -786420, 0, 4, -851955, 0, 4, -786419, 0, 4, -851954, 0, 4, -786418, 0, 4, -1179648, 0, 4, -1245184, 0, 4, -1114113, 0, 4, -1179649, 0, 4, -720912, 0, 4, -720913, 0, 4, -720914, 0, 4, -720915, 0, 4, -720916, 0, 4, -720917, 0, 4, -720918, 0, 4, -655383, 0, 4, -720919, 0, 4, -786417, 0, 4, -786416, 0, 4, -786415, 0, 4, -786414, 0, 4, -786413, 0, 4, -786412, 0, 4, -786411, 0, 4, -786410, 0, 4, -720874, 0, 4)
 
-[node name="OrangeBoss" parent="." instance=ExtResource("5_mdam3")]
+[node name="Warning" parent="." instance=ExtResource("11_66dfv")]
+position = Vector2(0, -544)
+scale = Vector2(2, 2)
+
+[node name="OrangeBoss" parent="." node_paths=PackedStringArray("floor_mid_marker", "warning", "cam") instance=ExtResource("5_mdam3")]
 position = Vector2(0, 50)
+floor_mid_marker = NodePath("../Jump_points/JumpPoint_8")
+warning = NodePath("../Warning")
+cam = NodePath("../Camera2D")
 
 [node name="player" parent="." instance=ExtResource("2_3rvfs")]
 position = Vector2(-504, 16)
@@ -52,7 +62,7 @@ layer_0/tile_data = PackedInt32Array(14, 720896, 3, -65522, 720896, 2, -131058, 
 
 [node name="oneway_1" parent="one_ways" instance=ExtResource("6_17dc7")]
 offset_left = -936.0
-offset_right = -520.0
+offset_right = -512.0
 texture = SubResource("CompressedTexture2D_bso07")
 
 [node name="oneway_2" parent="one_ways" instance=ExtResource("6_17dc7")]
@@ -70,7 +80,7 @@ offset_bottom = -361.0
 texture = SubResource("CompressedTexture2D_bso07")
 
 [node name="oneway_4" parent="one_ways" instance=ExtResource("6_17dc7")]
-offset_left = -368.0
+offset_left = -376.0
 offset_top = -64.0
 offset_right = -96.0
 offset_bottom = -49.0
@@ -98,19 +108,19 @@ offset_bottom = -257.0
 texture = SubResource("CompressedTexture2D_bso07")
 
 [node name="oneway_8" parent="one_ways" instance=ExtResource("6_17dc7")]
-offset_left = 528.0
+offset_left = 512.0
 offset_right = 936.0
 texture = SubResource("CompressedTexture2D_bso07")
 
 [node name="oneway_9" parent="one_ways" instance=ExtResource("6_17dc7")]
-offset_left = 520.0
-offset_top = -384.0
-offset_right = 928.0
-offset_bottom = -369.0
+offset_left = 536.0
+offset_top = -376.0
+offset_right = 936.0
+offset_bottom = -361.0
 texture = SubResource("CompressedTexture2D_bso07")
 
 [node name="oneway_10" parent="one_ways" instance=ExtResource("6_17dc7")]
-offset_left = -944.0
+offset_left = -936.0
 offset_top = -376.0
 offset_right = -536.0
 offset_bottom = -361.0
@@ -121,115 +131,123 @@ texture = SubResource("CompressedTexture2D_bso07")
 [node name="JumpPoint_1" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-832, -376)
 
-[node name="JumpPoint_21" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_2" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-640, -376)
 
-[node name="JumpPoint_26" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_4" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-736, -376)
 metadata/mid = true
 
-[node name="JumpPoint_2" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_5" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-232, 49)
+metadata/ground = true
 
-[node name="JumpPoint_22" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(-448, 48)
+[node name="JumpPoint_6" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(-448, 49)
+metadata/ground = true
 
-[node name="JumpPoint_23" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_7" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(448, 48)
+metadata/ground = true
 
-[node name="JumpPoint_3" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_8" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(0, 49)
+metadata/mid = true
+metadata/ground = true
 
-[node name="JumpPoint_4" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_9" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-288, -64)
 
-[node name="JumpPoint_34" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_10" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-160, -64)
 
-[node name="JumpPoint_35" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_11" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-224, -64)
 metadata/mid = true
 
-[node name="JumpPoint_5" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_12" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(160, -64)
 
-[node name="JumpPoint_32" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_13" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(288, -64)
 
-[node name="JumpPoint_33" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_14" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(224, -64)
 metadata/mid = true
 
-[node name="JumpPoint_6" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_15" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(224, 49)
-
-[node name="JumpPoint_7" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(832, -384)
-
-[node name="JumpPoint_18" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(640, -384)
-
-[node name="JumpPoint_27" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(736, -384)
-metadata/mid = true
-
-[node name="JumpPoint_8" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(-160, -376)
-
-[node name="JumpPoint_13" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(160, -376)
-
-[node name="JumpPoint_9" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(-160, -184)
+metadata/ground = true
 
 [node name="JumpPoint_16" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(832, -384)
+
+[node name="JumpPoint_17" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(640, -384)
+
+[node name="JumpPoint_18" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(736, -376)
+metadata/mid = true
+
+[node name="JumpPoint_19" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(-160, -376)
+
+[node name="JumpPoint_20" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(160, -376)
+
+[node name="JumpPoint_21" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(-160, -184)
+
+[node name="JumpPoint_22" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(0, -184)
 metadata/mid = true
 
-[node name="JumpPoint_17" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_23" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(0, -376)
 metadata/mid = true
 
-[node name="JumpPoint_14" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_24" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(160, -184)
 
-[node name="JumpPoint_10" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_25" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-480, -272)
 
-[node name="JumpPoint_29" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_26" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-352, -272)
 
-[node name="JumpPoint_30" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_28" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-416, -272)
 metadata/mid = true
 
-[node name="JumpPoint_31" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_27" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(416, -272)
 metadata/mid = true
 
-[node name="JumpPoint_11" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_32" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(344, -272)
 
-[node name="JumpPoint_28" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_29" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(480, -272)
 
-[node name="JumpPoint_12" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_30" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(640, -16)
 metadata/mid = true
 
-[node name="JumpPoint_24" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(744, 48)
+[node name="JumpPoint_31" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(744, 49)
+metadata/ground = true
 
-[node name="JumpPoint_25" parent="Jump_points" instance=ExtResource("8_7n5od")]
-position = Vector2(-736, 48)
+[node name="JumpPoint_33" parent="Jump_points" instance=ExtResource("8_7n5od")]
+position = Vector2(-736, 49)
+metadata/ground = true
 
-[node name="JumpPoint_19" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_34" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(832, -16)
 
-[node name="JumpPoint_15" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_35" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-832, -16)
 
-[node name="JumpPoint_20" parent="Jump_points" instance=ExtResource("8_7n5od")]
+[node name="JumpPoint_36" parent="Jump_points" instance=ExtResource("8_7n5od")]
 position = Vector2(-640, -16)
 metadata/mid = true
 
@@ -250,3 +268,1440 @@ position = Vector2(-1400, -656)
 [node name="spawner_node_4" parent="spawner_nodes" instance=ExtResource("9_5inhw")]
 position = Vector2(1416, -656)
 metadata/left = true
+
+[node name="spikes" type="Node" parent="."]
+
+[node name="floor" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/floor" instance=ExtResource("10_w6nkk")]
+position = Vector2(-16, 48)
+rotation = 3.14159
+scale = Vector2(1, -1)
+immediate = false
+
+[node name="spike_2" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-16, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_3" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-40, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_4" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-64, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_5" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-88, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_6" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-112, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_7" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-136, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_8" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-160, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_9" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-184, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_10" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-208, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_11" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-232, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_12" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-256, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_13" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-280, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_14" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-304, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_15" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-328, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_16" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-352, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_17" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-376, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_18" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-400, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_19" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-424, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_20" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-448, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_21" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-472, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_22" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-496, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_23" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-520, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_24" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-544, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_25" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-568, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_26" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-592, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_27" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-616, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_28" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-640, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_29" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-664, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_30" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-688, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_31" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-712, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_32" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-736, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_33" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-760, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_34" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-784, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_35" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-808, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_36" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-832, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_37" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-856, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_38" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-880, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_39" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-904, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_40" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-928, 49)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_41" parent="spikes/floor" instance=ExtResource("10_w6nkk")]
+position = Vector2(16, 48)
+immediate = false
+
+[node name="spike_42" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(16, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_43" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(40, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_44" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(64, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_45" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(88, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_46" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(112, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_47" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(136, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_48" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(160, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_49" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(184, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_50" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(208, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_51" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(232, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_52" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(256, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_53" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(280, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_54" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(304, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_55" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(328, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_56" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(352, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_57" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(376, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_58" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(400, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_59" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(424, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_60" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(448, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_61" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(472, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_62" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(496, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_63" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(520, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_64" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(544, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_65" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(568, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_66" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(592, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_67" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(616, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_68" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(640, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_69" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(664, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_70" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(688, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_71" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(712, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_72" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(736, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_73" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(760, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_74" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(784, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_75" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(808, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_76" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(832, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_77" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(856, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_78" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(880, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_79" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(904, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="spike_80" parent="spikes/floor" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(928, 49)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_8")
+immediate = false
+
+[node name="bottom_left" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-624, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_2" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-600, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_3" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-576, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_4" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-552, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_5" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-528, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_6" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-656, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_7" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-680, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_8" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-704, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_9" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-728, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_10" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-752, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_11" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-776, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_12" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-800, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_13" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-824, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_14" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-848, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_15" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-872, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_16" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-896, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="spike_17" parent="spikes/bottom_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-920, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_36")
+immediate = false
+
+[node name="bottom_right" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(624, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_2" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(600, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_3" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(576, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_4" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(552, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_5" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(528, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_6" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(656, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_7" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(680, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_8" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(704, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_9" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(728, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_10" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(752, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_11" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(776, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_12" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(800, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_13" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(824, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_14" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(848, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_15" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(872, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_16" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(896, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="spike_17" parent="spikes/bottom_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(920, -15)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_30")
+immediate = false
+
+[node name="bottom_mid_left" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-208, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_2" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-184, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_3" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-160, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_4" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-136, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_5" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-112, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_6" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-240, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_7" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-264, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_8" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-288, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_9" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-312, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_10" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-336, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="spike_11" parent="spikes/bottom_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-360, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_11")
+immediate = false
+
+[node name="bottom_mid_right" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(208, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_12" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(208, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_2" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(184, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_3" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(160, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_4" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(136, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_5" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(112, -63)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_6" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(240, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_7" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(264, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_8" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(288, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_9" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(312, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_10" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(336, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="spike_11" parent="spikes/bottom_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(360, -63)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_14")
+immediate = false
+
+[node name="top_mid_left" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-399.999, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_2" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-375.999, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_3" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-351.999, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_4" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-327.999, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_5" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-303.999, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_6" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-279.999, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_7" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-432, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_8" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-456, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_9" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-480, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_10" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-504, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_11" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-528, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="spike_12" parent="spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-552, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
+immediate = false
+
+[node name="top_mid_right" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(399.999, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_2" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(375.999, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_3" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(351.999, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_4" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(327.999, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_5" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(303.999, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_6" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(279.999, -271)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_7" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(432, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_8" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(456, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_9" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(480, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_10" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(504, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_11" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(528, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="spike_12" parent="spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(552, -271)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
+immediate = false
+
+[node name="top_left" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-719.999, -376)
+rotation = -3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_2" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-695.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_3" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-671.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_4" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-647.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_5" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-623.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_6" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-599.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_7" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-575.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_8" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-551.999, -376)
+rotation = -3.14159
+scale = Vector2(-1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_9" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-752, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_10" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-776, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_11" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-800, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_12" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-824, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_13" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-848, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_14" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-872, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_15" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-896, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="spike_16" parent="spikes/top_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-920, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_4")
+immediate = false
+
+[node name="top_right" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(719.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_2" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(695.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_3" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(671.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_4" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(647.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_5" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(623.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_6" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(599.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_7" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(575.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_8" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(551.999, -376)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_9" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(752, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_10" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(776, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_11" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(800, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_12" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(824, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_13" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(848, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_14" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(872, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_15" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(896, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="spike_16" parent="spikes/top_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(920, -376)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_18")
+immediate = false
+
+[node name="mid_mid" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(15.9999, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_2" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(40, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_3" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(64, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_4" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(88, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_5" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(112, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_6" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(136, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_7" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(160, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_8" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(184, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_9" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(208, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_10" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(232, -183)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_11" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-16, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_12" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-40, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_13" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-64, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_14" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-88, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_15" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-112, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_16" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-136, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_17" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-160, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_18" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-184, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_19" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-208, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="spike_20" parent="spikes/mid_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-232, -183)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_22")
+immediate = false
+
+[node name="top_mid" type="Node" parent="spikes"]
+
+[node name="spike_1" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(16.0009, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_2" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(40.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_3" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(64.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_4" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(88.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_5" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(112.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_6" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(136.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_7" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(160.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_8" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(184.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_9" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(208.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_10" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(232.001, -375)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_11" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-16, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_12" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-40, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_13" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-64, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_14" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-88, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_15" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-112, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_16" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-136, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_17" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-160, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_18" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-184, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_19" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-208, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
+
+[node name="spike_20" parent="spikes/top_mid" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
+position = Vector2(-232, -375)
+rotation = 3.14159
+scale = Vector2(1, -1)
+jump_pos = NodePath("../../../Jump_points/JumpPoint_23")
+immediate = false
