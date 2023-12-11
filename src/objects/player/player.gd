@@ -19,7 +19,8 @@ const GRAVITY       : int   =  980;
 @onready var body_collide   : CollisionShape2D  = $bodyCollide;
 @onready var turn_node      : Node2D            = $turn_node;
 @onready var davids_gun     : Sprite2D          = $turn_node/DavidsGun
-@onready var on_wall        : Area2D            = $turn_node/on_wall
+@onready var on_wall_left   : Area2D            = $on_wall_left
+@onready var on_wall_right  : Area2D            = $on_wall_right
 @onready var hurt_sound     : AudioStreamPlayer = $hurt
 
 @onready var land: Emitter = $land
@@ -49,6 +50,7 @@ var boosted : bool = false:
 
 func _ready() -> void:
 	GlobalInfo.player = self;
+	GlobalInfo.respawn_pos = global_position;
 	
 	boost_timer.timeout.connect(func(): boosted = false);
 	

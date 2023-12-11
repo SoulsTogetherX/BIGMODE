@@ -27,9 +27,9 @@ func process_physics(delta: float) -> State:
 	var direction = Input.get_axis("left", "right");
 	
 	if Input.is_action_just_pressed("jump"):
-		if _actor.on_wall.get_overlapping_bodies().size() > 0:
-			var sign_c = sign(_actor.turn_node.scale.x);
-			
+		prints(_actor.on_wall_left.get_overlapping_bodies().size(), _actor.on_wall_right.get_overlapping_bodies().size())
+		var sign_c = sign(_actor.on_wall_right.get_overlapping_bodies().size() - _actor.on_wall_left.get_overlapping_bodies().size());
+		if sign_c != 0:
 			_actor.velocity.x += -wall_jump_speed * sign_c;
 			_actor.turn(sign_c != -1);
 			_actor.velocity.y = 0;

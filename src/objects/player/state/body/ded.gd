@@ -12,5 +12,12 @@ func enter() -> void:
 func exit() -> void:
 	_actor.collision_layer = 2;
 
+func process_physics(delta: float) -> State:
+	_actor.velocity.x = 0;
+	_actor.velocity.y += _actor.GRAVITY * delta;
+	return null;
+
 func on_end_animation() -> State:
+	GlobalInfo.respawn();
+	
 	return null;
