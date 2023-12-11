@@ -10,16 +10,17 @@ const GRAVITY       : int   =  980;
 
 @export var settings : LabelSettings;
 
-@onready var coyote_timer   : Timer            = $coyote_timer;
-@onready var jump_buffer    : Timer            = $jump_buffer;
-@onready var boost_timer    : Timer            = $boost_timer
-@onready var walk_time      : Timer            = $walk_time;
-@onready var i_frames       : Timer            = $I_frames
-@onready var body_overhead  : StateOverhead    = $body;
-@onready var body_collide   : CollisionShape2D = $bodyCollide;
-@onready var turn_node      : Node2D           = $turn_node;
-@onready var davids_gun     : Sprite2D         = $turn_node/DavidsGun
-@onready var on_wall        : Area2D           = $turn_node/on_wall
+@onready var coyote_timer   : Timer             = $coyote_timer;
+@onready var jump_buffer    : Timer             = $jump_buffer;
+@onready var boost_timer    : Timer             = $boost_timer
+@onready var walk_time      : Timer             = $walk_time;
+@onready var i_frames       : Timer             = $I_frames
+@onready var body_overhead  : StateOverhead     = $body;
+@onready var body_collide   : CollisionShape2D  = $bodyCollide;
+@onready var turn_node      : Node2D            = $turn_node;
+@onready var davids_gun     : Sprite2D          = $turn_node/DavidsGun
+@onready var on_wall        : Area2D            = $turn_node/on_wall
+@onready var hurt_sound     : AudioStreamPlayer = $hurt
 
 @onready var land: Emitter = $land
 @onready var gun_shot: Emitter = $gun_shot;
@@ -121,6 +122,12 @@ func _ready() -> void:
 func get_movement() -> float:
 	return Input.get_axis("left", "right");
 
+func get_look() -> Vector2:
+	var look_vector : Vector2 = Vector2();
+	look_vector.x = Input.get_axis("aim_right", "aim_left");
+	look_vector.y = Input.get_axis("aim_down", "aim_up");
+	return look_vector.normalized();
+
 func _physics_process(delta: float) -> void:
 	if boosted:
 		velocity.x = sign(velocity.x) * max(BOOST_SPEED, abs(velocity.x));
@@ -145,20 +152,33 @@ func reset_fall() -> void:
 func is_falling() -> bool:
 	return body_overhead.is_in_state("main", "fall");
 
-const MAX_HEALTH = -1;
-var health = MAX_HEALTH;
+func force_cutscene(toggle : bool = true) -> void:
+	if toggle:
+		body_overhead.change_state("main", "cutscene");
+		$gun.process_mode = Node.PROCESS_MODE_DISABLED;
+		$shoot_timer.stop();
+	else:
+		body_overhead.change_state("main", "idle");
+		$gun.process_mode = Node.PROCESS_MODE_INHERIT;
+		$gun.change_state("main", "idle");
+
 func kill() -> void:
 	if !i_frames.is_stopped():
 		return;
-	if health == 0:
-		queue_free();
 	
-	health -= 1;
+	hurt_sound.pitch_scale = (randf() * 0.1) + 1.1;
+	hurt_sound.play();
+	
+	GlobalInfo.update_health(GlobalInfo.player_health - 1);
+	if GlobalInfo.player_health == 0:
+		body_overhead.change_state("main", "ded");
+		return;
+	
 	i_frames.start();
 	
-	var tw = create_tween().set_loops(6);
-	tw.tween_property(self, "modulate:a", 0.0, 0.1);
-	tw.tween_property(self, "modulate:a", 1.0, 0.2).set_delay(0.2);
+	var tw = create_tween().set_loops(10);
+	tw.tween_property(self, "modulate:a", 0.0, 0.05);
+	tw.tween_property(self, "modulate:a", 1.0, 0.1).set_delay(0.05);
 
 func _shoot_message(pos : Vector2 = Vector2.ZERO) -> void:
 	TextSpawner.new(settings).spawn(get_tree(), pos, shoot_quotes.pick_random());

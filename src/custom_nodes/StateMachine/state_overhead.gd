@@ -1,4 +1,5 @@
 @tool
+## @experimental
 class_name StateOverhead extends Node
 
 ## Checks if this [StateOverhead] object affects a given object.[br][br]

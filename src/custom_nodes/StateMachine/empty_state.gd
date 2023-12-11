@@ -1,6 +1,7 @@
 ## The base [State] for all [StateMachine] objects.[br]
 ## Extend from this class to make a custom [State][br]
 ## To use, add this as a child to a [StateMachine] object.
+## @experimental
 class_name State extends Node
 
 ## Easy access to the object, typically a [CharacterBody2D] or [CharacterBody3D], in which this

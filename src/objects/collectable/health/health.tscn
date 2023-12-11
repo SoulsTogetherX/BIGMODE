@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqjeh3g7atd67"]
+
+[ext_resource type="Texture2D" uid="uid://d1vxjeef1s1wp" path="res://asset/sprites/collectables/Health Collectable.png" id="1_c5pmx"]
+[ext_resource type="Script" path="res://src/objects/collectable/health/health.gd" id="1_waxen"]
+[ext_resource type="PackedScene" uid="uid://ck2fvp4120xx1" path="res://src/objects/collectable/collect.tscn" id="2_uu1ge"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_remc7"]
+radius = 11.0
+
+[node name="Health" type="Node2D"]
+script = ExtResource("1_waxen")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -4)
+texture = ExtResource("1_c5pmx")
+
+[node name="Collect" parent="." node_paths=PackedStringArray("_actor") instance=ExtResource("2_uu1ge")]
+_actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collect"]
+shape = SubResource("CircleShape2D_remc7")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2uk30vrr1b68"]
+[gd_scene load_steps=6 format=3 uid="uid://d2uk30vrr1b68"]
 
 [ext_resource type="Script" path="res://src/objects/collectable/orb/orb.gd" id="1_pt0u1"]
-[ext_resource type="Texture2D" uid="uid://dbrqgyk0khp3h" path="res://asset/sprites/collectables/orb.png" id="2_7yf56"]
 [ext_resource type="PackedScene" uid="uid://ck2fvp4120xx1" path="res://src/objects/collectable/collect.tscn" id="2_np638"]
+[ext_resource type="Texture2D" uid="uid://deyyskgqqgxvb" path="res://asset/sprites/collectables/Collectables and coffee.png" id="2_uutko"]
+[ext_resource type="AudioStream" uid="uid://ct2ea8ywf46rj" path="res://asset/sounds/collect/coin.wav" id="4_bw3cj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fhf4h"]
 radius = 5.0
@@ -11,10 +12,18 @@ radius = 5.0
 script = ExtResource("1_pt0u1")
 
 [node name="orb" type="Sprite2D" parent="."]
-texture = ExtResource("2_7yf56")
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_uutko")
+hframes = 4
+vframes = 2
+frame = 4
 
 [node name="Collect" parent="." node_paths=PackedStringArray("_actor") instance=ExtResource("2_np638")]
 _actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collect"]
 shape = SubResource("CircleShape2D_fhf4h")
+
+[node name="collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bw3cj")
+volume_db = -10.0

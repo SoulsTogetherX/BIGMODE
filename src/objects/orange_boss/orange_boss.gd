@@ -13,15 +13,19 @@ var health : int;
 @onready var floor_detect: Area2D = $floor_detect;
 @onready var find_ground: RayCast2D = $find_ground;
 @onready var blast_particles : Array[CPUParticles2D] = [$Sprite2D/BlastParticle_1, $Sprite2D/BlastParticle_2, $Sprite2D/BlastParticle_3];
+@onready var intro: Emitter = $Intro;
 
 @export var floor_mid_marker : Marker2D;
 @export var warning : Node2D;
-@export var cam : CameraFollow2D;
+@export var activate_area : Area2D;
 
 func _ready() -> void:
-	switch_phase(2);
+	switch_phase(0);
 
 func shot_at() -> void:
+	if GlobalInfo.cutscene:
+		return;
+	
 	health -= 1;
 	if health == 0:
 		if phase == 2:
@@ -35,7 +39,7 @@ func shot_at() -> void:
 		tw.tween_property(body, "modulate", Color.WHITE, 0.05);
 
 func die() -> void:
-	queue_free();
+	state_overhead.change_state("main", "ded_fall");
 
 func turn(left : bool) -> void:
 	var change : int = (-1 if left else 1);
@@ -82,7 +86,7 @@ func find_floor() -> float:
 
 func cam_shake() -> void:
 	if spike_attack:
-		cam.shake_event(Vector3(0.2, 0.2, 0), Vector3(2.5, 2.5, 0), Vector3(0.3, 0.3, 0), 0);
+		GlobalInfo.camera.shake_event(Vector3(0.2, 0.2, 0), Vector3(2.5, 2.5, 0), Vector3(0.3, 0.3, 0), 0);
 
 func blast_particle() -> void:
 	blast_particles[phase].emitting = true;
@@ -144,6 +148,9 @@ func spawn_minons(spawn_falling : bool = false) -> void:
 		minion.fall_move = true;
 		minion.face_left = node_info.get_meta("left", false);
 
+func play_intro() -> void:
+	intro.play_random();
+
 
 #AI
 
@@ -204,7 +211,7 @@ const STAGE_DELAYS : Array[Array] = [
 	],
 ]
 
-const STAGE_HEALHS = [110, 150, 190];
+const STAGE_HEALHS = [125, 160, 200];
 const STAGE_RANGES = [150, 200, 300];
 
 const VERY_SHORT_RANGE : float = 110.0;

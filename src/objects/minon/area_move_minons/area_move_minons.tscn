@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://mt34vrpdx762"]
+
+[ext_resource type="Script" path="res://src/objects/minon/area_move_minons/area_move_minons.gd" id="1_q33p0"]
+
+[node name="AreaMoveMinons" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_q33p0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

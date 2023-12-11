@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpx5erqcylul1"]
+[gd_scene load_steps=20 format=3 uid="uid://bpx5erqcylul1"]
 
 [ext_resource type="Texture2D" uid="uid://doms2dom2sm1e" path="res://asset/sprites/icon/icon.svg" id="1_ck6uf"]
 [ext_resource type="PackedScene" uid="uid://1l3xe5hihuta" path="res://src/objects/player/player.tscn" id="1_mfp8i"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://craxrmu5qceh2" path="res://src/objects/flip_area/flip_area.tscn" id="9_5cq2q"]
 [ext_resource type="PackedScene" uid="uid://c7qukbk0xo7xc" path="res://src/objects/collectable/orb/orb_spawner.tscn" id="11_ofyus"]
 [ext_resource type="PackedScene" uid="uid://cfl2pjvhh4d27" path="res://src/objects/oneway/oneway.tscn" id="12_4qi6m"]
-[ext_resource type="PackedScene" uid="uid://cansb3kwm4xd6" path="res://src/objects/orange_boss/orange_boss.tscn" id="13_7ahr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uid2w"]
 shader = ExtResource("1_mnylv")
@@ -125,7 +124,8 @@ shape = SubResource("RectangleShape2D_a2jx6")
 [node name="OrbSpawner" parent="." instance=ExtResource("11_ofyus")]
 position = Vector2(632, -59)
 curve = SubResource("Curve2D_6ixh2")
-inveral = 10
+inveral = 20
+flip = true
 
 [node name="NinePatchRect" parent="." instance=ExtResource("12_4qi6m")]
 offset_left = -934.0
@@ -139,6 +139,3 @@ offset_left = -705.0
 offset_top = -113.0
 offset_right = -410.0
 offset_bottom = -98.0
-
-[node name="OrangeBoss" parent="." instance=ExtResource("13_7ahr2")]
-position = Vector2(-1788, -63)

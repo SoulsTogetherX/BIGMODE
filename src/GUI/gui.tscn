@@ -1,111 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://8tb1htuku7d4"]
+[gd_scene load_steps=5 format=3 uid="uid://8tb1htuku7d4"]
 
 [ext_resource type="Script" path="res://src/GUI/gui.gd" id="1_t5nsk"]
+[ext_resource type="Texture2D" uid="uid://baaqm34q080pc" path="res://asset/sprites/GUI/Health.png" id="2_buhbx"]
+[ext_resource type="Texture2D" uid="uid://da1ekwwk72x7n" path="res://asset/sprites/GUI/Score.png" id="2_sqmgl"]
+[ext_resource type="Texture2D" uid="uid://dbgq45dird14d" path="res://asset/sprites/GUI/Timer.png" id="3_nxds6"]
 
 [node name="GUI" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_t5nsk")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Score" type="Sprite2D" parent="."]
+position = Vector2(108, 22)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_sqmgl")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="Value" type="Label" parent="Score"]
+offset_left = 18.6667
+offset_top = 3.0
+offset_right = 83.6667
+offset_bottom = 29.0
 
-[node name="LeftPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 5.0
+[node name="Time" type="Sprite2D" parent="."]
+position = Vector2(1040, 76)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_nxds6")
 
-[node name="Score" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="Value" type="Label" parent="Time"]
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 25.0
+horizontal_alignment = 1
 
-[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Score"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
+[node name="HealthBack" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = 28.0
+offset_top = 68.0
+offset_right = 60.0
+offset_bottom = 100.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_buhbx")
+stretch_mode = 1
 
-[node name="score" type="Label" parent="MarginContainer/HBoxContainer/Score"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-text = "Score:
-"
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Score"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-
-[node name="Mid" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Mid"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-
-[node name="|    |" type="Label" parent="MarginContainer/HBoxContainer/Mid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-text = "|       |
-|       |
-|       |"
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Mid"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-
-[node name="Time" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TopPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Time"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-
-[node name="time" type="Label" parent="MarginContainer/HBoxContainer/Time"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-text = "Time:"
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="BottomPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer/Time"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-
-[node name="RightPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 5.0
+[node name="Health" type="TextureRect" parent="."]
+offset_left = 28.0
+offset_top = 68.0
+offset_right = 60.0
+offset_bottom = 100.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_buhbx")
+stretch_mode = 1

@@ -2,6 +2,7 @@
 ## To use, add [State] and [AnimateState] objects as children to this [Node],
 ## set the [member starting_state] as once of the children [State] objects,
 ## and then attach this [StateMachine] to a [StateOverhead] object.
+## @experimental
 class_name StateMachine extends Node
 
 ## The name of the current [StateMachine]. This is an unique name identifier so

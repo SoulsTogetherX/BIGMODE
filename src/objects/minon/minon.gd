@@ -18,7 +18,9 @@ var move_speed : float = 250.;
 		if not is_inside_tree():
 			await ready;
 		
-		body.scale.x = (1 if val else -1);
+		var sign_c = (1 if val else -1);
+		body.scale.x = sign_c;
+		forward_detect.target_position.x = 1.25 * sign_c;
 		face_left = val;
 
 @onready var weak_point: Area2D = $weak_point;
@@ -131,6 +133,9 @@ func _ready() -> void:
 		set_physics_process(false);
 
 func _jumped_on(body: Node2D) -> void:
+	if $StateOverhead.is_in_state("main", "ded"):
+		return;
+	
 	body.force_jump();
 	body.velocity.x *= 1.3;
 	TextSpawner.new(settings).spawn(get_tree(), global_position, crushed_quotes.pick_random());
@@ -140,10 +145,14 @@ func shot_at() -> void:
 	TextSpawner.new(settings).spawn(get_tree(), global_position, shot_quotes.pick_random());
 	kill();
 
+func crashed_into() -> void:
+	kill();
+
 func _kill_player(body: Node2D) -> void:
 	if $StateOverhead.is_in_state("main", "ded") || body.boosted:
 		return;
 	body.kill();
+	crashed_into();
 
 func spike_kill() -> void:
 	TextSpawner.new(settings).spawn(get_tree(), global_position, spike_quotes.pick_random());

@@ -14,7 +14,13 @@ func enter() -> void:
 	_animationPlayer.play("idle");
 
 func reposition_gun() -> void:
-	var target : Vector2 = _actor.davids_gun.get_global_mouse_position();
+	var target : Vector2;
+	var look_vec = _actor.get_look();
+	if look_vec == Vector2(0,0):
+		target = _actor.davids_gun.get_global_mouse_position();
+	else:
+		target = look_vec + _actor.davids_gun.global_position;
+	
 	var dir = sign(_actor.davids_gun.get_parent().scale.x);
 	var angle : float = rad_to_deg(_actor.davids_gun.global_position.angle_to_point(target));
 	if dir == 1:

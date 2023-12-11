@@ -6,8 +6,10 @@ extends Node2D
 		bounce = val;
 		queue_redraw();
 func _draw() -> void:
-	draw_line(Vector2.ZERO, bounce / 10, Color.CRIMSON, 2);
+	if Engine.is_editor_hint():
+		draw_line(Vector2.ZERO, bounce / 10, Color.CRIMSON, 2);
 
 func _on_enter(body: Node2D) -> void:
-	body.velocity += bounce;
+	body.velocity = bounce;
+	body.body_overhead.change_state("main", "fall");
 

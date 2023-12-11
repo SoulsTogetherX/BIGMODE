@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0cuhkviuydxn"]
+
+[ext_resource type="Script" path="res://room/Menu/credits/credits.gd" id="1_0ttli"]
+[ext_resource type="Texture2D" uid="uid://c5u6ewhy2yvwt" path="res://asset/sprites/GUI/start_menu/Background.png" id="1_5m2ha"]
+[ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_vxw5g"]
+[ext_resource type="Script" path="res://room/Menu/button.gd" id="4_5lkin"]
+[ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="5_7dctk"]
+
+[sub_resource type="SystemFont" id="SystemFont_5lw1w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k1xai"]
+font = SubResource("SystemFont_5lw1w")
+font_size = 40
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_0ttli")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 650.0
+texture = ExtResource("1_5m2ha")
+
+[node name="back" type="Button" parent="."]
+offset_left = 426.0
+offset_top = 330.0
+offset_right = 726.0
+offset_bottom = 404.0
+theme = ExtResource("3_vxw5g")
+script = ExtResource("4_5lkin")
+
+[node name="sprite" type="Sprite2D" parent="back"]
+position = Vector2(56, 37)
+scale = Vector2(3, 3)
+texture = ExtResource("5_7dctk")
+hframes = 3
+
+[node name="Back" type="Label" parent="back"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 10.0
+offset_right = 205.0
+offset_bottom = 65.0
+text = "Back
+"
+label_settings = SubResource("LabelSettings_k1xai")
+
+[connection signal="mouse_entered" from="back" to="back" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="back" to="back" method="_on_mouse_exited"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

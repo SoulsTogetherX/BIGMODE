@@ -9,8 +9,7 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_fbg2e")
 font_size = 32
 
-[node name="Area2D" type="Area2D"]
-position = Vector2(993.992, -24.3562)
+[node name="filp_area" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_y3uq5")

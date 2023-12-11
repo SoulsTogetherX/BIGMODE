@@ -1,5 +1,6 @@
 @tool
 ## An extention class for [Camera2D] that assists with smooth camera follower, camera shake, and camera zoom.
+## @experimental
 class_name CameraFollow2D extends Camera2D
 
 ## Singals a sucessfully concluded camera shake.[br][br]

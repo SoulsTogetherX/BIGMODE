@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0qveeimm6dhd"]
 
 [ext_resource type="Script" path="res://src/objects/collectable/boost/Boost.gd" id="1_f6q2g"]
-[ext_resource type="Texture2D" uid="uid://dr3hb3gw5vovw" path="res://asset/sprites/other/boost/coffee.png" id="1_pncpj"]
 [ext_resource type="PackedScene" uid="uid://ck2fvp4120xx1" path="res://src/objects/collectable/collect.tscn" id="2_obmug"]
+[ext_resource type="Texture2D" uid="uid://deyyskgqqgxvb" path="res://asset/sprites/collectables/Collectables and coffee.png" id="2_yb028"]
 
 [sub_resource type="SystemFont" id="SystemFont_cglb3"]
 subpixel_positioning = 0
@@ -19,8 +19,10 @@ script = ExtResource("1_f6q2g")
 settings = SubResource("LabelSettings_hy2i6")
 
 [node name="Coffee" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
-texture = ExtResource("1_pncpj")
+position = Vector2(-1, -13)
+texture = ExtResource("2_yb028")
+hframes = 4
+vframes = 2
 
 [node name="Collect" parent="." node_paths=PackedStringArray("_actor") instance=ExtResource("2_obmug")]
 _actor = NodePath("..")

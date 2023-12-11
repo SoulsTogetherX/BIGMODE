@@ -35,6 +35,11 @@ func exit() -> void:
 	_actor.global_position.y = target.global_position.y;
 	_animationPlayer.play("idle");
 	land_emitter.play_random();
+	
+	if jump_tween:
+		var pos = _actor.global_position;
+		jump_tween.kill();
+		_actor.global_position = pos;
 
 func process_physics(_delta: float) -> State:
 	return null;

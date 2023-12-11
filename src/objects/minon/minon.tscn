@@ -16,9 +16,9 @@
 [ext_resource type="AudioStream" uid="uid://bq1aorcemvfqn" path="res://asset/sounds/explotion/milder_explosion.wav" id="7_bldtu"]
 [ext_resource type="AudioStream" uid="uid://b85giym34psy1" path="res://asset/sounds/minon_hurt/player_2.wav" id="7_p48or"]
 [ext_resource type="Script" path="res://src/objects/minon/state/ded.gd" id="8_43vlt"]
-[ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="8_soet5"]
 [ext_resource type="AudioStream" uid="uid://blwtilkp1tfn1" path="res://asset/sounds/minon_hurt/player_3.wav" id="8_vmmlj"]
 [ext_resource type="AudioStream" uid="uid://dvdvj0kp8eprh" path="res://asset/sounds/minon_hurt/player_4.wav" id="9_onac5"]
+[ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="14_25iih"]
 
 [sub_resource type="SystemFont" id="SystemFont_jxklu"]
 subpixel_positioning = 0
@@ -27,7 +27,7 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_jxklu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2qha"]
-size = Vector2(52.5, 48.75)
+size = Vector2(47.5, 48.75)
 
 [sub_resource type="Animation" id="Animation_323fg"]
 length = 0.001
@@ -164,7 +164,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgdwk"]
-size = Vector2(40, 0.674992)
+size = Vector2(20, 0.674996)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_guohv"]
 size = Vector2(52.5001, 31.25)
@@ -175,14 +175,6 @@ collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_x86le")
 settings = SubResource("LabelSettings_qcebg")
-
-[node name="Emitter" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
-volume_db = -20.0
-pitch_scale = 1.4
-max_distance = 1000.0
-attenuation = 0.594604
-_particles = NodePath("../body/WalkParticle")
-audios = Array[AudioStream]([ExtResource("3_0u5vd"), ExtResource("4_3i3ub"), ExtResource("5_g64f2")])
 
 [node name="death" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
 volume_db = -10.0
@@ -196,9 +188,18 @@ attenuation = 0.133972
 _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("6_ce12s"), ExtResource("7_p48or"), ExtResource("8_vmmlj"), ExtResource("9_onac5")])
 
+[node name="Emitter" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
+position = Vector2(0, -1.90735e-06)
+volume_db = -20.0
+pitch_scale = 1.4
+max_distance = 1000.0
+attenuation = 0.594604
+_particles = NodePath("../body/WalkParticle")
+audios = Array[AudioStream]([ExtResource("3_0u5vd"), ExtResource("4_3i3ub"), ExtResource("5_g64f2")])
+
 [node name="body" type="Sprite2D" parent="."]
 position = Vector2(0, 0.100125)
-scale = Vector2(-1, 0.997146)
+scale = Vector2(-1, 1)
 texture = ExtResource("2_d3kg8")
 hframes = 4
 vframes = 3
@@ -218,12 +219,12 @@ collision_mask = 17
 [node name="forward_detect" type="RayCast2D" parent="body"]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(-26.25, 27.4783)
-scale = Vector2(1, 1.00286)
 exclude_parent = false
-target_position = Vector2(-1.25, 3.8147e-06)
+target_position = Vector2(-1.25, 0)
+hit_from_inside = true
 
 [node name="bodyCollide" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5.62499)
+position = Vector2(1.11759e-06, 5.62499)
 shape = SubResource("RectangleShape2D_j2qha")
 
 [node name="body_animate" type="AnimationPlayer" parent="."]
@@ -238,7 +239,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weak_point"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(-4.47035e-07, -19.0875)
+position = Vector2(-5.96046e-07, -19.0875)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_lgdwk")
 
@@ -248,12 +249,12 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kill_area"]
 self_modulate = Color(0, 0, 1, 1)
-position = Vector2(-5.21541e-07, 14.375)
+position = Vector2(-2.42889e-06, 14.375)
 scale = Vector2(0.999998, 0.999998)
 shape = SubResource("RectangleShape2D_guohv")
 
 [node name="StateOverhead" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
-script = ExtResource("8_soet5")
+script = ExtResource("14_25iih")
 _usesActor = true
 _actor = NodePath("..")
 _usesAnimationPlayer = true

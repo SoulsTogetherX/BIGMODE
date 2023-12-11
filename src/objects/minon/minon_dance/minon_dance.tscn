@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdd6fjbqjbvf7"]
+
+[ext_resource type="Script" path="res://src/objects/minon/minon_dance/minon_dance.gd" id="1_vo11h"]
+[ext_resource type="Texture2D" uid="uid://8op1vsrf2hra" path="res://asset/sprites/minon/minon_spritesheet.png" id="2_0u3qq"]
+[ext_resource type="PackedScene" uid="uid://cy6wdj1eolk4p" path="res://src/custom_nodes/emiter/emitter.tscn" id="2_bqrvn"]
+[ext_resource type="AudioStream" uid="uid://klshyflkrdif" path="res://asset/sounds/footsteps/player/Player_step_1.wav" id="3_0jp2h"]
+[ext_resource type="AudioStream" uid="uid://bivx41oe5a74o" path="res://asset/sounds/footsteps/player/Player_step_2.wav" id="4_fcrvl"]
+[ext_resource type="AudioStream" uid="uid://dt34w6btqdnqa" path="res://asset/sounds/footsteps/player/Player_step_3.wav" id="5_g3wff"]
+[ext_resource type="PackedScene" uid="uid://21ninjibavp5" path="res://asset/particles/walk_particle.tscn" id="7_0qy0t"]
+
+[sub_resource type="Animation" id="Animation_f4qkg"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Emitter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}, {
+"args": [],
+"method": &"play_random"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_bljfi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j77xn"]
+_data = {
+"RESET": SubResource("Animation_bljfi"),
+"walk": SubResource("Animation_f4qkg")
+}
+
+[node name="MinonDance" type="Node2D"]
+script = ExtResource("1_vo11h")
+
+[node name="Emitter" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_bqrvn")]
+position = Vector2(-2, -31)
+volume_db = -20.0
+pitch_scale = 1.4
+max_distance = 1000.0
+attenuation = 0.594604
+_particles = NodePath("../body/WalkParticle")
+audios = Array[AudioStream]([ExtResource("3_0jp2h"), ExtResource("4_fcrvl"), ExtResource("5_g3wff")])
+
+[node name="body" type="Sprite2D" parent="."]
+position = Vector2(-2, -28)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_0u3qq")
+hframes = 4
+vframes = 3
+frame = 4
+
+[node name="WalkParticle" parent="body" instance=ExtResource("7_0qy0t")]
+position = Vector2(16, 21)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="body_animate" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j77xn")
+}
+autoplay = "walk"
+
+[connection signal="timeout" from="Timer" to="." method="turn"]

@@ -1,5 +1,6 @@
 ## A addition [Node] that calls a given method repeatedly over an
 ## interval or an indeterminate amount of time.
+## @experimental
 class_name RepeatCaller extends Node
 
 ## Signals a finished calling interval

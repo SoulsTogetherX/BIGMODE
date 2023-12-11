@@ -1,0 +1,114 @@
+[gd_scene load_steps=14 format=3 uid="uid://dc04v8exrt3j8"]
+
+[ext_resource type="Script" path="res://room/Menu/start_menu/start_menu.gd" id="1_2y0gu"]
+[ext_resource type="Texture2D" uid="uid://c5u6ewhy2yvwt" path="res://asset/sprites/GUI/start_menu/Background.png" id="2_bt4eu"]
+[ext_resource type="Script" path="res://room/Menu/button.gd" id="3_axd0y"]
+[ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_ilv21"]
+[ext_resource type="Texture2D" uid="uid://c1gunxi5yddgp" path="res://asset/sprites/GUI/start_menu/Icon.png" id="3_vtpu5"]
+[ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="3_yfal5"]
+[ext_resource type="Texture2D" uid="uid://dig5w8wiffjuh" path="res://asset/sprites/GUI/start_menu/Settings UI.png" id="4_6yxki"]
+[ext_resource type="Texture2D" uid="uid://xsloct884g8v" path="res://asset/sprites/GUI/start_menu/UI Credits.png" id="4_tnyt2"]
+[ext_resource type="Texture2D" uid="uid://bjr0wqr54eyei" path="res://asset/sprites/GUI/start_menu/Subtext.png" id="7_2w2gy"]
+
+[sub_resource type="SystemFont" id="SystemFont_t2rqj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t7yow"]
+font = SubResource("SystemFont_t2rqj")
+font_size = 40
+
+[sub_resource type="SystemFont" id="SystemFont_eqnqc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kjqo3"]
+font = SubResource("SystemFont_eqnqc")
+font_size = 40
+
+[node name="StartMenu" type="Node2D"]
+script = ExtResource("1_2y0gu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_bt4eu")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 426.0
+offset_top = 330.0
+offset_right = 726.0
+offset_bottom = 404.0
+theme = ExtResource("3_ilv21")
+script = ExtResource("3_axd0y")
+
+[node name="sprite" type="Sprite2D" parent="Play"]
+position = Vector2(56, 37)
+scale = Vector2(3, 3)
+texture = ExtResource("3_yfal5")
+hframes = 3
+
+[node name="Play" type="Label" parent="Play"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 10.0
+offset_right = 205.0
+offset_bottom = 65.0
+text = "Play"
+label_settings = SubResource("LabelSettings_t7yow")
+
+[node name="Settings" type="Button" parent="."]
+offset_left = 426.0
+offset_top = 446.0
+offset_right = 726.0
+offset_bottom = 520.0
+theme = ExtResource("3_ilv21")
+script = ExtResource("3_axd0y")
+
+[node name="sprite" type="Sprite2D" parent="Settings"]
+position = Vector2(57, 37)
+scale = Vector2(3, 3)
+texture = ExtResource("4_6yxki")
+hframes = 2
+
+[node name="Settings" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 10.0
+offset_right = 279.0
+offset_bottom = 65.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_kjqo3")
+
+[node name="Credits" type="Button" parent="."]
+offset_left = 889.0
+offset_top = 36.0
+offset_right = 1109.0
+offset_bottom = 110.0
+theme = ExtResource("3_ilv21")
+script = ExtResource("3_axd0y")
+
+[node name="sprite" type="Sprite2D" parent="Credits"]
+position = Vector2(107, 38)
+scale = Vector2(3, 3)
+texture = ExtResource("4_tnyt2")
+hframes = 3
+frame = 2
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(576, 150)
+scale = Vector2(3, 3)
+texture = ExtResource("3_vtpu5")
+
+[node name="Subtext" type="Sprite2D" parent="."]
+position = Vector2(590, 274)
+scale = Vector2(3, 3)
+texture = ExtResource("7_2w2gy")
+
+[connection signal="mouse_entered" from="Play" to="Play" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Play" to="Play" method="_on_mouse_exited"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="Settings" to="Settings" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Settings" to="Settings" method="_on_mouse_exited"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="Credits" to="Credits" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Credits" to="Credits" method="_on_mouse_exited"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]

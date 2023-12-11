@@ -16,7 +16,7 @@ func _on_player_enter(body: Node2D) -> void:
 	
 	if slow_down:
 		TimeManager.instant_time_scale(0.1, 0.8, true);
-		GlobalInfo.camera.zoom_event(Vector2(0.1, 0.1), Vector2(2, 2));
+		GlobalInfo.camera.zoom_event(Vector2(0.1, 0.1), Vector2(1.2, 1.2));
 		if !message_show:
 			_flip_message();
 			message_show = true;
@@ -25,6 +25,6 @@ func _on_player_enter(body: Node2D) -> void:
 	await get_tree().create_timer(0.4).timeout;
 	
 	if slow_down:
-		GlobalInfo.camera.zoom_event(Vector2(0.2, 0.2), Vector2(1, 1));
+		GlobalInfo.camera.zoom_event(Vector2(0.2, 0.2), Vector2(0.8, 0.8));
 	body.rotation = 0;
 	print(body.rotation)

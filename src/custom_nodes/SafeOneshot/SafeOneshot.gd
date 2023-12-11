@@ -1,3 +1,4 @@
+## @experimental
 class_name SafeOneshot extends RefCounted
 
 enum SAFE_ONESHOT_STATE {RUNNING, KILLED}

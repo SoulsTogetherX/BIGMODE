@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4kd64g2tfm7p"]
+
+[ext_resource type="Texture2D" uid="uid://baaqm34q080pc" path="res://asset/sprites/GUI/Health.png" id="1_hstts"]
+[ext_resource type="Script" path="res://asset/particles/particle.gd" id="1_wuvmt"]
+
+[sub_resource type="Curve" id="Curve_maekw"]
+min_value = -5.0
+max_value = 5.0
+_data = [Vector2(0.0123457, -0.934066), 0.0, 0.0, 0, 0, Vector2(0.325103, 0.824176), 0.0, 0.0, 0, 0, Vector2(0.699588, -1.04396), 0.0, 0.0, 0, 0, Vector2(1, 0.494505), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_ubty0"]
+offsets = PackedFloat32Array(0, 0.184874, 0.298319, 0.462185, 0.932773)
+colors = PackedColorArray(1, 1, 1, 1, 0.529412, 0, 0, 1, 0.529412, 0, 0, 1, 1, 1, 1, 0.803922, 1, 1, 1, 0)
+
+[node name="HeartParticle" type="CPUParticles2D"]
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("1_hstts")
+direction = Vector2(0, -1)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+linear_accel_min = -1.0
+linear_accel_max = 1.0
+radial_accel_min = -10.0
+radial_accel_max = 10.0
+tangential_accel_min = -10.0
+tangential_accel_max = 10.0
+angle_min = -50.0
+angle_max = 50.0
+angle_curve = SubResource("Curve_maekw")
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_ubty0")
+script = ExtResource("1_wuvmt")
