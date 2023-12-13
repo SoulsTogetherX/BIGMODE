@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://hxqy8mcyky3h"]
+
+[ext_resource type="Script" path="res://room/rooms/room_manager/visiblity_mod.gd" id="1_iqbbh"]
+
+[node name="VisiblityMod" type="VisibleOnScreenNotifier2D"]
+rect = Rect2(-1000, -1000, 10000, 10000)
+script = ExtResource("1_iqbbh")
+
+[connection signal="screen_entered" from="." to="." method="_on_screen_entered"]
+[connection signal="screen_exited" from="." to="." method="_on_screen_exited"]

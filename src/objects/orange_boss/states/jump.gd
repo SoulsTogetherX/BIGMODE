@@ -11,6 +11,7 @@ var _start     : Vector2;
 var _end       : Vector2;
 var _control   : Vector2;
 var jump_tween : Tween;
+var _prev      : Vector2;
 
 func get_id():
 	return "jump";
@@ -37,9 +38,8 @@ func exit() -> void:
 	land_emitter.play_random();
 	
 	if jump_tween:
-		var pos = _actor.global_position;
 		jump_tween.kill();
-		_actor.global_position = pos;
+		_actor.global_position = _prev;
 
 func process_physics(_delta: float) -> State:
 	return null;
@@ -52,6 +52,7 @@ func _arc_shoot(gradient : float) -> void:
 	var lerp2   : Vector2 = lerp(_control, _end, gradient);
 	var new_pos : Vector2 = lerp(lerp1, lerp2, gradient);
 	_actor.global_position = new_pos;
+	_prev = new_pos;
 	
 	_actor.turn(GlobalInfo.player.global_position > new_pos);
 

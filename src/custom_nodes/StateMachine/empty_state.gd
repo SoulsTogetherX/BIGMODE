@@ -15,6 +15,8 @@ var _stateOverhead : StateOverhead;
 ## The id of the [StateMachine] this [State] is in.
 var _machine_id : String;
 
+var lock : bool = false;
+
 ## The id of the current [State]. This is an unique name identifier so this [State] may be found
 ## and utilized outside of the current [StateMachine].
 func get_id():

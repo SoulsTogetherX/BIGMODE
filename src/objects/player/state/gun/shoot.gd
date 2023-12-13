@@ -7,6 +7,8 @@ extends State
 
 @export var _idle : State;
 
+@onready var shoot_timer: Timer = $"../../../shoot_timer";
+
 func get_id():
 	return "shoot";
 
@@ -52,5 +54,8 @@ func process_frame(_delta: float) -> State:
 						);
 	
 	_actor.gun_sound();
+	
+	if Input.is_action_pressed("shoot", true):
+		shoot_timer.start();
 	
 	return _idle;

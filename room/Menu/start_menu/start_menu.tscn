@@ -4,22 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://c5u6ewhy2yvwt" path="res://asset/sprites/GUI/start_menu/Background.png" id="2_bt4eu"]
 [ext_resource type="Script" path="res://room/Menu/button.gd" id="3_axd0y"]
 [ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_ilv21"]
-[ext_resource type="Texture2D" uid="uid://c1gunxi5yddgp" path="res://asset/sprites/GUI/start_menu/Icon.png" id="3_vtpu5"]
+[ext_resource type="Texture2D" uid="uid://deoacnwloh2wx" path="res://asset/sprites/GUI/start_menu/Icon.png" id="3_vtpu5"]
 [ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="3_yfal5"]
 [ext_resource type="Texture2D" uid="uid://dig5w8wiffjuh" path="res://asset/sprites/GUI/start_menu/Settings UI.png" id="4_6yxki"]
 [ext_resource type="Texture2D" uid="uid://xsloct884g8v" path="res://asset/sprites/GUI/start_menu/UI Credits.png" id="4_tnyt2"]
 [ext_resource type="Texture2D" uid="uid://bjr0wqr54eyei" path="res://asset/sprites/GUI/start_menu/Subtext.png" id="7_2w2gy"]
 
-[sub_resource type="SystemFont" id="SystemFont_t2rqj"]
+[sub_resource type="SystemFont" id="SystemFont_3x6ul"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t7yow"]
-font = SubResource("SystemFont_t2rqj")
+font = SubResource("SystemFont_3x6ul")
 font_size = 40
 
-[sub_resource type="SystemFont" id="SystemFont_eqnqc"]
+[sub_resource type="SystemFont" id="SystemFont_bmpl6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kjqo3"]
-font = SubResource("SystemFont_eqnqc")
+font = SubResource("SystemFont_bmpl6")
 font_size = 40
 
 [node name="StartMenu" type="Node2D"]
@@ -94,7 +94,7 @@ hframes = 3
 frame = 2
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(576, 150)
+position = Vector2(576, 157)
 scale = Vector2(3, 3)
 texture = ExtResource("3_vtpu5")
 

@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://fsqgx6g50b0r"]
+
+[ext_resource type="Script" path="res://room/End_Sceen/end_sceen.gd" id="1_oisy5"]
+[ext_resource type="Texture2D" uid="uid://b3eukluq06jwn" path="res://asset/sprites/GUI/end_sceen/End Screen.png" id="1_yekel"]
+[ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="2_yyuxi"]
+[ext_resource type="AudioStream" uid="uid://cm0qtch7aith4" path="res://asset/sounds/button/menu_select_bigmode.wav" id="3_3p1b1"]
+[ext_resource type="Script" path="res://room/Menu/button.gd" id="3_stb4b"]
+[ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="4_bi8yu"]
+[ext_resource type="Texture2D" uid="uid://dig5w8wiffjuh" path="res://asset/sprites/GUI/start_menu/Settings UI.png" id="5_avect"]
+
+[sub_resource type="SystemFont" id="SystemFont_t2rqj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fglyw"]
+font = SubResource("SystemFont_t2rqj")
+font_size = 40
+
+[sub_resource type="SystemFont" id="SystemFont_eqnqc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6q6sj"]
+font = SubResource("SystemFont_eqnqc")
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuggq"]
+bg_color = Color(0.576471, 0, 0.6, 1)
+border_width_right = 2
+border_width_bottom = 10
+border_color = Color(0.305882, 0, 0.321569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 10.0
+shadow_size = 2
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="SystemFont" id="SystemFont_trrj1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_stbic"]
+font = SubResource("SystemFont_trrj1")
+font_size = 40
+font_color = Color(1, 0.52549, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="end_sceen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oisy5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_yekel")
+
+[node name="select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3p1b1")
+volume_db = -10.0
+
+[node name="Try Again" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 0
+offset_left = 930.0
+offset_top = 474.0
+offset_right = 1283.0
+offset_bottom = 548.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("2_yyuxi")
+script = ExtResource("3_stb4b")
+
+[node name="sprite" type="Sprite2D" parent="Try Again"]
+position = Vector2(56, 37)
+scale = Vector2(3, 3)
+texture = ExtResource("4_bi8yu")
+hframes = 3
+
+[node name="Play" type="Label" parent="Try Again"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 10.0
+offset_right = 205.0
+offset_bottom = 65.0
+text = "Try Again"
+label_settings = SubResource("LabelSettings_fglyw")
+
+[node name="Main Menu" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 0
+offset_left = 930.0
+offset_top = 541.0
+offset_right = 1282.0
+offset_bottom = 615.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("2_yyuxi")
+script = ExtResource("3_stb4b")
+
+[node name="sprite" type="Sprite2D" parent="Main Menu"]
+position = Vector2(57, 37)
+scale = Vector2(3, 3)
+texture = ExtResource("5_avect")
+hframes = 2
+
+[node name="Settings" type="Label" parent="Main Menu"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 10.0
+offset_right = 279.0
+offset_bottom = 65.0
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_6q6sj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 466.0
+offset_right = 913.0
+offset_bottom = 599.0
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuggq")
+
+[node name="time" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Final Time:
+00:00:00:00"
+label_settings = SubResource("LabelSettings_stbic")
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="Try Again" to="Try Again" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Try Again" to="Try Again" method="_on_mouse_exited"]
+[connection signal="pressed" from="Try Again" to="." method="_on_try_again_pressed"]
+[connection signal="mouse_entered" from="Main Menu" to="Main Menu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main Menu" to="Main Menu" method="_on_mouse_exited"]
+[connection signal="pressed" from="Main Menu" to="." method="_on_main_menu_pressed"]

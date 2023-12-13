@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfpwhfx84h7o7"]
+
+[ext_resource type="Texture2D" uid="uid://c3172yi62unor" path="res://asset/sprites/decorations/Decorations.png" id="1_ydr7k"]
+
+[node name="decoration" type="Sprite2D"]
+position = Vector2(-77, -244)
+texture = ExtResource("1_ydr7k")
+hframes = 4
+vframes = 3
+frame = 11

@@ -2,7 +2,7 @@ extends State
 
 @export var _shoot : State;
 
-@onready var shoot_timer: Timer = $"../../../shoot_timer"
+@onready var shoot_timer: Timer = $"../../../shoot_timer";
 
 func get_id():
 	return "idle";
@@ -33,7 +33,6 @@ func reposition_gun() -> void:
 
 func process_physics(delta: float) -> State:
 	if Input.is_action_just_pressed("shoot", true):
-		shoot_timer.start();
 		return _shoot;
 	if Input.is_action_just_released("shoot", true):
 		shoot_timer.stop();

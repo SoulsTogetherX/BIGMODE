@@ -6,6 +6,9 @@ extends State
 @export var jump : State;
 @export var spawn : State;
 @export var walk : State;
+@export var dead_fall : State;
+
+@onready var delay_timer: Timer = $Timer
 
 var state_queue : Array = [];
 var timer : Timer;
@@ -14,6 +17,7 @@ var move_to_state : State = null;
 var delay = 0;
 
 var cutscene_2 : bool = false;
+var cutscene_3 : bool = false;
 
 func get_id():
 	return "transition";
@@ -23,6 +27,9 @@ func state_ready() -> void:
 	add_child(timer);
 
 func enter() -> void:
+	if cutscene_3:
+		move_to_state = dead_fall;
+		return;
 	if cutscene_2:
 		cutscene_2 = false;
 		state_queue = [
@@ -37,7 +44,9 @@ func enter() -> void:
 		delay = state_queue.back()[1];
 		get_move_to_state();
 		return;
-	get_tree().create_timer(delay).timeout.connect(get_move_to_state);
+	
+	delay_timer.wait_time = delay;
+	delay_timer.start();
 	delay = state_queue.back()[1];
 
 func exit() -> void:

@@ -40,6 +40,7 @@ func shot_at() -> void:
 
 func die() -> void:
 	state_overhead.change_state("main", "ded_fall");
+	$StateOverhead/StateMachine/transition.cutscene_3 = true;
 
 func turn(left : bool) -> void:
 	var change : int = (-1 if left else 1);
@@ -211,7 +212,7 @@ const STAGE_DELAYS : Array[Array] = [
 	],
 ]
 
-const STAGE_HEALHS = [125, 160, 200];
+const STAGE_HEALHS = [125, 160, 170];
 const STAGE_RANGES = [150, 200, 300];
 
 const VERY_SHORT_RANGE : float = 110.0;
@@ -245,7 +246,7 @@ const priorities = [
 			3,   # IDLE
 			0,   # SPAWN
 			0,   # SPAWN_MUl
-			5,   # WALK
+			8,   # WALK
 			0,   # JUMP_PLAYER
 			0,   # JUMP_PLAYER_ATTACK2
 			1,   # JUMP_RANDOM
@@ -259,7 +260,7 @@ const priorities = [
 			8,   # IDLE
 			0,   # SPAWN
 			0,   # SPAWN_MUl
-			6,   # WALK
+			12,  # WALK
 			18,  # JUMP_PLAYER
 			7,   # JUMP_PLAYER_ATTACK2
 			0,   # JUMP_RANDOM
@@ -273,7 +274,7 @@ const priorities = [
 			14,  # IDLE
 			0,   # SPAWN
 			0,   # SPAWN_MUl
-			1,   # WALK
+			3,   # WALK
 			26,  # JUMP_PLAYER
 			15,  # JUMP_PLAYER_ATTACK2
 			0,   # JUMP_RANDOM
@@ -437,8 +438,6 @@ func prioirtize() -> Array[Array]:
 	else:
 		distance_indx = 3;
 	
-	prints(player_distance, distance_indx, phase)
-	
 	var unweighted : Array[float] = [];
 	var weighted   : Array[float] = [];
 	var sum : float = 0;
@@ -477,42 +476,31 @@ func prioirtize() -> Array[Array]:
 	var delay = randf_range(delays[0],delays[1]);
 	match selected_idx:
 		ACTION_SELECT.ATTACK1:
-			print("ATTACK1")
 			ret.append([ACTION.ATTACK1, delay]);
 		ACTION_SELECT.ATTACK2:
-			print("ATTACK2")
 			ret.append([ACTION.ATTACK2, delay]);
 		ACTION_SELECT.IDLE:
-			print("IDLE")
 			ret.append([ACTION.IDLE, delay]);
 		ACTION_SELECT.SPAWN:
-			print("SPAWN")
 			ret.append([ACTION.SPAWN, delay]);
 		ACTION_SELECT.SPAWN_MUl:
-			print("SPAWN_MUl")
 			for i in randi_range(1,4):
 				ret.append([ACTION.SPAWN, 0.15]);
 			ret.append([ACTION.SPAWN, delay]);
 		ACTION_SELECT.WALK:
-			print("WALK")
 			ret.append([ACTION.WALK, delay, get_walk_pos()]);
 		ACTION_SELECT.JUMP_PLAYER:
-			print("JUMP_PLAYER")
 			ret.append([ACTION.JUMP, delay, get_jump_target(true)]);
 		ACTION_SELECT.JUMP_PLAYER_ATTACK2:
-			print("JUMP_PLAYER_ATTACK2")
 			ret.append([ACTION.JUMP, 0.0, get_jump_target(true)]);
 			ret.append([ACTION.ATTACK2, delay]);
 		ACTION_SELECT.JUMP_RANDOM:
-			print("JUMP_RANDOM")
 			ret.append([ACTION.JUMP, delay, get_jump_target(false)]);
 		ACTION_SELECT.JUMP_MUL:
-			print("JUMP_MUL")
 			for i in randi_range(1,4):
 				ret.append([ACTION.JUMP, 0.0, get_jump_target(false)]);
 			ret.append([ACTION.JUMP, delay, get_jump_target(false)]);
 		ACTION_SELECT.JUMP_ATTACK2:
-			print("JUMP_ATTACK2")
 			ret.append([ACTION.JUMP, 0, get_jump_target(false)]);
 			ret.append([ACTION.ATTACK2, delay]);
 	

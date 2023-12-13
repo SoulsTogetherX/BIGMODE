@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://wrgotbjqinwo"]
+[gd_scene load_steps=4 format=3 uid="uid://wrgotbjqinwo"]
 
 [ext_resource type="Script" path="res://room/Menu/menu/Menu.gd" id="1_hmn3s"]
+[ext_resource type="AudioStream" uid="uid://cm0qtch7aith4" path="res://asset/sounds/button/menu_select_bigmode.wav" id="2_g0nxe"]
+[ext_resource type="AudioStream" uid="uid://118w3er3mrpj" path="res://asset/sounds/button/de-select.wav" id="3_27fg2"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_hmn3s")
+
+[node name="select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g0nxe")
+volume_db = -10.0
+
+[node name="deselect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_27fg2")
+volume_db = -10.0

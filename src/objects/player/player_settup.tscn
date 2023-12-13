@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0ne13rjokvx7"]
+
+[ext_resource type="PackedScene" uid="uid://1l3xe5hihuta" path="res://src/objects/player/player.tscn" id="1_vcaoh"]
+[ext_resource type="Script" path="res://room/Camera.gd" id="2_8chxs"]
+[ext_resource type="PackedScene" uid="uid://8tb1htuku7d4" path="res://src/GUI/gui.tscn" id="3_hebhg"]
+
+[node name="Player_Settup" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_vcaoh")]
+position = Vector2(-440, -206)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow")]
+position = Vector2(-417.015, -227.062)
+zoom = Vector2(0.8, 0.8)
+script = ExtResource("2_8chxs")
+follow = NodePath("../player")
+auto_follow = true
+
+[node name="GUI" parent="Camera2D" instance=ExtResource("3_hebhg")]
+follow_viewport_enabled = false

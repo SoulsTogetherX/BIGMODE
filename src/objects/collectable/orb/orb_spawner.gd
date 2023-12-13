@@ -15,6 +15,7 @@ func _ready() -> void:
 		var orb = _orb_scene.instantiate();
 		orb.get_node("orb").flip_h = flip;
 		orb.position = point;
+		orb.global_scale = Vector2(1.0, 1.0);
 		add_child(orb);
 	
 	#var count : int = curve.get_baked_points().size();

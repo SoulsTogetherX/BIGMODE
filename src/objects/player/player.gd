@@ -32,6 +32,8 @@ var coyote_quotes    : QuotesInfo = QuotesInfo.new();
 var shoot_quotes     : QuotesInfo = QuotesInfo.new();
 var wall_kick_quotes : QuotesInfo = QuotesInfo.new();
 
+var pause_physics : bool = false;
+
 var fix_speed_when_next_on_ground : bool = false;
 var boosted : bool = false:
 	set(val):
@@ -50,7 +52,9 @@ var boosted : bool = false:
 
 func _ready() -> void:
 	GlobalInfo.player = self;
-	GlobalInfo.respawn_pos = global_position;
+	if GlobalInfo.request_spawn_pos:
+		GlobalInfo.respawn_pos = global_position;
+		GlobalInfo.request_spawn_pos = false;
 	
 	boost_timer.timeout.connect(func(): boosted = false);
 	
@@ -120,6 +124,8 @@ func _ready() -> void:
 		["Ram it with your head", 0.2],
 		["Turn off", 0.2],
 		];
+	
+	$shoot_timer.stop();
 
 func get_movement() -> float:
 	return Input.get_axis("left", "right");
@@ -134,7 +140,8 @@ func _physics_process(delta: float) -> void:
 	if boosted:
 		velocity.x = sign(velocity.x) * max(BOOST_SPEED, abs(velocity.x));
 	
-	move_and_slide();
+	if !pause_physics:
+		move_and_slide();
 
 func turn(left : bool = false) -> void:
 	var sign_c : float = (-1 if left else 1);
@@ -164,8 +171,11 @@ func force_cutscene(toggle : bool = true) -> void:
 		$gun.process_mode = Node.PROCESS_MODE_INHERIT;
 		$gun.change_state("main", "idle");
 
+func force_victory() -> void:
+	body_overhead.change_state("main", "victory");
+
 func kill() -> void:
-	if !i_frames.is_stopped():
+	if !i_frames.is_stopped() || GlobalInfo.cutscene:
 		return;
 	
 	hurt_sound.pitch_scale = (randf() * 0.1) + 1.1;
@@ -173,6 +183,7 @@ func kill() -> void:
 	
 	GlobalInfo.update_health(GlobalInfo.player_health - 1);
 	if GlobalInfo.player_health == 0:
+		$shoot_timer.stop();
 		body_overhead.change_state("main", "ded");
 		return;
 	

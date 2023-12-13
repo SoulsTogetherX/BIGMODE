@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b0cuhkviuydxn"]
 
 [ext_resource type="Script" path="res://room/Menu/credits/credits.gd" id="1_0ttli"]
-[ext_resource type="Texture2D" uid="uid://c5u6ewhy2yvwt" path="res://asset/sprites/GUI/start_menu/Background.png" id="1_5m2ha"]
+[ext_resource type="Texture2D" uid="uid://5rk3a3cb3ke6" path="res://asset/sprites/GUI/credits_menu/MODE Credits.png" id="2_xaenv"]
 [ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_vxw5g"]
 [ext_resource type="Script" path="res://room/Menu/button.gd" id="4_5lkin"]
 [ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="5_7dctk"]
@@ -18,13 +18,13 @@ script = ExtResource("1_0ttli")
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 650.0
-texture = ExtResource("1_5m2ha")
+texture = ExtResource("2_xaenv")
 
 [node name="back" type="Button" parent="."]
-offset_left = 426.0
-offset_top = 330.0
-offset_right = 726.0
-offset_bottom = 404.0
+offset_left = 13.0
+offset_top = 20.0
+offset_right = 313.0
+offset_bottom = 94.0
 theme = ExtResource("3_vxw5g")
 script = ExtResource("4_5lkin")
 

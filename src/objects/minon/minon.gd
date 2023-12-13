@@ -172,3 +172,6 @@ func kill() -> void:
 	explode_sound.pitch_scale = (randf() * 0.1) + 0.95;
 	if randf() <= 0.1:
 		death_sound.play_random();
+
+func turn():
+	$StateOverhead/main/move.turn();

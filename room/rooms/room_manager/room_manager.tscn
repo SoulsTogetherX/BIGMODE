@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://citi47mxu7t8c"]
+
+[ext_resource type="Script" path="res://room/rooms/room_manager/room_manager.gd" id="1_e4xa4"]
+[ext_resource type="Shader" path="res://asset/shader/JitterFreePixelArt.gdshader" id="1_lun1h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_attyy"]
+shader = ExtResource("1_lun1h")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqx2r"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_t6jrp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ise5"]
+font = SubResource("SystemFont_t6jrp")
+font_size = 50
+
+[node name="Rooms" type="Node2D"]
+material = SubResource("ShaderMaterial_attyy")
+script = ExtResource("1_e4xa4")
+
+[node name="Center" type="MarginContainer" parent="."]
+offset_right = 1156.0
+offset_bottom = 652.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Center"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Center/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jqx2r")
+
+[node name="Center2" type="CenterContainer" parent="Center"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Center2"]
+layout_mode = 2
+text = "Loading..."
+label_settings = SubResource("LabelSettings_4ise5")

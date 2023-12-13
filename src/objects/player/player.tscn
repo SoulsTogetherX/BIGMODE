@@ -1,10 +1,11 @@
-[gd_scene load_steps=50 format=3 uid="uid://1l3xe5hihuta"]
+[gd_scene load_steps=52 format=3 uid="uid://1l3xe5hihuta"]
 
 [ext_resource type="Script" path="res://src/objects/player/player.gd" id="1_h5kqw"]
 [ext_resource type="AudioStream" uid="uid://bty4n6oo5jleb" path="res://asset/sounds/hurt/player_hurt.wav" id="2_6u70r"]
 [ext_resource type="Texture2D" uid="uid://bj5bgnb0vngqv" path="res://asset/sprites/player/david_spritesheet.png" id="2_e2nie"]
 [ext_resource type="PackedScene" uid="uid://cy6wdj1eolk4p" path="res://src/custom_nodes/emiter/emitter.tscn" id="2_qo5up"]
 [ext_resource type="Texture2D" uid="uid://dl7k72kjn7ht" path="res://asset/sprites/player/Davids Gun.png" id="3_2vqnr"]
+[ext_resource type="AudioStream" uid="uid://dgr3e2w23604u" path="res://asset/sounds/victory_sound/victory.wav" id="3_djy0r"]
 [ext_resource type="PackedScene" uid="uid://21ninjibavp5" path="res://asset/particles/walk_particle.tscn" id="3_xgyx3"]
 [ext_resource type="AudioStream" uid="uid://klshyflkrdif" path="res://asset/sounds/footsteps/player/Player_step_1.wav" id="3_yh6hu"]
 [ext_resource type="AudioStream" uid="uid://bivx41oe5a74o" path="res://asset/sounds/footsteps/player/Player_step_2.wav" id="4_73evq"]
@@ -34,6 +35,7 @@
 [ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="24_yjnu8"]
 [ext_resource type="Script" path="res://src/objects/player/state/cutscene.gd" id="26_hw60e"]
 [ext_resource type="Script" path="res://src/objects/player/state/body/ded.gd" id="32_yap5s"]
+[ext_resource type="Script" path="res://src/objects/player/state/victory.gd" id="34_g80pl"]
 [ext_resource type="PackedScene" uid="uid://dswddrk6bhuqm" path="res://src/objects/projectiles/David/bullet.tscn" id="35_cmp0g"]
 
 [sub_resource type="SystemFont" id="SystemFont_uhc4g"]
@@ -43,7 +45,7 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_uhc4g")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tsla"]
-size = Vector2(11.25, 40)
+size = Vector2(25.375, 40)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7x4t"]
 height = 60.0
@@ -310,6 +312,10 @@ stream = ExtResource("2_6u70r")
 volume_db = -10.0
 pitch_scale = 1.2
 
+[node name="victory_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_djy0r")
+volume_db = -10.0
+
 [node name="foot_steps" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
 volume_db = -5.0
@@ -356,23 +362,25 @@ position = Vector2(-21, 24)
 [node name="on_wall_left" type="Area2D" parent="."]
 position = Vector2(0, -33)
 collision_layer = 0
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="on_wall_left"]
 modulate = Color(1, 1, 0, 1)
-position = Vector2(-15.75, 3)
+position = Vector2(-8.6875, 3)
 shape = SubResource("RectangleShape2D_5tsla")
 
 [node name="on_wall_right" type="Area2D" parent="."]
 position = Vector2(0, -33)
 collision_layer = 0
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="on_wall_right"]
 modulate = Color(1, 1, 0, 1)
-position = Vector2(15.625, 3)
+position = Vector2(8, 3)
 shape = SubResource("RectangleShape2D_5tsla")
 
 [node name="bodyCollide" type="CollisionShape2D" parent="."]
-position = Vector2(0, -30)
+position = Vector2(0, -30.5)
 shape = SubResource("CapsuleShape2D_s7x4t")
 
 [node name="body_animate" type="AnimationPlayer" parent="."]
@@ -401,6 +409,7 @@ one_shot = true
 
 [node name="shoot_timer" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
 
 [node name="I_frames" type="Timer" parent="."]
 one_shot = true
@@ -454,6 +463,9 @@ move = NodePath("../move")
 
 [node name="ded" type="Node" parent="body/main"]
 script = ExtResource("32_yap5s")
+
+[node name="victory" type="Node" parent="body/main"]
+script = ExtResource("34_g80pl")
 
 [node name="gun" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("24_yjnu8")

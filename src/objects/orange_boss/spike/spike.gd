@@ -14,6 +14,7 @@ func _ready() -> void:
 	if immediate || Engine.is_editor_hint():
 		visible = true;
 		animations.play("idle");
+		$Area2D/CollisionPolygon2D.disabled = false;
 
 func start(delay : float = 0) -> void:
 	if delay != 0:
@@ -25,6 +26,7 @@ func end() -> void:
 	animations.play("end");
 
 func _victum_entered(body: Node2D) -> void:
+	print("hello???")
 	if body is Player:
 		body.kill();
 	elif body is Minon:

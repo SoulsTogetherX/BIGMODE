@@ -1,8 +1,6 @@
 extends Node2D
 
-const ROOM_PATHS : Array[String] = [
-	"res://room/rooms/room_1/room_1.tscn",
-];
+const ROOM_MANAGER : String = "res://room/rooms/room_manager/room_manager.tscn";
 
 var start_menu : PackedScene;
 const START_MENU_PATH     : String = "res://room/Menu/start_menu/start_menu.tscn";
@@ -13,35 +11,56 @@ const CREDITS_PATH        : String = "res://room/Menu/credits/credits.tscn";
 var settings_menu : PackedScene;
 const SETTING_PATH        : String = "res://room/Menu/settings/settings.tscn";
 
+@onready var select   : AudioStreamPlayer = $select;
+@onready var deselect : AudioStreamPlayer = $deselect;
+
+const menu_theme : AudioStream = preload("res://asset/music/menu_music.wav");
+
 func _ready() -> void:
 	ResourceLoader.load_threaded_request(START_MENU_PATH);
 	ResourceLoader.load_threaded_request(CREDITS_PATH);
 	ResourceLoader.load_threaded_request(SETTING_PATH);
 	
 	start_menu = ResourceLoader.load_threaded_get(START_MENU_PATH);
-	_switch_to_start_menu();
+	var child : Node2D = start_menu.instantiate();
+	add_child(child);
+	child.play.connect(_switch_to_play);
+	child.settings.connect(_switch_to_settings);
+	child.credits.connect(_switch_to_credits);
 	
 	settings_menu  = ResourceLoader.load_threaded_get(SETTING_PATH);
 	credit_menu    = ResourceLoader.load_threaded_get(CREDITS_PATH);
 	
-	for path in ROOM_PATHS:
-		ResourceLoader.load_threaded_request(path);
+	ResourceLoader.load_threaded_request(ROOM_MANAGER);
+	
+	SoundManager.set_music(menu_theme);
+	SoundManager.play_music();
 
 func _free_childrend() -> void:
 	for c in get_children():
+		if c is AudioStreamPlayer:
+			continue;
+		
 		c.queue_free();
 
 func _switch_to_play() -> void:
+	select.play();
+	await select.finished;
+	
+	SoundManager.stop();
 	_free_childrend();
-		
-	for path in ROOM_PATHS:
-		add_child(ResourceLoader.load_threaded_get(path).instantiate());
+	
+	var packed : PackedScene = ResourceLoader.load_threaded_get(ROOM_MANAGER);
+	get_tree().change_scene_to_packed(packed)
+	#add_child(ResourceLoader.load_threaded_get(ROOM_MANAGER).instantiate());
 
 func _switch_to_start_menu() -> void:
 	if !start_menu:
 		return;
 	
+	deselect.play();
 	_free_childrend();
+	
 	var child : Node2D = start_menu.instantiate();
 	add_child(child);
 	
@@ -53,7 +72,9 @@ func _switch_to_settings() -> void:
 	if !settings_menu:
 		return;
 	
+	select.play();
 	_free_childrend();
+	
 	var child : Node2D = settings_menu.instantiate();
 	add_child(child);
 	
@@ -63,7 +84,9 @@ func _switch_to_credits() -> void:
 	if !credit_menu:
 		return;
 	
+	select.play();
 	_free_childrend();
+	
 	var child : Node2D = credit_menu.instantiate();
 	add_child(child);
 	

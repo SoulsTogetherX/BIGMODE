@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BIGMODE"
-run/main_scene="res://room/rooms/room_1/room_1.tscn"
+run/main_scene="res://room/Menu/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://asset/sprites/icon/icon.svg"
 
