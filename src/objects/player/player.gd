@@ -142,6 +142,7 @@ func _physics_process(delta: float) -> void:
 	
 	if !pause_physics:
 		move_and_slide();
+	print(Engine.get_frames_per_second())
 
 func turn(left : bool = false) -> void:
 	var sign_c : float = (-1 if left else 1);

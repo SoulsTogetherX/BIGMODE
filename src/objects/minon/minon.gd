@@ -3,12 +3,15 @@ class_name Minon extends CharacterBody2D
 
 const GRAVITY : int   =  980;
 var move_speed : float = 250.;
+var hp = 1;
 
 @export var settings  : LabelSettings;
 @export var move      : bool = false:
 	set(val):
 		if not is_inside_tree():
 			await ready;
+		elif val:
+			$StateOverhead.change_state("main", "walk");
 		
 		move = val;
 
@@ -131,6 +134,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		set_process(false);
 		set_physics_process(false);
+	elif GlobalInfo.enemy_hp_inc:
+		hp = 2;
 
 func _jumped_on(body: Node2D) -> void:
 	if $StateOverhead.is_in_state("main", "ded"):
@@ -138,20 +143,43 @@ func _jumped_on(body: Node2D) -> void:
 	
 	body.force_jump();
 	body.velocity.x *= 1.3;
+	
+	hp -= 1;
+	if hp > 0:
+		hurt_animate();
+		return;
+	
 	TextSpawner.new(settings).spawn(get_tree(), global_position, crushed_quotes.pick_random());
 	kill();
 
 func shot_at() -> void:
+	hp -= 1;
+	if hp > 0:
+		hurt_animate();
+		return;
+	
 	TextSpawner.new(settings).spawn(get_tree(), global_position, shot_quotes.pick_random());
 	kill();
 
 func crashed_into() -> void:
+	hp -= 1;
+	if hp > 0:
+		hurt_animate();
+		return;
+	
 	kill();
 
 func _kill_player(body: Node2D) -> void:
 	if $StateOverhead.is_in_state("main", "ded") || body.boosted:
 		return;
+	
 	body.kill();
+	
+	hp -= 1;
+	if hp > 0:
+		hurt_animate();
+		return;
+	
 	crashed_into();
 
 func spike_kill() -> void:
@@ -161,6 +189,12 @@ func spike_kill() -> void:
 func blast_kill() -> void:
 	TextSpawner.new(settings).spawn(get_tree(), global_position, blast_quotes.pick_random());
 	kill();
+
+func hurt_animate() -> void:
+	var tw = create_tween();
+	tw.set_trans(Tween.TRANS_SINE);
+	tw.tween_property(body, "modulate", Color("#ff4646"), 0.05);
+	tw.tween_property(body, "modulate", Color.WHITE, 0.05);
 
 func kill() -> void:
 	if $StateOverhead.is_in_state("main", "ded"):

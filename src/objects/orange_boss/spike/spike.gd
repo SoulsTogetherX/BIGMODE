@@ -26,7 +26,6 @@ func end() -> void:
 	animations.play("end");
 
 func _victum_entered(body: Node2D) -> void:
-	print("hello???")
 	if body is Player:
 		body.kill();
 	elif body is Minon:

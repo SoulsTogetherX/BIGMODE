@@ -8,12 +8,5 @@ func get_id():
 
 func enter() -> void:
 	_animationPlayer.play("idle");
-
-func process_physics(_delta: float) -> State:
 	if _actor.move:
-		return move;
-	
-	if !_actor.is_on_floor():
-		return fall;
-	
-	return null;
+		get_parent()._change_state(move)

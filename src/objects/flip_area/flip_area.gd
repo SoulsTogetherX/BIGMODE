@@ -28,4 +28,3 @@ func _on_player_enter(body: Node2D) -> void:
 	if slow_down:
 		GlobalInfo.camera.zoom_event(Vector2(0.2, 0.2), Vector2(0.8, 0.8));
 	body.rotation = 0;
-	print(body.rotation)

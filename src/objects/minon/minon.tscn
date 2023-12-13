@@ -163,11 +163,11 @@ _data = {
 "walk": SubResource("Animation_mem16")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgdwk"]
-size = Vector2(20, 0.674996)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_guohv"]
-size = Vector2(52.5001, 31.25)
+size = Vector2(65.0002, 31.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgdwk"]
+size = Vector2(32.5, 1.24999)
 
 [node name="Minon" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)
@@ -179,12 +179,14 @@ settings = SubResource("LabelSettings_qcebg")
 [node name="death" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
 volume_db = -10.0
 attenuation = 0.143588
+bus = &"SFX"
 _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("6_bxwhv"), ExtResource("7_bldtu")])
 
 [node name="death_sound" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
 volume_db = -10.0
 attenuation = 0.133972
+bus = &"SFX"
 _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("6_ce12s"), ExtResource("7_p48or"), ExtResource("8_vmmlj"), ExtResource("9_onac5")])
 
@@ -194,6 +196,7 @@ volume_db = -20.0
 pitch_scale = 1.4
 max_distance = 1000.0
 attenuation = 0.594604
+bus = &"SFX"
 _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("3_0u5vd"), ExtResource("4_3i3ub"), ExtResource("5_g64f2")])
 
@@ -233,25 +236,28 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="kill_area" type="Area2D" parent="."]
+process_priority = 1
+process_physics_priority = 1
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kill_area"]
+self_modulate = Color(0, 0, 1, 1)
+position = Vector2(5.96047e-07, 14.375)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_guohv")
+
 [node name="weak_point" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weak_point"]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(-5.96046e-07, -19.0875)
+position = Vector2(8.9407e-07, -19.375)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_lgdwk")
-
-[node name="kill_area" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="kill_area"]
-self_modulate = Color(0, 0, 1, 1)
-position = Vector2(-2.42889e-06, 14.375)
-scale = Vector2(0.999998, 0.999998)
-shape = SubResource("RectangleShape2D_guohv")
 
 [node name="StateOverhead" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]
 script = ExtResource("14_25iih")
@@ -282,5 +288,5 @@ fall = NodePath("../fall")
 [node name="ded" type="Node" parent="StateOverhead/main"]
 script = ExtResource("8_43vlt")
 
-[connection signal="body_entered" from="weak_point" to="." method="_jumped_on"]
 [connection signal="body_entered" from="kill_area" to="." method="_kill_player"]
+[connection signal="body_entered" from="weak_point" to="." method="_jumped_on"]

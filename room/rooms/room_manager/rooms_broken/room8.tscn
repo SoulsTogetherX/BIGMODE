@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://pwxxkiuvqct1"]
+[gd_scene load_steps=14 format=3 uid="uid://pwxxkiuvqct1"]
 
+[ext_resource type="Texture2D" uid="uid://dun1w2rqvkasq" path="res://asset/sprites/pixel/pixel.png" id="1_6s82p"]
 [ext_resource type="TileSet" uid="uid://conm8l7uktq4s" path="res://asset/sprites/titlesheet/Standard_TileSheet.tres" id="1_kfv2g"]
 [ext_resource type="PackedScene" uid="uid://dfpwhfx84h7o7" path="res://src/objects/decoration/decoration.tscn" id="2_vs21w"]
 [ext_resource type="PackedScene" uid="uid://cfl2pjvhh4d27" path="res://src/objects/oneway/oneway.tscn" id="4_x1rot"]
@@ -588,6 +589,14 @@ sources/0 = SubResource("TileSetAtlasSource_3h4j2")
 
 [node name="room_vis" type="Node2D" parent="."]
 process_mode = 4
+visible = false
+
+[node name="Pixel" type="Sprite2D" parent="room_vis"]
+modulate = Color(0.301961, 0.301961, 0.301961, 1)
+z_index = -4
+position = Vector2(-7824, -4522)
+scale = Vector2(500, 500)
+texture = ExtResource("1_6s82p")
 
 [node name="background" type="TileMap" parent="room_vis"]
 modulate = Color(0.392157, 0.392157, 0.392157, 1)

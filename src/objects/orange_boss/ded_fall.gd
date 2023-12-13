@@ -9,6 +9,7 @@ func get_id():
 
 func enter() -> void:
 	$"../transition/Timer".stop();
+	$"../../../danger_mod".hide_danger_shape(0.8);
 	
 	_actor.velocity = Vector2.ZERO;
 	lock = true;

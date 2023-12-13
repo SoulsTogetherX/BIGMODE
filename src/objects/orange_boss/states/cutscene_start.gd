@@ -12,7 +12,7 @@ func cutscene(body : Node2D) -> void:
 	GlobalInfo.hard_coded_flag_check__I_am_a_terrible_programmer = true;
 	
 	var OG_pos = GlobalInfo.camera.position;
-	
+	var OG_health_pos = _actor.health_bar.position.x;
 	GlobalInfo.cutscene = true;
 	
 	if GlobalInfo.cutscene_before:
@@ -20,10 +20,16 @@ func cutscene(body : Node2D) -> void:
 	else:
 		await get_tree().create_timer(1.2).timeout;
 	
+	_actor.health_bar.position.x += _actor.health_bar.size.x * 0.5;
+	_actor.health_bar.scale.x = 0;
+	_actor.health_bar.visible = true;
+	
 	var tw = create_tween().set_parallel();
 	tw.set_trans(Tween.TRANS_QUINT);
 	tw.tween_property(GlobalInfo.camera, "offset", Vector2(0, -100), 0.7);
 	tw.tween_property(GlobalInfo.camera, "global_position", _actor.global_position, 0.7);
+	tw.tween_property(_actor.health_bar, "scale:x", 1, 2).set_delay(1.0);
+	tw.tween_property(_actor.health_bar, "position:x", OG_health_pos, 2).set_delay(1.0);
 	GlobalInfo.cutscene_before = true;
 	GlobalInfo.camera.auto_follow = false;
 	

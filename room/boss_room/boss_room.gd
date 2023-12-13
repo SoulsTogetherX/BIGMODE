@@ -13,6 +13,9 @@ func _ready() -> void:
 	
 	var tw = create_tween();
 	tw.tween_property(GlobalInfo.camera, "limit_bottom", 320, 3.0);
+	
+	if GlobalInfo.hard_coded_flag_check__I_am_a_terrible_programmer:
+		GlobalInfo.player.global_position = GlobalInfo.respawn_pos;
 
 func switch_to_end() -> void:
 	if ResourceLoader.has_cached(END_SCEEN_PATH):

@@ -61,4 +61,7 @@ func end_state() -> void:
 	
 	if _actor.wave_jump:
 		_actor.create_shockwave();
-	get_parent()._change_state(transition)
+	
+	var arr : Array[String] = ["ded", "ded_fall"];
+	if !get_parent().is_in_states(arr):
+		get_parent()._change_state(transition)

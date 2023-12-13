@@ -1,10 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6sb5i810mtqc"]
+[gd_scene load_steps=14 format=3 uid="uid://c6sb5i810mtqc"]
 
 [ext_resource type="Script" path="res://room/Menu/settings/settings.gd" id="1_uuj8c"]
 [ext_resource type="Texture2D" uid="uid://c5u6ewhy2yvwt" path="res://asset/sprites/GUI/start_menu/Background.png" id="2_7sxxx"]
 [ext_resource type="Script" path="res://room/Menu/button.gd" id="3_g02nw"]
 [ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_oij5k"]
 [ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="4_34tmx"]
+
+[sub_resource type="SystemFont" id="SystemFont_7wjot"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a88mp"]
+font = SubResource("SystemFont_7wjot")
+font_size = 40
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="SystemFont" id="SystemFont_qc4m3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0qvy8"]
+font = SubResource("SystemFont_qc4m3")
+font_size = 40
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="SystemFont" id="SystemFont_frxvy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2f1op"]
+font = SubResource("SystemFont_frxvy")
+font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(5, 5)
 
 [sub_resource type="SystemFont" id="SystemFont_7ge36"]
 
@@ -20,11 +48,127 @@ offset_right = 1152.0
 offset_bottom = 650.0
 texture = ExtResource("2_7sxxx")
 
+[node name="Master Volume" type="HSlider" parent="."]
+offset_left = 169.0
+offset_top = 230.0
+offset_right = 549.0
+offset_bottom = 246.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="Text" type="Label" parent="Master Volume"]
+offset_left = 13.0
+offset_top = -57.0
+offset_right = 377.0
+offset_bottom = -2.0
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_a88mp")
+horizontal_alignment = 1
+
+[node name="Music" type="HSlider" parent="."]
+offset_left = 169.0
+offset_top = 296.0
+offset_right = 549.0
+offset_bottom = 312.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="Text" type="Label" parent="Music"]
+offset_left = 101.0
+offset_top = -57.0
+offset_right = 284.0
+offset_bottom = -2.0
+text = "Music"
+label_settings = SubResource("LabelSettings_a88mp")
+horizontal_alignment = 1
+
+[node name="Sound" type="HSlider" parent="."]
+offset_left = 169.0
+offset_top = 362.0
+offset_right = 549.0
+offset_bottom = 378.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="Text" type="Label" parent="Sound"]
+offset_left = 101.0
+offset_top = -50.0
+offset_right = 284.0
+offset_bottom = 5.0
+text = "Sound"
+label_settings = SubResource("LabelSettings_a88mp")
+horizontal_alignment = 1
+
+[node name="Challenges" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Challenges"]
+offset_left = 629.0
+offset_top = 146.0
+offset_right = 984.0
+offset_bottom = 240.0
+text = "Challenge Modes"
+label_settings = SubResource("LabelSettings_0qvy8")
+
+[node name="1 HP" type="CheckBox" parent="Challenges"]
+offset_left = 696.0
+offset_top = 219.0
+offset_right = 720.0
+offset_bottom = 243.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Text" type="Label" parent="Challenges/1 HP"]
+offset_left = 32.0
+offset_top = -4.0
+offset_right = 223.0
+offset_bottom = 43.0
+scale = Vector2(0.667, 0.667)
+text = "1 HP"
+label_settings = SubResource("LabelSettings_2f1op")
+
+[node name="Speed Mode" type="CheckBox" parent="Challenges"]
+offset_left = 696.0
+offset_top = 285.0
+offset_right = 720.0
+offset_bottom = 309.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Text" type="Label" parent="Challenges/Speed Mode"]
+offset_left = 32.0
+offset_top = -2.66669
+offset_right = 223.0
+offset_bottom = 44.3333
+scale = Vector2(0.667, 0.667)
+text = "1.5x Speed"
+label_settings = SubResource("LabelSettings_2f1op")
+
+[node name="Enemy Hp" type="CheckBox" parent="Challenges"]
+offset_left = 696.0
+offset_top = 351.0
+offset_right = 720.0
+offset_bottom = 375.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Text" type="Label" parent="Challenges/Enemy Hp"]
+offset_left = 32.0
+offset_top = -3.33331
+offset_right = 223.0
+offset_bottom = 43.6667
+scale = Vector2(0.667, 0.667)
+text = "Increase Enemy HP"
+label_settings = SubResource("LabelSettings_2f1op")
+
 [node name="back" type="Button" parent="."]
 offset_left = 426.0
-offset_top = 330.0
+offset_top = 516.0
 offset_right = 726.0
-offset_bottom = 404.0
+offset_bottom = 590.0
 theme = ExtResource("3_oij5k")
 script = ExtResource("3_g02nw")
 
@@ -43,6 +187,12 @@ offset_bottom = 65.0
 text = "Back"
 label_settings = SubResource("LabelSettings_a35sy")
 
+[connection signal="value_changed" from="Master Volume" to="." method="_on_master_volume_changed"]
+[connection signal="value_changed" from="Music" to="." method="_on_music_changed"]
+[connection signal="value_changed" from="Sound" to="." method="_on_sound_changed"]
+[connection signal="toggled" from="Challenges/1 HP" to="." method="_on_hp_toggled"]
+[connection signal="toggled" from="Challenges/Speed Mode" to="." method="_on_speed_toggled"]
+[connection signal="toggled" from="Challenges/Enemy Hp" to="." method="_on_double_hp_toggled"]
 [connection signal="mouse_entered" from="back" to="back" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="back" to="back" method="_on_mouse_exited"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

@@ -2,6 +2,9 @@ extends Node
 
 signal time_scale_changed(newTime : float);
 
+var ignore_time_scale : bool = true;
+var default_time : float = 1.0;
+
 ## Allows instant [member Engine.time_scale] changes.
 func instant_time_scale(scale : float = 0.0, duration : float = 0.1, audio : bool = false) -> void:
 	Engine.time_scale = scale;
@@ -11,11 +14,11 @@ func instant_time_scale(scale : float = 0.0, duration : float = 0.1, audio : boo
 	time_scale_changed.emit(scale);
 	await get_tree().create_timer(duration, true, false, true).timeout;
 	
-	Engine.time_scale = 1.0;
+	Engine.time_scale = default_time;
 	if audio:
 		adjust_sounds(1.0);
 	
-	time_scale_changed.emit(1.0);
+	time_scale_changed.emit(default_time);
 
 ## Allows gradual [member Engine.time_scale] transitions.[br][br]
 ##
@@ -48,7 +51,10 @@ func reset_timer(autostart : bool = false) -> void:
 
 func _process(delta: float) -> void:
 	if timer_on:
-		time += delta;
+		if ignore_time_scale:
+			time += (delta / Engine.time_scale);
+		else:
+			time += delta;
 
 func get_timer_raw() -> float:
 	return time;

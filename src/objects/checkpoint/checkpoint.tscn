@@ -84,5 +84,6 @@ libraries = {
 stream = ExtResource("3_g1cj7")
 volume_db = -10.0
 pitch_scale = 1.5
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]

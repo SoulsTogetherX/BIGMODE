@@ -20,6 +20,8 @@ func _ready() -> void:
 		];
 
 func _on_collect(body: Node2D) -> void:
+	GlobalInfo.increase_score(500);
+	
 	GlobalInfo.player_health += 1;
 	visible = false;
 	$Collect.queue_free();

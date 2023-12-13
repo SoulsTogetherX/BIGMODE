@@ -600,6 +600,7 @@ sources/0 = SubResource("TileSetAtlasSource_3h4j2")
 
 [node name="room_vis" type="Node2D" parent="."]
 process_mode = 4
+visible = false
 
 [node name="background" type="TileMap" parent="room_vis"]
 modulate = Color(0.392157, 0.392157, 0.392157, 1)

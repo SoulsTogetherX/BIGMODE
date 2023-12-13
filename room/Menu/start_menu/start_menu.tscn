@@ -57,9 +57,9 @@ label_settings = SubResource("LabelSettings_t7yow")
 
 [node name="Settings" type="Button" parent="."]
 offset_left = 426.0
-offset_top = 446.0
+offset_top = 438.0
 offset_right = 726.0
-offset_bottom = 520.0
+offset_bottom = 512.0
 theme = ExtResource("3_ilv21")
 script = ExtResource("3_axd0y")
 
@@ -77,6 +77,23 @@ offset_right = 279.0
 offset_bottom = 65.0
 text = "Settings"
 label_settings = SubResource("LabelSettings_kjqo3")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 426.0
+offset_top = 545.0
+offset_right = 726.0
+offset_bottom = 619.0
+theme = ExtResource("3_ilv21")
+
+[node name="Settings" type="Label" parent="Quit"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 289.0
+offset_bottom = 65.0
+text = "Quit"
+label_settings = SubResource("LabelSettings_kjqo3")
+horizontal_alignment = 1
 
 [node name="Credits" type="Button" parent="."]
 offset_left = 889.0
@@ -109,6 +126,9 @@ texture = ExtResource("7_2w2gy")
 [connection signal="mouse_entered" from="Settings" to="Settings" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Settings" to="Settings" method="_on_mouse_exited"]
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="Quit" to="Quit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Quit" to="Quit" method="_on_mouse_exited"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
 [connection signal="mouse_entered" from="Credits" to="Credits" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Credits" to="Credits" method="_on_mouse_exited"]
 [connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]

@@ -33,3 +33,6 @@ func _on_credits_pressed() -> void:
 	if tween:
 		tween.kill();
 	credits.emit();
+
+func _on_quit_pressed() -> void:
+	get_tree().quit();

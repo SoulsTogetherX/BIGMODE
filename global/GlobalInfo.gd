@@ -28,6 +28,7 @@ var player_max_health : int = 5:
 
 var boss_room : bool = false;
 var request_spawn_pos : bool = true;
+var enemy_hp_inc : bool = false;
 
 signal score_increased;
 signal updated_health(old : int);

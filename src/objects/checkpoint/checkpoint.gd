@@ -7,10 +7,6 @@ extends Node2D
 
 var checked : bool = false;
 
-func _ready() -> void:
-	if GlobalInfo.hard_coded_flag_check__I_am_a_terrible_programmer:
-		GlobalInfo.player.global_position = global_position;
-
 func _on_player_entered(_body: Node2D) -> void:
 	if checked:
 		return;

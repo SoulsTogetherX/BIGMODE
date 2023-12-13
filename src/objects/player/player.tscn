@@ -311,15 +311,18 @@ settings = SubResource("LabelSettings_ywm34")
 stream = ExtResource("2_6u70r")
 volume_db = -10.0
 pitch_scale = 1.2
+bus = &"SFX"
 
 [node name="victory_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_djy0r")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="foot_steps" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
 volume_db = -5.0
 pitch_scale = 1.4
+bus = &"SFX"
 _particles = NodePath("../turn_node/WalkParticle")
 audios = Array[AudioStream]([ExtResource("3_yh6hu"), ExtResource("4_73evq"), ExtResource("5_ypwgq")])
 
@@ -327,17 +330,20 @@ audios = Array[AudioStream]([ExtResource("3_yh6hu"), ExtResource("4_73evq"), Ext
 position = Vector2(0, -33)
 volume_db = -5.0
 pitch_scale = 0.5
+bus = &"SFX"
 audios = Array[AudioStream]([ExtResource("6_xpakn"), ExtResource("7_i3prd"), ExtResource("8_5skmr"), ExtResource("9_jtkep")])
 
 [node name="land" parent="." instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
 pitch_scale = 0.65
+bus = &"SFX"
 audios = Array[AudioStream]([ExtResource("10_f6it4"), ExtResource("11_45om5"), ExtResource("12_n670b"), ExtResource("13_qvo43")])
 
 [node name="gun_shot" parent="." instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
 volume_db = -20.0
 pitch_scale = 0.6
+bus = &"SFX"
 audios = Array[AudioStream]([ExtResource("14_buhvo"), ExtResource("15_6s3cv"), ExtResource("16_hcwrn"), ExtResource("17_3u2qa"), ExtResource("18_n73su"), ExtResource("19_h8whg")])
 
 [node name="turn_node" type="Node2D" parent="."]

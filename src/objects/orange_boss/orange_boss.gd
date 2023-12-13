@@ -19,26 +19,33 @@ var health : int;
 @export var warning : Node2D;
 @export var activate_area : Area2D;
 
+var health_bar : TextureProgressBar;
+
 func _ready() -> void:
 	switch_phase(0);
 
 func shot_at() -> void:
-	if GlobalInfo.cutscene:
+	if GlobalInfo.cutscene || stage_lock:
 		return;
 	
 	health -= 1;
+	health_bar.value = health;
 	if health == 0:
 		if phase == 2:
 			die();
 			return;
 		switch_phase(phase + 1);
-	else:
-		var tw = create_tween();
-		tw.set_trans(Tween.TRANS_SINE);
-		tw.tween_property(body, "modulate", Color("#ff4646"), 0.05);
-		tw.tween_property(body, "modulate", Color.WHITE, 0.05);
+	hurt_animate()
+
+func hurt_animate() -> void:
+	var tw = create_tween();
+	tw.set_trans(Tween.TRANS_SINE);
+	tw.tween_property(body, "modulate", Color("#ff4646"), 0.05);
+	tw.tween_property(body, "modulate", Color.WHITE, 0.05);
 
 func die() -> void:
+	create_tween().tween_property(health_bar, "modulate:a", 0.0, 1.0);
+	
 	state_overhead.change_state("main", "ded_fall");
 	$StateOverhead/StateMachine/transition.cutscene_3 = true;
 
@@ -150,6 +157,7 @@ func spawn_minons(spawn_falling : bool = false) -> void:
 		minion.face_left = node_info.get_meta("left", false);
 
 func play_intro() -> void:
+	GlobalInfo.hard_coded_player_velocity__I_am_a_terrible_programmer = Vector2.ZERO;
 	intro.play_random();
 
 
@@ -212,8 +220,9 @@ const STAGE_DELAYS : Array[Array] = [
 	],
 ]
 
-const STAGE_HEALHS = [125, 160, 170];
-const STAGE_RANGES = [150, 200, 300];
+const STAGE_HEALHS : Array[int]   = [125, 160, 170];
+const STAGE_COLORS : Array[Color] = [Color.SEA_GREEN, Color.DARK_ORANGE, Color.RED];
+const STAGE_RANGES : Array[int]   = [150, 200, 300];
 
 const VERY_SHORT_RANGE : float = 110.0;
 const SHORT_RANGE : float = 300.0;
@@ -406,10 +415,16 @@ const priorities = [
 	],
 ]
 
+var stage_lock : bool = false;
 func switch_phase(switch_phase : int) -> void:
+	$StateOverhead/StateMachine/transition/Timer.stop();
+	stage_lock = true;
+	
 	phase = switch_phase;
 	
 	max_health = STAGE_HEALHS[phase];
+	if GlobalInfo.enemy_hp_inc:
+		max_health = floori(max_health * 1.2);
 	danger_mod.radius = STAGE_RANGES[phase];
 	
 	health = max_health;
@@ -418,6 +433,25 @@ func switch_phase(switch_phase : int) -> void:
 	
 	if phase == 1:
 		$StateOverhead/StateMachine/transition.cutscene_2 = true;
+	
+	if health_bar:
+		GlobalInfo.camera.shake_event(Vector3(0.3, 0.3, 0.0), Vector3(5., 5., 0), Vector3.ZERO);
+		
+		var tw = create_tween().set_parallel();
+		tw.tween_property(health_bar, "max_value", max_health, 0.8).set_delay(0.5);
+		tw.tween_property(health_bar, "value", health, 0.8).set_delay(0.5);
+		tw.tween_property(health_bar, "tint_progress", STAGE_COLORS[phase], 0.8).set_delay(0.5);
+		
+		await tw.finished;
+		
+		$StateOverhead/StateMachine/transition/Timer.start();
+	else:
+		health_bar = $"../Camera2D/GUI".get_health_bar();
+		health_bar.max_value = max_health;
+		health_bar.value = health;
+		health_bar.tint_progress = STAGE_COLORS[phase];
+	
+	stage_lock = false;
 
 var old : int = -1;
 func prioirtize() -> Array[Array]:

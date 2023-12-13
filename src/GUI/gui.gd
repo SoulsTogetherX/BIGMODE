@@ -56,3 +56,7 @@ func _create_heart_particle(pos_x : int) -> void:
 	await get_tree().create_timer(part.lifetime).timeout;
 	
 	part.queue_free();
+
+func get_health_bar() -> TextureProgressBar:
+	return $health_bar;
+
