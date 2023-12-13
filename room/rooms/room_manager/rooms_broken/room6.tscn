@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c42suvb43uo2m"]
+[gd_scene load_steps=15 format=3 uid="uid://c42suvb43uo2m"]
 
 [ext_resource type="TileSet" uid="uid://conm8l7uktq4s" path="res://asset/sprites/titlesheet/Standard_TileSheet.tres" id="1_jtoxi"]
 [ext_resource type="Texture2D" uid="uid://dun1w2rqvkasq" path="res://asset/sprites/pixel/pixel.png" id="1_kuqqu"]
@@ -23,6 +23,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -70, 45, 0, 0, 0, 0, 268, 44, 0, 0, 0, 0, 270, 1, 0, 0, 0, 0, -69, -2, 0, 0, 0, 0, -69, -51, 0, 0, 0, 0, 271, -49, 0, 0, 0, 0, 271, -103, 0, 0, 0, 0, -72, -100)
 }
 point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_rw12c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1094, 169, 124.451, 19.799, -124.451, -19.799, 878, 163, 0, 0, 0, 0, 656, 47)
+}
+point_count = 3
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3h4j2"]
 texture = ExtResource("14_cr2h6")
@@ -652,17 +658,17 @@ texture = SubResource("CompressedTexture2D_pki02")
 [node name="minons" type="Node2D" parent="room_vis"]
 
 [node name="Minon_75" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13146, -3778)
+position = Vector2(-13146, -3769)
 fall_move = true
 face_left = true
 
 [node name="Minon_76" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13273, -3781)
+position = Vector2(-13273, -3769)
 fall_move = true
 face_left = true
 
 [node name="Minon_77" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13406, -3778)
+position = Vector2(-13406, -3769)
 fall_move = true
 face_left = true
 
@@ -672,21 +678,21 @@ fall_move = true
 face_left = true
 
 [node name="Minon_79" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13331, -4592)
+position = Vector2(-13331, -4583)
 move = true
 face_left = true
 
 [node name="Minon_80" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13234, -4592)
+position = Vector2(-13234, -4583)
 move = true
 face_left = true
 
 [node name="Minon_81" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13133, -4590)
+position = Vector2(-13133, -4583)
 move = true
 
 [node name="Minon_82" parent="room_vis/minons" instance=ExtResource("5_dof2v")]
-position = Vector2(-13061, -4585)
+position = Vector2(-13061, -4583)
 move = true
 
 [node name="pickups" type="Node2D" parent="room_vis"]
@@ -703,6 +709,12 @@ inveral = 30
 [node name="OrbSpawner_17" parent="room_vis/pickups/orbs/Spawners" instance=ExtResource("8_6j40n")]
 position = Vector2(-14102, -3600)
 curve = SubResource("Curve2D_8m2cb")
+flip = true
+
+[node name="OrbSpawner_18" parent="room_vis/pickups/orbs/Spawners" instance=ExtResource("8_6j40n")]
+position = Vector2(-14102, -3600)
+curve = SubResource("Curve2D_rw12c")
+inveral = 30
 flip = true
 
 [node name="foreground" type="TileMap" parent="room_vis"]

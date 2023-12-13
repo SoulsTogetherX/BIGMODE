@@ -13,9 +13,9 @@ load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7f
 
 [sub_resource type="Curve2D" id="Curve2D_pd3ts"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 697, 10, -102.272, -15.4597, 102.272, 15.4597, 1030, 34, 0, 0, 0, 0, 1479, 98, 0, 0, 0, 0, 1495, 580, 0, 0, 0, 0, 805, 582, 0, 0, 0, 0, 713, 1000, 0, 0, 0, 0, 961, 950, 0, 0, 0, 0, 1593, 958)
+"points": PackedVector2Array(0, 0, 0, 0, 694, 26, -105.269, -0.476627, 105.269, 0.476627, 1024, 34, 0, 0, 0, 0, 1484, 78, 0, 0, 0, 0, 1495, 580, 92.4997, -1.88775, -92.4997, 1.88775, 835, 581, 0, 0, 0, 0, 713, 1000, -67.959, -16.9897, 67.959, 16.9897, 1648, 980)
 }
-point_count = 8
+point_count = 7
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3h4j2"]
 texture = ExtResource("14_1b0wy")
@@ -663,7 +663,7 @@ position = Vector2(228, -3623)
 move = true
 
 [node name="Minon_98" parent="room_vis/minons" instance=ExtResource("5_vl5vl")]
-position = Vector2(1452, -4204)
+position = Vector2(1452, -4199)
 
 [node name="orbs" type="Node2D" parent="room_vis"]
 

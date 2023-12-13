@@ -14,7 +14,7 @@ const SETTING_PATH        : String = "res://room/Menu/settings/settings.tscn";
 @onready var select   : AudioStreamPlayer = $select;
 @onready var deselect : AudioStreamPlayer = $deselect;
 
-const menu_theme : AudioStream = preload("res://asset/music/menu_music.wav");
+const menu_theme : AudioStream = preload("res://asset/music/menu_music.mp3");
 
 func _ready() -> void:
 	ResourceLoader.load_threaded_request(START_MENU_PATH);
@@ -45,14 +45,15 @@ func _free_childrend() -> void:
 
 func _switch_to_play() -> void:
 	select.play();
-	await select.finished;
+	await Transition.fade_in(0.5);
 	
 	SoundManager.stop();
 	_free_childrend();
 	
 	var packed : PackedScene = ResourceLoader.load_threaded_get(ROOM_MANAGER);
 	get_tree().change_scene_to_packed(packed)
-	#add_child(ResourceLoader.load_threaded_get(ROOM_MANAGER).instantiate());
+	
+	Transition.fade_out(0.5);
 
 func _switch_to_start_menu() -> void:
 	if !start_menu:

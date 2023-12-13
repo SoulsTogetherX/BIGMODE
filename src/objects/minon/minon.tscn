@@ -218,10 +218,11 @@ scale = Vector2(1, 1.00286)
 exclude_parent = false
 target_position = Vector2(0, 1.25)
 collision_mask = 17
+hit_from_inside = true
 
 [node name="forward_detect" type="RayCast2D" parent="body"]
 modulate = Color(0, 1, 0, 1)
-position = Vector2(-26.25, 27.4783)
+position = Vector2(-26.25, 21.2283)
 exclude_parent = false
 target_position = Vector2(-1.25, 0)
 hit_from_inside = true
@@ -239,7 +240,6 @@ autoplay = "idle"
 [node name="kill_area" type="Area2D" parent="."]
 process_priority = 1
 process_physics_priority = 1
-scale = Vector2(1, 1)
 collision_layer = 0
 collision_mask = 2
 

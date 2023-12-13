@@ -31,6 +31,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jqx2r")
 
 [node name="Center2" type="CenterContainer" parent="Center"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Center/Center2"]

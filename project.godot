@@ -20,6 +20,7 @@ config/icon="res://asset/sprites/icon/icon.svg"
 SoundManager="*res://global/SoundManager.tscn"
 GlobalInfo="*res://global/GlobalInfo.gd"
 TimeManager="*res://global/TimeManager.gd"
+Transition="*res://global/transition/transition.tscn"
 
 [display]
 

@@ -661,69 +661,69 @@ texture = SubResource("CompressedTexture2D_pki02")
 [node name="minons" type="Node2D" parent="room_vis"]
 
 [node name="Minon_31" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-1146, -2770)
+position = Vector2(-1146, -2758)
 move = true
 
 [node name="Minon_33" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-2007, -2538)
+position = Vector2(-2007, -2535)
 
 [node name="Minon_34" parent="room_vis/minons" instance=ExtResource("5_naakq")]
 position = Vector2(-2711, -3368)
 
 [node name="Minon_35" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-2891, -3050)
+position = Vector2(-2891, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_36" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-2952, -3051)
+position = Vector2(-2952, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_37" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3016, -3054)
+position = Vector2(-3016, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_38" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3081, -3054)
+position = Vector2(-3081, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_39" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3148, -3055)
+position = Vector2(-3148, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_40" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3206, -3054)
+position = Vector2(-3206, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_41" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3262, -3052)
+position = Vector2(-3262, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_42" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3323, -3049)
+position = Vector2(-3323, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_43" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3382, -3048)
+position = Vector2(-3382, -3047)
 fall_move = true
 face_left = true
 
 [node name="Minon_44" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-4881, -2731)
+position = Vector2(-4881, -2727)
 
 [node name="Minon_45" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-3495, -2667)
+position = Vector2(-3495, -2662)
 face_left = true
 
 [node name="Minon_46" parent="room_vis/minons" instance=ExtResource("5_naakq")]
-position = Vector2(-4811, -2679)
+position = Vector2(-4811, -2663)
 
 [node name="pickups" type="Node2D" parent="room_vis"]
 

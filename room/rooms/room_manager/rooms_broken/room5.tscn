@@ -17,13 +17,13 @@ load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7f
 
 [sub_resource type="Curve2D" id="Curve2D_3q7y7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 19, -7, 192.822, 0, -192.822, 0, -142, 260, 148.325, 65.6867, -148.325, -65.6867, -1197, 248, 0, 0, 0, 0, -1303.02, 87.2886, -98.1495, -6.70044, 98.1495, 6.70044, -1154.9, 13.8687, 0, 0, 0, 0, -1625.46, -113.713)
+"points": PackedVector2Array(0, 0, 0, 0, 19, -7, 192.822, 0, -192.822, 0, -138.246, 282.27, 148.325, 65.6867, -148.325, -65.6867, -1174.09, 264.215, 0, 0, 0, 0, -1341.35, 160.705, -62.5625, 60.0986, 62.5625, -60.0986, -1143.86, 52.3811, 0, 0, 0, 0, -1397.78, -42.7036, 0, 0, 0, 0, -1584.19, -39.0928)
 }
-point_count = 6
+point_count = 7
 
 [sub_resource type="Curve2D" id="Curve2D_h1dcf"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1729, 81, 0, 0, 0, 0, -25, 81)
+"points": PackedVector2Array(0, 0, 0, 0, -1220, 89, 0, 0, 0, 0, -265, 82)
 }
 point_count = 2
 
@@ -640,14 +640,14 @@ texture = SubResource("CompressedTexture2D_pki02")
 [node name="minons" type="Node2D" parent="room_vis"]
 
 [node name="Minon_72" parent="room_vis/minons" instance=ExtResource("5_mhyrb")]
-position = Vector2(-10551, -3183)
+position = Vector2(-10551, -3175)
 face_left = true
 
 [node name="Minon_73" parent="room_vis/minons" instance=ExtResource("5_mhyrb")]
-position = Vector2(-11909, -3187)
+position = Vector2(-11909, -3175)
 
 [node name="Minon_74" parent="room_vis/minons" instance=ExtResource("5_mhyrb")]
-position = Vector2(-12349, -3433)
+position = Vector2(-12349, -3431)
 face_left = true
 
 [node name="pickups" type="Node2D" parent="room_vis"]

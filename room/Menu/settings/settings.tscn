@@ -58,6 +58,7 @@ max_value = 1.0
 step = 0.01
 
 [node name="Text" type="Label" parent="Master Volume"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = -57.0
 offset_right = 377.0
@@ -76,6 +77,7 @@ max_value = 1.0
 step = 0.01
 
 [node name="Text" type="Label" parent="Music"]
+layout_mode = 0
 offset_left = 101.0
 offset_top = -57.0
 offset_right = 284.0
@@ -94,6 +96,7 @@ max_value = 1.0
 step = 0.01
 
 [node name="Text" type="Label" parent="Sound"]
+layout_mode = 0
 offset_left = 101.0
 offset_top = -50.0
 offset_right = 284.0
@@ -109,6 +112,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="Challenges"]
+layout_mode = 0
 offset_left = 629.0
 offset_top = 146.0
 offset_right = 984.0
@@ -117,6 +121,7 @@ text = "Challenge Modes"
 label_settings = SubResource("LabelSettings_0qvy8")
 
 [node name="1 HP" type="CheckBox" parent="Challenges"]
+layout_mode = 0
 offset_left = 696.0
 offset_top = 219.0
 offset_right = 720.0
@@ -124,6 +129,7 @@ offset_bottom = 243.0
 scale = Vector2(1.5, 1.5)
 
 [node name="Text" type="Label" parent="Challenges/1 HP"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = -4.0
 offset_right = 223.0
@@ -133,6 +139,7 @@ text = "1 HP"
 label_settings = SubResource("LabelSettings_2f1op")
 
 [node name="Speed Mode" type="CheckBox" parent="Challenges"]
+layout_mode = 0
 offset_left = 696.0
 offset_top = 285.0
 offset_right = 720.0
@@ -140,6 +147,7 @@ offset_bottom = 309.0
 scale = Vector2(1.5, 1.5)
 
 [node name="Text" type="Label" parent="Challenges/Speed Mode"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = -2.66669
 offset_right = 223.0
@@ -149,6 +157,7 @@ text = "1.5x Speed"
 label_settings = SubResource("LabelSettings_2f1op")
 
 [node name="Enemy Hp" type="CheckBox" parent="Challenges"]
+layout_mode = 0
 offset_left = 696.0
 offset_top = 351.0
 offset_right = 720.0
@@ -156,6 +165,7 @@ offset_bottom = 375.0
 scale = Vector2(1.5, 1.5)
 
 [node name="Text" type="Label" parent="Challenges/Enemy Hp"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = -3.33331
 offset_right = 223.0

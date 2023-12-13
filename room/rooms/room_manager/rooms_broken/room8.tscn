@@ -15,9 +15,9 @@ load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7f
 
 [sub_resource type="Curve2D" id="Curve2D_716p6"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -273, 93, -89.135, 10.0908, 89.135, -10.0908, 533, -85, 0, 0, 0, 0, 999, -99, 0, 0, 0, 0, 1069, 276, 79.37, 9.52441, -79.37, -9.52441, 394, 292, 0, 0, 0, 0, 202, 217, 0, 0, 0, 0, 158, 540, 0, 0, 0, 0, 1143, 542)
+"points": PackedVector2Array(0, 0, 0, 0, -273, 93, -89.135, 10.0908, 89.135, -10.0908, 533, -85, 0, 0, 0, 0, 999, -99, 0, 0, 0, 0, 1009, 304, 0, 0, 0, 0, 192, 302, 0, 0, 0, 0, 190, 568, 0, 0, 0, 0, 1149, 560)
 }
-point_count = 8
+point_count = 7
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3h4j2"]
 texture = ExtResource("14_mv3nk")
@@ -678,13 +678,13 @@ texture = SubResource("CompressedTexture2D_pki02")
 [node name="minons" type="Node2D" parent="room_vis"]
 
 [node name="Minon_83" parent="room_vis/minons" instance=ExtResource("5_ssof4")]
-position = Vector2(-6795, -4064)
+position = Vector2(-6795, -4057)
 
 [node name="Minon_84" parent="room_vis/minons" instance=ExtResource("5_ssof4")]
-position = Vector2(-6720, -4176)
+position = Vector2(-6720, -4166)
 
 [node name="Minon_85" parent="room_vis/minons" instance=ExtResource("5_ssof4")]
-position = Vector2(-6568, -4321)
+position = Vector2(-6568, -4312)
 
 [node name="pickups" type="Node2D" parent="room_vis"]
 

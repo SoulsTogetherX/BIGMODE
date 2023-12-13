@@ -16,7 +16,7 @@ func instant_time_scale(scale : float = 0.0, duration : float = 0.1, audio : boo
 	
 	Engine.time_scale = default_time;
 	if audio:
-		adjust_sounds(1.0);
+		adjust_sounds(default_time);
 	
 	time_scale_changed.emit(default_time);
 

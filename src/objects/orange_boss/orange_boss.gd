@@ -46,6 +46,12 @@ func hurt_animate() -> void:
 func die() -> void:
 	create_tween().tween_property(health_bar, "modulate:a", 0.0, 1.0);
 	
+	for clean in get_tree().get_nodes_in_group("Cleanable"):
+		if clean is Minon:
+			clean.kill();
+		else:
+			clean.end_animate()
+	
 	state_overhead.change_state("main", "ded_fall");
 	$StateOverhead/StateMachine/transition.cutscene_3 = true;
 
@@ -155,11 +161,12 @@ func spawn_minons(spawn_falling : bool = false) -> void:
 		minion.move = true;
 		minion.fall_move = true;
 		minion.face_left = node_info.get_meta("left", false);
+		
+		minion.add_to_group("Cleanable");
 
 func play_intro() -> void:
 	GlobalInfo.hard_coded_player_velocity__I_am_a_terrible_programmer = Vector2.ZERO;
 	intro.play_random();
-
 
 #AI
 
@@ -220,7 +227,7 @@ const STAGE_DELAYS : Array[Array] = [
 	],
 ]
 
-const STAGE_HEALHS : Array[int]   = [125, 160, 170];
+const STAGE_HEALHS : Array[int]   = [1,1,1]#[125, 160, 170];
 const STAGE_COLORS : Array[Color] = [Color.SEA_GREEN, Color.DARK_ORANGE, Color.RED];
 const STAGE_RANGES : Array[int]   = [150, 200, 300];
 

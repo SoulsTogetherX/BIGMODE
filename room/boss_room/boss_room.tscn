@@ -168,7 +168,7 @@ offset_bottom = -49.0
 texture = SubResource("CompressedTexture2D_bso07")
 
 [node name="oneway_6" parent="boss_room/one_ways" instance=ExtResource("6_17dc7")]
-offset_left = -596.0
+offset_left = -547.0
 offset_top = -272.0
 offset_right = -264.0
 offset_bottom = -257.0
@@ -177,7 +177,7 @@ texture = SubResource("CompressedTexture2D_bso07")
 [node name="oneway_7" parent="boss_room/one_ways" instance=ExtResource("6_17dc7")]
 offset_left = 256.0
 offset_top = -272.0
-offset_right = 594.0
+offset_right = 545.0
 offset_bottom = -257.0
 texture = SubResource("CompressedTexture2D_bso07")
 
@@ -1243,20 +1243,6 @@ scale = Vector2(1, -1)
 jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
 immediate = false
 
-[node name="spike_12" parent="boss_room/spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
-position = Vector2(-552, -271)
-rotation = 3.14159
-scale = Vector2(1, -1)
-jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
-immediate = false
-
-[node name="spike_13" parent="boss_room/spikes/top_mid_left" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
-position = Vector2(-577, -270)
-rotation = 3.14159
-scale = Vector2(1, -1)
-jump_pos = NodePath("../../../Jump_points/JumpPoint_28")
-immediate = false
-
 [node name="top_mid_right" type="Node" parent="boss_room/spikes"]
 
 [node name="spike_1" parent="boss_room/spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
@@ -1323,16 +1309,6 @@ immediate = false
 
 [node name="spike_11" parent="boss_room/spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
 position = Vector2(528, -271)
-jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
-immediate = false
-
-[node name="spike_12" parent="boss_room/spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
-position = Vector2(552, -271)
-jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
-immediate = false
-
-[node name="spike_13" parent="boss_room/spikes/top_mid_right" node_paths=PackedStringArray("jump_pos") instance=ExtResource("10_w6nkk")]
-position = Vector2(577, -271)
 jump_pos = NodePath("../../../Jump_points/JumpPoint_27")
 immediate = false
 

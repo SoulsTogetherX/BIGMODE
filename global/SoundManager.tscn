@@ -3,5 +3,6 @@
 [ext_resource type="Script" path="res://global/SoundManager.gd" id="1_ah8sy"]
 
 [node name="SoundManager" type="AudioStreamPlayer"]
+volume_db = 20.0
 bus = &"Music"
 script = ExtResource("1_ah8sy")

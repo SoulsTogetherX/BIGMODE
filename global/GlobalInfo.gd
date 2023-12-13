@@ -36,9 +36,14 @@ signal updated_max_health(old : int);
 
 static var player_scene = preload("res://src/objects/player/player.tscn");
 func respawn() -> void:
+	await Transition.fade_in(0.5);
+	
 	player_health = player_max_health;
 	if boss_room:
 		get_tree().reload_current_scene();
+		
+		await get_tree().create_timer(0.2).timeout;
+		Transition.fade_out(0.5);
 		return;
 	
 	player.queue_free();
@@ -47,6 +52,9 @@ func respawn() -> void:
 	get_tree().current_scene.add_child(player);
 	
 	camera.follow = player;
+	
+	await get_tree().create_timer(0.2).timeout;
+	Transition.fade_out(0.5);
 
 func increase_score(inc : int) -> void:
 	score += inc;

@@ -16,15 +16,15 @@ load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7f
 
 [sub_resource type="Curve2D" id="Curve2D_pskdy"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 42, 20, 195.161, 70.7107, -195.161, -70.7107, -706, 10, 115.966, 33.9411, -115.966, -33.9411, -1056, -376, 87.6812, 50.9117, -87.6812, -50.9117, -1402, -400, 124.451, 101.823, -124.451, -101.823, -1600, -780, 438.406, 31.1127, -438.406, -31.1127, -2286, -772)
+"points": PackedVector2Array(0, 0, 0, 0, -327, 10, 267.733, 4.72153, -267.733, -4.72153, -886, 14, 163.184, 17.014, -163.184, -17.014, -1096, -373, 87.6812, 50.9117, -87.6812, -50.9117, -1508, -384, 134.53, 3.54916, -134.53, -3.54916, -1599, -765, 446.891, 15.5563, -446.891, -15.5563, -2286, -772)
 }
 point_count = 6
 
 [sub_resource type="Curve2D" id="Curve2D_nd43v"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -398, -179, -309.941, 52.9167, 309.941, -52.9167, 358, -146, 451.052, -22.6786, -451.052, 22.6786, 141, -633, 0, 0, 0, 0, -1429, -610)
+"points": PackedVector2Array(-80.7261, 0, 80.7261, 0, -398, -179, -72.3171, 6.72717, 72.3171, -6.72717, -262, -98, -289.759, 74.78, 289.759, -74.78, 354, -133, 425.825, -4.17888, -425.825, 4.17888, 214, -579, 0, 0, 0, 0, -1427, -569)
 }
-point_count = 4
+point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sru15"]
 size = Vector2(28, 179)
@@ -656,54 +656,54 @@ texture = SubResource("CompressedTexture2D_pki02")
 [node name="minons" type="Node2D" parent="room_vis"]
 
 [node name="Minon_52" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-7344, -2731)
+position = Vector2(-7344, -2727)
 
 [node name="Minon_53" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-7342, -2809)
+position = Vector2(-7342, -2800)
 
 [node name="Minon_54" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
 position = Vector2(-6940, -2727)
 
 [node name="Minon_55" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-6938, -2805)
+position = Vector2(-6938, -2800)
 
 [node name="Minon_56" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-7722, -2805)
+position = Vector2(-7722, -2800)
 
 [node name="Minon_57" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-7720, -2729)
+position = Vector2(-7720, -2728)
 
 [node name="Minon_58" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8620, -2733)
+position = Vector2(-8620, -2726)
 fall_move = true
 
 [node name="Minon_59" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8897, -3073)
+position = Vector2(-8897, -3069)
 face_left = true
 
 [node name="Minon_60" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8778, -3077)
+position = Vector2(-8778, -3069)
 fall_move = true
 face_left = true
 
 [node name="Minon_61" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-7606, -3117)
+position = Vector2(-7606, -3111)
 fall_move = true
 face_left = true
 
 [node name="Minon_62" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8305, -3081)
+position = Vector2(-8305, -3069)
 
 [node name="Minon_63" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-9726, -3121)
+position = Vector2(-9726, -3111)
 fall_move = true
 
 [node name="Minon_64" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8414, -3081)
+position = Vector2(-8414, -3069)
 fall_move = true
 
 [node name="Minon_65" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-7879, -3571)
+position = Vector2(-7879, -3559)
 move = true
 
 [node name="Minon_66" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
@@ -711,23 +711,23 @@ position = Vector2(-8179, -3558)
 move = true
 
 [node name="Minon_67" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8515, -3569)
+position = Vector2(-8515, -3559)
 move = true
 
 [node name="Minon_68" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-8798, -3569)
+position = Vector2(-8798, -3559)
 move = true
 
 [node name="Minon_69" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-9045, -3569)
+position = Vector2(-9045, -3559)
 move = true
 
 [node name="Minon_70" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-9266, -3573)
+position = Vector2(-9266, -3558)
 move = true
 
 [node name="Minon_71" parent="room_vis/minons" instance=ExtResource("5_l1uhe")]
-position = Vector2(-9494, -3577)
+position = Vector2(-9494, -3559)
 move = true
 
 [node name="pickups" type="Node2D" parent="room_vis"]

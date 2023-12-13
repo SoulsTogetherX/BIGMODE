@@ -19,6 +19,7 @@ const ROOM_PATHS  : Array[String] = [
 ];
 
 func _ready() -> void:
+	TimeManager.adjust_sounds(TimeManager.default_time);
 	call_deferred_thread_group("load_game");
 
 func load_game() -> void:
@@ -31,4 +32,5 @@ func load_game() -> void:
 	
 	for path in ROOM_PATHS:
 		add_child(ResourceLoader.load_threaded_get(path).instantiate());
+	
 	$Center.queue_free();

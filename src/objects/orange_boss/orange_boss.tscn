@@ -869,8 +869,7 @@ modulate = Color(0, 1, 0, 1)
 shape = SubResource("RectangleShape2D_4gil3")
 
 [node name="find_ground" type="RayCast2D" parent="."]
-position = Vector2(-2, -0.5)
-target_position = Vector2(0, 2)
+target_position = Vector2(0, 3)
 collision_mask = 17
 hit_from_inside = true
 

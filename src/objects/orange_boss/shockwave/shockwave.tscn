@@ -45,7 +45,7 @@ _data = {
 radius = 5.0
 height = 60.0
 
-[node name="Shockwave" type="Node2D"]
+[node name="Shockwave" type="Node2D" groups=["Cleanable"]]
 script = ExtResource("1_bxwnv")
 
 [node name="origin" type="Node2D" parent="."]

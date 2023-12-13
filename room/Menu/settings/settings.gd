@@ -28,7 +28,9 @@ func _on_hp_toggled(toggled_on: bool) -> void:
 
 func _on_speed_toggled(toggled_on: bool) -> void:
 	Engine.time_scale = 1.5 if toggled_on else 1.0;
+	TimeManager.ignore_time_scale = toggled_on;
 	TimeManager.default_time = Engine.time_scale;
+	
 
 func _on_double_hp_toggled(toggled_on: bool) -> void:
 	GlobalInfo.enemy_hp_inc = toggled_on;

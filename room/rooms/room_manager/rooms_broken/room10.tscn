@@ -15,7 +15,7 @@ load_path = "res://.godot/imported/Oneway_platform.png-4fbb9edd6521079607fe4db7f
 
 [sub_resource type="Curve2D" id="Curve2D_kyxr0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -3, 38, 0, 0, 0, 0, 682, 31)
+"points": PackedVector2Array(0, 0, 0, 0, -13, 20, 0, 0, 0, 0, 683, 20)
 }
 point_count = 2
 
@@ -673,15 +673,15 @@ texture = SubResource("CompressedTexture2D_pki02")
 [node name="minons" type="Node2D" parent="room_vis"]
 
 [node name="Minon_87" parent="room_vis/minons" instance=ExtResource("5_4uoe7")]
-position = Vector2(-3096, -5082)
+position = Vector2(-3096, -5065)
 fall_move = true
 
 [node name="Minon_88" parent="room_vis/minons" instance=ExtResource("5_4uoe7")]
-position = Vector2(-1686, -4900)
+position = Vector2(-1686, -4892)
 fall_move = true
 
 [node name="Minon_89" parent="room_vis/minons" instance=ExtResource("5_4uoe7")]
-position = Vector2(-1439, -4710)
+position = Vector2(-1439, -4703)
 fall_move = true
 
 [node name="pickups" type="Node2D" parent="room_vis"]

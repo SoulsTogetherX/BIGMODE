@@ -1,5 +1,7 @@
 extends State
 
+const menu_theme : AudioStream = preload("res://asset/music/boss_music.mp3");
+
 @export var transition : State;
 
 func get_id():
@@ -57,3 +59,6 @@ func cutscene(body : Node2D) -> void:
 	transition.state_queue = [[Boss.ACTION.JUMP, 0.2, _actor.floor_mid_marker]]
 	
 	get_parent()._change_state(transition);
+	
+	SoundManager.set_music(menu_theme);
+	SoundManager.play_music();

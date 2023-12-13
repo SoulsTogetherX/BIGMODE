@@ -10,7 +10,7 @@
 position = Vector2(-440, -206)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow")]
-position = Vector2(-417.015, -227.062)
+position = Vector2(-420, -206)
 zoom = Vector2(0.8, 0.8)
 script = ExtResource("2_8chxs")
 follow = NodePath("../player")

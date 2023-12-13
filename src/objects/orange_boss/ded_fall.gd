@@ -25,6 +25,7 @@ func enter() -> void:
 	GlobalInfo.camera.auto_follow = false;
 	
 	TimeManager.toggle_timer(false);
+	SoundManager.stop();
 
 func process_physics(delta: float) -> State:
 	if _actor.on_floor():
