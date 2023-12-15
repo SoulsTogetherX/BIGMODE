@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://8tb1htuku7d4"]
+[gd_scene load_steps=9 format=3 uid="uid://8tb1htuku7d4"]
 
 [ext_resource type="Script" path="res://src/GUI/gui.gd" id="1_t5nsk"]
 [ext_resource type="Texture2D" uid="uid://baaqm34q080pc" path="res://asset/sprites/GUI/Health.png" id="2_buhbx"]
 [ext_resource type="Texture2D" uid="uid://da1ekwwk72x7n" path="res://asset/sprites/GUI/Score.png" id="2_sqmgl"]
 [ext_resource type="Texture2D" uid="uid://dbgq45dird14d" path="res://asset/sprites/GUI/Timer.png" id="3_nxds6"]
+[ext_resource type="LabelSettings" uid="uid://b18qh3kex4h20" path="res://asset/font/standard_font_small.tres" id="4_sw5gi"]
 [ext_resource type="Texture2D" uid="uid://jahsbgiav5ov" path="res://asset/sprites/health_bar/bar.png" id="5_dhvjo"]
 [ext_resource type="Texture2D" uid="uid://m22lo88fxt6g" path="res://asset/sprites/health_bar/filling.png" id="6_s8re4"]
+[ext_resource type="PackedScene" uid="uid://ddd6agu0pgk38" path="res://src/GUI/pause_screen.tscn" id="8_egjcq"]
 
 [node name="GUI" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -21,16 +23,21 @@ offset_left = 18.6667
 offset_top = 3.0
 offset_right = 83.6667
 offset_bottom = 29.0
+label_settings = ExtResource("4_sw5gi")
 
 [node name="Time" type="Sprite2D" parent="."]
-position = Vector2(1040, 76)
-scale = Vector2(1.5, 1.5)
+position = Vector2(1040, 74)
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("3_nxds6")
 
 [node name="Value" type="Label" parent="Time"]
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 25.0
+offset_left = -46.47
+offset_top = 2.647
+offset_right = 56.53
+offset_bottom = 27.647
+scale = Vector2(0.9, 0.9)
+text = "00:00:00:00"
+label_settings = ExtResource("4_sw5gi")
 horizontal_alignment = 1
 
 [node name="HealthBack" type="TextureRect" parent="."]
@@ -70,3 +77,5 @@ texture_under = ExtResource("6_s8re4")
 texture_over = ExtResource("5_dhvjo")
 texture_progress = ExtResource("6_s8re4")
 tint_under = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" parent="." instance=ExtResource("8_egjcq")]

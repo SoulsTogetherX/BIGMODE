@@ -59,6 +59,7 @@ func get_move_to_state() -> void:
 	var info = state_queue.pop_back();
 	if info == null:
 		_stateOverhead.change_state("main", "transition");
+		return;
 	
 	match info[0]:
 		Boss.ACTION.ATTACK1:

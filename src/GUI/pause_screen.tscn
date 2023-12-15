@@ -1,0 +1,185 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddd6agu0pgk38"]
+
+[ext_resource type="Script" path="res://src/GUI/pause_screen.gd" id="1_hp0ag"]
+[ext_resource type="LabelSettings" uid="uid://cfxe3p8wtgsny" path="res://asset/font/standard_font_large.tres" id="1_rs03e"]
+[ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_veuft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_su4dt"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="Gradient" id="Gradient_eneve"]
+colors = PackedColorArray(0, 0.533333, 0, 0.705882, 1, 1, 1, 0.705882)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r5gwo"]
+gradient = SubResource("Gradient_eneve")
+fill_to = Vector2(0.9, 0.9)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sx7on"]
+texture = SubResource("GradientTexture2D_r5gwo")
+
+[sub_resource type="SystemFont" id="SystemFont_3x6ul"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y7dh5"]
+font = SubResource("SystemFont_3x6ul")
+font_size = 40
+
+[sub_resource type="SystemFont" id="SystemFont_bmpl6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4opwi"]
+font = SubResource("SystemFont_bmpl6")
+font_size = 40
+
+[node name="CenterContainer" type="CenterContainer"]
+process_priority = -2
+process_physics_priority = -2
+modulate = Color(1, 1, 1, 0.784314)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hp0ag")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Panel2" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_su4dt")
+
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sx7on")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+self_modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = ExtResource("1_rs03e")
+horizontal_alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 100
+
+[node name="Restart" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0.705882)
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("3_veuft")
+
+[node name="Restart" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/Control/Restart"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 65.0
+text = "Restart"
+label_settings = SubResource("LabelSettings_y7dh5")
+horizontal_alignment = 1
+
+[node name="Main Menu" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0.705882)
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("3_veuft")
+
+[node name="Main Menu" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/Control/Main Menu"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 10.0
+offset_right = 252.0
+offset_bottom = 65.0
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_4opwi")
+horizontal_alignment = 1
+
+[node name="Control2" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Last Flag" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_veuft")
+
+[node name="Last Flag" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/Control2/Last Flag"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 10.0
+offset_right = 315.0
+offset_bottom = 65.0
+text = "Prev Checkpoint"
+label_settings = SubResource("LabelSettings_4opwi")
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/Control2"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_veuft")
+
+[node name="Resume" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/Control2/Resume"]
+layout_mode = 0
+offset_left = -32.0
+offset_top = 10.0
+offset_right = 225.0
+offset_bottom = 65.0
+text = "Resume"
+label_settings = SubResource("LabelSettings_4opwi")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Control/Restart" to="MarginContainer/MarginContainer/VBoxContainer/Control/Restart" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Control/Restart" to="MarginContainer/MarginContainer/VBoxContainer/Control/Restart" method="_on_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Control/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Control/Main Menu" to="MarginContainer/MarginContainer/VBoxContainer/Control/Main Menu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Control/Main Menu" to="MarginContainer/MarginContainer/VBoxContainer/Control/Main Menu" method="_on_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Control/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Control2/Last Flag" to="MarginContainer/MarginContainer/VBoxContainer/Control2/Last Flag" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Control2/Last Flag" to="MarginContainer/MarginContainer/VBoxContainer/Control2/Last Flag" method="_on_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Control2/Last Flag" to="." method="_on_last_flag_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Control2/Resume" to="MarginContainer/MarginContainer/VBoxContainer/Control2/Resume" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Control2/Resume" to="MarginContainer/MarginContainer/VBoxContainer/Control2/Resume" method="_on_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Control2/Resume" to="." method="_on_resume_pressed"]

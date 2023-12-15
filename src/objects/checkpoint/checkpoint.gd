@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var particle: CPUParticles2D = $particle
+
 @export var turn : bool = false:
 	set(val):
 		turn = val;
@@ -18,3 +20,5 @@ func _on_player_entered(_body: Node2D) -> void:
 	
 	$AnimationPlayer.play("checked");
 	GlobalInfo.respawn_pos = global_position;
+	
+	particle.emitting = true;

@@ -24,8 +24,6 @@ func exit() -> void:
 	has_jumped = false;
 
 func process_physics(delta: float) -> State:
-	var direction = Input.get_axis("left", "right");
-	
 	if Input.is_action_just_pressed("jump"):
 		var sign_c = sign(_actor.on_wall_right.get_overlapping_bodies().size() - _actor.on_wall_left.get_overlapping_bodies().size());
 		if sign_c != 0:
@@ -57,12 +55,16 @@ func process_physics(delta: float) -> State:
 		else:
 			if prev_y > 150:
 				_actor.land_sound();
+				_actor._land_message();
 			if _actor.velocity.x != 0 || _actor.boosted:
 				return move;
 			return idle;
 	
 	_actor.velocity.y += _actor.GRAVITY * delta;
 	prev_y = _actor.velocity.y;
+	
+	if _actor.velocity.y > 0:
+		_actor.collision_layer |= 16;
 	
 	_actor._move_hor();
 	

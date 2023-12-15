@@ -31,7 +31,7 @@ func reposition_gun() -> void:
 	
 	_actor.davids_gun.global_rotation_degrees = angle;
 
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	if Input.is_action_just_pressed("shoot", true):
 		return _shoot;
 	if Input.is_action_just_released("shoot", true):

@@ -96,8 +96,9 @@ position = Vector2(433, 8)
 face_left = true
 
 [node name="Minon2" parent="." instance=ExtResource("4_rambk")]
-position = Vector2(-208, 3.99997)
+position = Vector2(-208, 7.99994)
 move = true
+fall_move = true
 face_left = true
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow")]
@@ -124,7 +125,6 @@ shape = SubResource("RectangleShape2D_a2jx6")
 [node name="OrbSpawner" parent="." instance=ExtResource("11_ofyus")]
 position = Vector2(632, -59)
 curve = SubResource("Curve2D_6ixh2")
-inveral = 20
 flip = true
 
 [node name="NinePatchRect" parent="." instance=ExtResource("12_4qi6m")]

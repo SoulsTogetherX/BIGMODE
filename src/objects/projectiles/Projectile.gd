@@ -8,8 +8,6 @@ class_name Projectile extends Node2D
 		continous_collition_checking = val;
 		set_physics_process(continous_collition_checking);
 
-var _movement      : Tween;
-
 func set_timer(max_duration : float) -> void:
 	if max_duration > 0:
 		var timer = Timer.new();
@@ -26,7 +24,7 @@ func destroy(fade_particle : bool = true) -> void:
 		_particle.fade_this();
 	queue_free();
 
-func on_collide(collide : Node2D) -> void:
+func on_collide(_collide : Node2D) -> void:
 	destroy();
 
 func on_dissipate() -> void:

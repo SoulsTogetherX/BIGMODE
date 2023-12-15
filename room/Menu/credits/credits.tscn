@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0cuhkviuydxn"]
+[gd_scene load_steps=10 format=3 uid="uid://b0cuhkviuydxn"]
 
 [ext_resource type="Script" path="res://room/Menu/credits/credits.gd" id="1_0ttli"]
 [ext_resource type="Texture2D" uid="uid://5rk3a3cb3ke6" path="res://asset/sprites/GUI/credits_menu/MODE Credits.png" id="2_xaenv"]
 [ext_resource type="Theme" uid="uid://b2ya4oywhj26t" path="res://asset/themes/GUI_Button.tres" id="3_vxw5g"]
 [ext_resource type="Script" path="res://room/Menu/button.gd" id="4_5lkin"]
 [ext_resource type="Texture2D" uid="uid://pswmvd6fpe48" path="res://asset/sprites/GUI/start_menu/UI Play.png" id="5_7dctk"]
+[ext_resource type="Script" path="res://room/Menu/credits/secret.gd" id="6_jrrk0"]
+[ext_resource type="AudioStream" uid="uid://b7gvnlc4nk3ui" path="res://asset/I did not listen to this sound/SUPER_SECRET_MESSAGE_DONT_OPEN.wav" id="7_bpw0y"]
 
 [sub_resource type="SystemFont" id="SystemFont_5lw1w"]
 
@@ -44,6 +46,17 @@ text = "Back
 "
 label_settings = SubResource("LabelSettings_k1xai")
 
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("6_jrrk0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(233, 360, 238, 348, 221, 316, 221, 273, 226, 259, 244, 234, 259, 219, 272, 209, 297, 202, 345, 202, 367, 209, 382, 217, 388, 224, 411, 276, 414, 302, 385, 336, 403, 378, 381, 400, 381, 419, 348, 434, 291, 433, 245, 418, 214, 401, 191, 402, 185, 396, 198, 384, 179, 375, 125, 372, 115, 361, 141, 353, 167, 341, 176, 336, 183, 321, 208, 357, 221, 363, 232, 366)
+
+[node name="secret_sound" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource("7_bpw0y")
+volume_db = -10.0
+
 [connection signal="mouse_entered" from="back" to="back" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="back" to="back" method="_on_mouse_exited"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]

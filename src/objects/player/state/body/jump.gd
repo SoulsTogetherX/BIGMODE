@@ -20,6 +20,8 @@ func enter() -> void:
 		_actor.velocity.y += _actor.BOOST_JUMP;
 	else:
 		_actor.velocity.y += _actor.JUMP_VELOCITY;
+	
+	_actor.collision_layer &= ~16;
 
 func exit() -> void:
 	_actor.force_jumped = false;

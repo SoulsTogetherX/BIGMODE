@@ -97,11 +97,11 @@ step = 0.01
 
 [node name="Text" type="Label" parent="Sound"]
 layout_mode = 0
-offset_left = 101.0
+offset_left = 15.0
 offset_top = -50.0
-offset_right = 284.0
+offset_right = 373.0
 offset_bottom = 5.0
-text = "Sound"
+text = "Sound Effects"
 label_settings = SubResource("LabelSettings_a88mp")
 horizontal_alignment = 1
 

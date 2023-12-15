@@ -216,13 +216,13 @@ func zoom_event(
 				times       : Vector2,
 				zoom_target : Vector2,
 				trans       : Tween.TransitionType = Tween.TRANS_SINE,
-				ease        : Tween.EaseType       = Tween.EASE_IN_OUT
+				ease_       : Tween.EaseType       = Tween.EASE_IN_OUT
 				) -> void:
 	if _zoom_tweem:
 		_zoom_tweem.kill();
 	
 	_zoom_tweem = create_tween().set_parallel();
-	_zoom_tweem.set_ease(ease);
+	_zoom_tweem.set_ease(ease_);
 	_zoom_tweem.set_trans(trans);
 	if times.x > 0:
 		_zoom_tweem.tween_property(self, "zoom:x", zoom_target.x, times.x);

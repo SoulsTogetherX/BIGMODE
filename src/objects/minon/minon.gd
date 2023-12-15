@@ -2,34 +2,34 @@
 class_name Minon extends CharacterBody2D
 
 const GRAVITY : int   =  980;
+const health_pickup : PackedScene = preload("res://src/objects/collectable/health/health.tscn");
 var move_speed : float = 250.;
 var hp = 1;
+var spawn_health : bool = false;
 
 @export var settings  : LabelSettings;
 @export var move      : bool = false:
 	set(val):
 		if not is_inside_tree():
 			await ready;
-		elif val:
+		if val:
 			$StateOverhead.change_state("main", "walk");
 		
 		move = val;
 
-@export var fall_move : bool = false;
-@export var face_left : bool:
+@export var fall_move : bool = false:
 	set(val):
-		if not is_inside_tree():
-			await ready;
+		fall_move = val;
+		$body/fall_detect/CollisionShape2D.disabled = fall_move;
+@export var face_left : bool:
+	set = adjust;
 		
-		var sign_c = (1 if val else -1);
-		body.scale.x = sign_c;
-		forward_detect.target_position.x = 1.25 * sign_c;
-		face_left = val;
+@export var killable : bool = true;
 
 @onready var weak_point: Area2D = $weak_point;
 @onready var body: Sprite2D = $body
-@onready var fall_detect: RayCast2D = $body/fall_detect
-@onready var forward_detect: RayCast2D = $body/forward_detect
+@onready var fall_detect: Area2D = $body/fall_detect
+@onready var forward_detect: Area2D = $body/forward_detect
 @onready var death_sound: Emitter = $death_sound
 @onready var explode_sound: Emitter = $death
 
@@ -37,6 +37,14 @@ var crushed_quotes : QuotesInfo = QuotesInfo.new();
 var shot_quotes    : QuotesInfo = QuotesInfo.new();
 var spike_quotes   : QuotesInfo = QuotesInfo.new();
 var blast_quotes   : QuotesInfo = QuotesInfo.new();
+
+func adjust(val : bool) -> void:
+	if not is_inside_tree():
+		await ready;
+	
+	var sign_c = (1 if val else -1);
+	body.scale.x = sign_c;
+	face_left = val;
 
 func _ready() -> void:
 	crushed_quotes.quotes = [
@@ -127,22 +135,22 @@ func _ready() -> void:
 		["I still think pineapple Pizza is--", 0.05],
 		];
 	
-	
-	fall_detect.add_exception(self);
-	forward_detect.add_exception(self);
-	
 	if Engine.is_editor_hint():
 		set_process(false);
 		set_physics_process(false);
 	elif GlobalInfo.enemy_hp_inc:
 		hp = 2;
+	
+	adjust(face_left);
 
-func _jumped_on(body: Node2D) -> void:
+const KILL_TO_HEALTH_RATIO : int = 20;
+static var current_kill : int = 1;
+func _jumped_on(body_: Node2D) -> void:
 	if $StateOverhead.is_in_state("main", "ded"):
 		return;
 	
-	body.force_jump();
-	body.velocity.x *= 1.3;
+	body_.force_jump();
+	body_.velocity.x *= 1.3;
 	
 	hp -= 1;
 	if hp > 0:
@@ -150,6 +158,7 @@ func _jumped_on(body: Node2D) -> void:
 		return;
 	
 	TextSpawner.new(settings).spawn(get_tree(), global_position, crushed_quotes.pick_random());
+	spawn_pickup_check();
 	kill();
 
 func shot_at() -> void:
@@ -159,6 +168,7 @@ func shot_at() -> void:
 		return;
 	
 	TextSpawner.new(settings).spawn(get_tree(), global_position, shot_quotes.pick_random());
+	spawn_pickup_check();
 	kill();
 
 func crashed_into() -> void:
@@ -167,19 +177,31 @@ func crashed_into() -> void:
 		hurt_animate();
 		return;
 	
+	spawn_pickup_check();
 	kill();
 
-func _kill_player(body: Node2D) -> void:
-	if $StateOverhead.is_in_state("main", "ded") || body.boosted:
+const HEALTH_PICKUP : PackedScene = preload("res://src/objects/collectable/health/health.tscn");
+func spawn_pickup_check() -> void:
+	if !spawn_health:
 		return;
 	
-	body.kill();
+	if (current_kill % KILL_TO_HEALTH_RATIO) == 0:
+		var pickup = HEALTH_PICKUP.instantiate();
+		pickup.global_position = global_position + (Vector2.UP * 10);
+		get_tree().current_scene.add_child(pickup);
+		
+	current_kill += 1;
+
+func _kill_player(body_: Node2D) -> void:
+	if $StateOverhead.is_in_state("main", "ded") || body_.boosted:
+		return;
+	
+	body_.kill();
 	
 	hp -= 1;
 	if hp > 0:
 		hurt_animate();
 		return;
-	
 	crashed_into();
 
 func spike_kill() -> void:
@@ -197,6 +219,9 @@ func hurt_animate() -> void:
 	tw.tween_property(body, "modulate", Color.WHITE, 0.05);
 
 func kill() -> void:
+	if !killable:
+		return;
+	
 	if $StateOverhead.is_in_state("main", "ded"):
 		return;
 	collision_layer = 0;

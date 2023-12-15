@@ -24,10 +24,10 @@ func instant_time_scale(scale : float = 0.0, duration : float = 0.1, audio : boo
 ##
 ## [b]NOTE[/b]: not implemented yet.
 func graduale_time_scale(
-			scale : float = 0.0,
-			spd_in : float = 0.1,
-			wait : float = 0.0,
-			spd_out : float = 0.1
+			_scale : float = 0.0,
+			_spd_in : float = 0.1,
+			_wait : float = 0.0,
+			_spd_out : float = 0.1
 			) -> void:
 	
 	pass;
@@ -42,6 +42,17 @@ func adjust_sounds(scale : float) -> void:
 var time : float = 0.0;
 var timer_on : bool = false;
 
+func pause(toggle : bool = true, audio : bool = false) -> void:
+	if toggle:
+		Engine.time_scale = 0.0;
+		toggle_timer(false);
+	else:
+		Engine.time_scale = default_time;
+		toggle_timer(true);
+	
+	if audio:
+		adjust_sounds(Engine.time_scale);
+
 func toggle_timer(toggle : bool = true) -> void:
 	timer_on = toggle;
 
@@ -50,7 +61,7 @@ func reset_timer(autostart : bool = false) -> void:
 	time = 0.0;
 
 func _process(delta: float) -> void:
-	if timer_on:
+	if timer_on && Engine.time_scale > 0:
 		if ignore_time_scale:
 			time += (delta / Engine.time_scale);
 		else:
@@ -110,26 +121,32 @@ func get_timer_string(
 	if show_mill:
 		ret = "%03d:" % [mili % 1000];
 		
-	var secs  : int = mili / 60;
+	@warning_ignore("integer_division")
+	var secs  : int = mili / 1000;
 	if show_secs:
 		ret = "%02d:" % [secs % 60] + ret;
 	
+	@warning_ignore("integer_division")
 	var mins  : int = secs / 60;
 	if show_mins:
 		ret = "%02d:" % [mins % 60] + ret;
 	
+	@warning_ignore("integer_division")
 	var hours : int = mins / 60;
 	if show_hours:
 		ret = "%02d:" % [hours % 60] + ret;
 	
+	@warning_ignore("integer_division")
 	var days  : int = hours / 24;
 	if show_days:
-		ret = "%02d:" % [hours % 24] + ret;
+		ret = "%02d:" % [days % 24] + ret;
 	
+	@warning_ignore("integer_division")
 	var years : int = days / 356;
 	if show_years:
 		ret = "%03d:" % [years % 356] + ret;
 	
+	@warning_ignore("integer_division")
 	var cens  : int = years / 1000;
 	if show_centuries:
 		ret = "%03d:" % [cens % 1000] + ret;

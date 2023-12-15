@@ -4,5 +4,5 @@ extends Sprite2D
 
 @export var parral_scale : float = 1.0;
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_position.x = lerp(GlobalInfo.player.global_position.x, pos, parral_scale);

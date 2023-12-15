@@ -9,10 +9,13 @@ extends Node2D
 func _ready() -> void:
 	$orb.frame = randi_range(4, 7);
 
-func _on_collect(body : Node2D):
+func _on_collect(_body : Node2D):
 	GlobalInfo.increase_score(100);
 	
-func _on_entered(body):
+func _on_entered(_body):
+	call_deferred("foo");
+
+func foo() -> void:
 	visible = false;
 	$Collect/CollisionShape2D.disabled = true;
 	

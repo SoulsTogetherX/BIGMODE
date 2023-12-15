@@ -5,10 +5,10 @@ var _settings : LabelSettings;
 func _init(settings : LabelSettings) -> void:
 	_settings = settings;
 
-func spawn(tree : SceneTree, global_pos : Vector2, text : String, scale : float = 1., color : Color = Color.WHITE, w : float = 50, h_1 : float = -10, h_2 : float = -5) -> TextSpawner:
+func spawn(tree : SceneTree, global_pos : Vector2, text : String, _scale : float = 1., z_set = 2, _color : Color = Color.WHITE, w : float = 50, h_1 : float = -10, h_2 : float = -5) -> TextSpawner:
 	var rotation_point : Node2D = Node2D.new();
 	var label : Label = Label.new();
-	label.z_index = 2;
+	label.z_index = z_set;
 	label.label_settings = _settings;
 	label.text = text;
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;
@@ -19,7 +19,6 @@ func spawn(tree : SceneTree, global_pos : Vector2, text : String, scale : float 
 	rotation_point.global_position = global_pos;
 	rotation_point.global_position += Vector2((randf() - 0.5), (randf() - 0.5)) * 20;
 	label.position = -_settings.font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, _settings.font_size) * 0.5;;
-	tree.current_scene.add_child(label);
 	
 	var tw = tree.create_tween().set_parallel();
 	var x_reach : float = (randf() - 0.5) * w;

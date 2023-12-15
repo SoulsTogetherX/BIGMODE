@@ -40,6 +40,8 @@ func respawn() -> void:
 	
 	player_health = player_max_health;
 	if boss_room:
+		SoundManager.stop();
+		
 		get_tree().reload_current_scene();
 		
 		await get_tree().create_timer(0.2).timeout;
@@ -55,6 +57,18 @@ func respawn() -> void:
 	
 	await get_tree().create_timer(0.2).timeout;
 	Transition.fade_out(0.5);
+
+func reset_values() -> void:
+	boss_room = false;
+	hard_coded_flag_check__I_am_a_terrible_programmer = false;
+	request_spawn_pos = true;
+	
+	score = 0;
+	player_health = player_max_health;
+	TimeManager.time = 0;
+	TimeManager.toggle_timer(false);
+	
+	SoundManager.pitch_scale = 1.0;
 
 func increase_score(inc : int) -> void:
 	score += inc;

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ycaotd6qrioi"]
+[gd_scene load_steps=5 format=3 uid="uid://ycaotd6qrioi"]
 
 [ext_resource type="Texture2D" uid="uid://doms2dom2sm1e" path="res://asset/sprites/icon/icon.svg" id="1_4r20b"]
 [ext_resource type="Script" path="res://src/objects/bounce_pad/bounce_pad.gd" id="1_w6b3t"]
+[ext_resource type="AudioStream" uid="uid://be8k8qh38pkcd" path="res://asset/sounds/spring/springy.wav" id="3_5bybd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3jku"]
 size = Vector2(4.99999, 192)
@@ -22,5 +23,9 @@ collision_mask = 2
 position = Vector2(-4.88699e-05, -7.5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_j3jku")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5bybd")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_enter"]

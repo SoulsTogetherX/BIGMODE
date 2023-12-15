@@ -21,16 +21,34 @@ const ROOM_PATHS  : Array[String] = [
 func _ready() -> void:
 	TimeManager.adjust_sounds(TimeManager.default_time);
 	call_deferred_thread_group("load_game");
+	
+	SoundManager.set_music(load("res://asset/music/level_music.mp3"));
+	SoundManager.play_music();
+	SoundManager.volume_db = -40;
+	
+	var tw = create_tween();
+	tw.set_trans(Tween.TRANS_EXPO);
+	tw.tween_property(SoundManager, "volume_db", 0.0, 4);
 
 func load_game() -> void:
 	add_child(START_ROOM.instantiate());
+	
 	var player = PLAYER_SET.instantiate();
 	add_child(player);
 	
-	for path in ROOM_PATHS:
-		ResourceLoader.load_threaded_request(path);
-	
-	for path in ROOM_PATHS:
-		add_child(ResourceLoader.load_threaded_get(path).instantiate());
+	call_deferred("load_next", 0);
 	
 	$Center.queue_free();
+
+func load_next(indx : int) -> void:
+	if indx >= ROOM_PATHS.size():
+		return;
+	
+	ResourceLoader.load_threaded_request(ROOM_PATHS[indx]);
+	var room = ResourceLoader.load_threaded_get(ROOM_PATHS[indx]).instantiate();
+	add_child(room);
+	call_deferred_thread_group("load_next", indx + 1);
+
+func _exit_tree() -> void:
+	for path in ROOM_PATHS:
+		ResourceLoader.load_threaded_get(path);

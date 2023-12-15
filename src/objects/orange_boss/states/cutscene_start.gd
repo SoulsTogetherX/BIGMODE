@@ -10,7 +10,7 @@ func get_id():
 func state_ready() -> void:
 	_actor.activate_area.body_entered.connect(cutscene);
 
-func cutscene(body : Node2D) -> void:
+func cutscene(_body : Node2D) -> void:
 	GlobalInfo.hard_coded_flag_check__I_am_a_terrible_programmer = true;
 	
 	var OG_pos = GlobalInfo.camera.position;

@@ -1,6 +1,6 @@
 extends Area2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var diff : float = (global_position.x - GlobalInfo.player.global_position.x);
 	modulate.a = 1.0 - ((diff + 950) / -1350);
 

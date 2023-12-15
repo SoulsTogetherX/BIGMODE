@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b18qh3kex4h20"]
+
+[ext_resource type="FontFile" uid="uid://nd5xavrs8jdn" path="res://asset/font/PacifyAngryRegular-DOjXW.ttf" id="1_3e2jn"]
+
+[resource]
+font = ExtResource("1_3e2jn")
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)

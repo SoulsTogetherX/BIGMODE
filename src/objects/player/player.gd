@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 const SPEED         : float =  500;
 const BOOST_SPEED   : float =  2000;
-const JUMP_VELOCITY : int   = -400;
+const JUMP_VELOCITY : int   = -450;
 const BOOST_JUMP    : float = -500;
 const JUMP_CUTOFF   : float = -50.;
 const BOOST_CUTOFF  : float = -60;
@@ -13,7 +13,6 @@ const GRAVITY       : int   =  980;
 @onready var coyote_timer   : Timer             = $coyote_timer;
 @onready var jump_buffer    : Timer             = $jump_buffer;
 @onready var boost_timer    : Timer             = $boost_timer
-@onready var walk_time      : Timer             = $walk_time;
 @onready var i_frames       : Timer             = $I_frames
 @onready var body_overhead  : StateOverhead     = $body;
 @onready var body_collide   : CollisionShape2D  = $bodyCollide;
@@ -45,10 +44,17 @@ var boosted : bool = false:
 			boost_timer.start();
 			if body_overhead.is_in_states("main", ["idle", "slow_down"]):
 				body_overhead.change_state("main", "move");
+			
+			var tw = create_tween();
+			tw.tween_property(self, "modulate", Color("#ff9696"), 0.2);
 		else:
 			boost_timer.stop();
 			if body_overhead.is_in_state("main", "move"):
 				body_overhead.change_state("main", "slow_down");
+			
+			var tw = create_tween();
+			tw.tween_property(self, "modulate", Color.WHITE, 0.2);
+			
 
 func _ready() -> void:
 	GlobalInfo.player = self;
@@ -114,10 +120,10 @@ func _ready() -> void:
 		["Back Take", 3],
 		["Do a flip", 3],
 		["Jamp", 2.5],
-		["Stunt man here", 2.5],
-		["Don't hurt yourself", 2],
+		["Stunt man here", 1.5],
+		["Don't hurt yourself", 1],
 		["Rude", 0.8],
-		["Walls do be like that", 1],
+		["Walls do be like that", 0.8],
 		["Boosted", 3],
 		["Reversal", 2],
 		["No U", 2.2],
@@ -126,6 +132,10 @@ func _ready() -> void:
 		];
 	
 	$shoot_timer.stop();
+	
+	await get_tree().create_timer(1.0, true, false, true).timeout;
+	Transition.get_child(0).material.set_shader_parameter("circle_size", 1.0);
+	Transition.fade_out(0.01);
 
 func get_movement() -> float:
 	return Input.get_axis("left", "right");
@@ -136,7 +146,7 @@ func get_look() -> Vector2:
 	look_vector.y = Input.get_axis("aim_down", "aim_up");
 	return look_vector.normalized();
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if boosted:
 		velocity.x = sign(velocity.x) * max(BOOST_SPEED, abs(velocity.x));
 	
@@ -187,6 +197,7 @@ func kill() -> void:
 		body_overhead.change_state("main", "ded");
 		return;
 	
+	TimeManager.instant_time_scale();
 	i_frames.start();
 	
 	var tw = create_tween().set_loops(10);
@@ -239,8 +250,10 @@ func _move_hor(overwrite : bool = false) -> bool:
 	
 	_prev_move = move;
 	if !boosted:
+		@warning_ignore("narrowing_conversion")
 		update_speed(move, SPEED);
 	elif move != 0:
+		@warning_ignore("narrowing_conversion")
 		update_speed(move, BOOST_SPEED);
 	
 	return true;

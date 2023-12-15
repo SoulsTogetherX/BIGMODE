@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://ug3aissj7fqx"]
+[gd_scene load_steps=32 format=3 uid="uid://ug3aissj7fqx"]
 
 [ext_resource type="Script" path="res://src/objects/minon/minon.gd" id="1_x86le"]
+[ext_resource type="LabelSettings" uid="uid://b18qh3kex4h20" path="res://asset/font/standard_font_small.tres" id="2_7xibm"]
 [ext_resource type="PackedScene" uid="uid://cy6wdj1eolk4p" path="res://src/custom_nodes/emiter/emitter.tscn" id="2_ca1gw"]
 [ext_resource type="Texture2D" uid="uid://8op1vsrf2hra" path="res://asset/sprites/minon/minon_spritesheet.png" id="2_d3kg8"]
 [ext_resource type="AudioStream" uid="uid://klshyflkrdif" path="res://asset/sounds/footsteps/player/Player_step_1.wav" id="3_0u5vd"]
@@ -20,11 +21,11 @@
 [ext_resource type="AudioStream" uid="uid://dvdvj0kp8eprh" path="res://asset/sounds/minon_hurt/player_4.wav" id="9_onac5"]
 [ext_resource type="Script" path="res://src/custom_nodes/StateMachine/state_overhead.gd" id="14_25iih"]
 
-[sub_resource type="SystemFont" id="SystemFont_jxklu"]
-subpixel_positioning = 0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsgab"]
+size = Vector2(7.5, 1.25)
 
-[sub_resource type="LabelSettings" id="LabelSettings_qcebg"]
-font = SubResource("SystemFont_jxklu")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_um8ow"]
+size = Vector2(3.75, 48.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2qha"]
 size = Vector2(47.5, 48.75)
@@ -174,17 +175,17 @@ scale = Vector2(0.8, 0.8)
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_x86le")
-settings = SubResource("LabelSettings_qcebg")
+settings = ExtResource("2_7xibm")
 
 [node name="death" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
-volume_db = -10.0
+volume_db = 5.0
 attenuation = 0.143588
 bus = &"SFX"
 _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("6_bxwhv"), ExtResource("7_bldtu")])
 
 [node name="death_sound" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
-volume_db = -10.0
+volume_db = 5.0
 attenuation = 0.133972
 bus = &"SFX"
 _particles = NodePath("../body/WalkParticle")
@@ -192,7 +193,7 @@ audios = Array[AudioStream]([ExtResource("6_ce12s"), ExtResource("7_p48or"), Ext
 
 [node name="Emitter" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_ca1gw")]
 position = Vector2(0, -1.90735e-06)
-volume_db = -20.0
+volume_db = -5.0
 pitch_scale = 1.4
 max_distance = 1000.0
 attenuation = 0.594604
@@ -201,7 +202,7 @@ _particles = NodePath("../body/WalkParticle")
 audios = Array[AudioStream]([ExtResource("3_0u5vd"), ExtResource("4_3i3ub"), ExtResource("5_g64f2")])
 
 [node name="body" type="Sprite2D" parent="."]
-position = Vector2(0, 0.100125)
+position = Vector2(0, 7.45058e-09)
 scale = Vector2(-1, 1)
 texture = ExtResource("2_d3kg8")
 hframes = 4
@@ -211,21 +212,23 @@ frame = 6
 [node name="WalkParticle" parent="body" instance=ExtResource("6_4ho5w")]
 position = Vector2(16.2176, 21.2104)
 
-[node name="fall_detect" type="RayCast2D" parent="body"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(-25, 29.9855)
-scale = Vector2(1, 1.00286)
-exclude_parent = false
-target_position = Vector2(0, 1.25)
+[node name="fall_detect" type="Area2D" parent="body"]
+collision_layer = 0
 collision_mask = 17
-hit_from_inside = true
 
-[node name="forward_detect" type="RayCast2D" parent="body"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(-26.25, 21.2283)
-exclude_parent = false
-target_position = Vector2(-1.25, 0)
-hit_from_inside = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/fall_detect"]
+position = Vector2(-27.5, 30.625)
+shape = SubResource("RectangleShape2D_hsgab")
+debug_color = Color(0, 1, 0, 0.419608)
+
+[node name="forward_detect" type="Area2D" parent="body"]
+collision_layer = 0
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="body/forward_detect"]
+position = Vector2(-25.625, 5.625)
+shape = SubResource("RectangleShape2D_um8ow")
+debug_color = Color(0, 1, 0, 0.419608)
 
 [node name="bodyCollide" type="CollisionShape2D" parent="."]
 position = Vector2(1.11759e-06, 5.62499)
@@ -280,10 +283,9 @@ idle = NodePath("../idle")
 script = ExtResource("5_13mwt")
 _idle = NodePath("../idle")
 
-[node name="idle" type="Node" parent="StateOverhead/main" node_paths=PackedStringArray("move", "fall")]
+[node name="idle" type="Node" parent="StateOverhead/main" node_paths=PackedStringArray("move")]
 script = ExtResource("6_cwrv1")
 move = NodePath("../move")
-fall = NodePath("../fall")
 
 [node name="ded" type="Node" parent="StateOverhead/main"]
 script = ExtResource("8_43vlt")

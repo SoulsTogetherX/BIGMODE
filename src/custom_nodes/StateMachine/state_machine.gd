@@ -78,11 +78,17 @@ func update() -> void:
 
 
 func _animate_interval(interval : float) -> void:
+	if not _current_state is AnimateState:
+		return;
+	
 	var new_state = _current_state.on_interval(interval);
 	if new_state:
 		_change_state(new_state);
 
 func _animate_interval_end() -> void:
+	if not _current_state is AnimateState:
+		return;
+	
 	var new_state = _current_state.on_end_animation();
 	_disconnect_all_settup();
 	if new_state:
@@ -137,14 +143,14 @@ func _prebake_intervals(state : AnimateState) -> void:
 	_current_animate_length = animation.length;
 	_current_mode           = animation.loop_mode;
 	
-	var set : Array[float] = [];
-	set = state.get_intervals().\
+	var set_ : Array[float] = [];
+	set_ = state.get_intervals().\
 			filter(func(val : float): return 0 < val && val < _current_animate_length);
-	set.append_array(state.get_interval_percentage().\
+	set_.append_array(state.get_interval_percentage().\
 			filter(func(val : float): return 0 < val && val < 1.).\
 			map(func(val : float): return val * _current_animate_length));
 	
-	for val in set:
+	for val in set_:
 		if not val in state._prebaked_intervals:
 			state._prebaked_intervals.append(val);
 

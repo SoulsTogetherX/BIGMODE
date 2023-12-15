@@ -11,12 +11,9 @@ func enter() -> void:
 	_animationPlayer.play("walk");
 
 func process_physics(_delta: float) -> State:
-	if !_actor.move:
-		return idle;
-	
-	if _actor.forward_detect.is_colliding():
+	if !_actor.fall_move && _actor.fall_detect.get_overlapping_bodies().size() == 0:
 		turn();
-	if !_actor.fall_detect.is_colliding() && !_actor.fall_move:
+	elif _actor.forward_detect.get_overlapping_bodies().size() > 0:
 		turn();
 	if !_actor.is_on_floor():
 		return fall;

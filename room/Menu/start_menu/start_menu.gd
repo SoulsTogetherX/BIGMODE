@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var animate: AnimationPlayer = $animate;
 @onready var icon: Sprite2D = $Icon;
 
 signal play;

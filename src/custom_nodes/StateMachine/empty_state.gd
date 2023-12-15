@@ -6,13 +6,17 @@ class_name State extends Node
 
 ## Easy access to the object, typically a [CharacterBody2D] or [CharacterBody3D], in which this
 ## [State] will affect.
+@warning_ignore("unused_private_class_variable")
 var _actor : Node;
 ## Easy access to the animationPlayer in which this [State] will affect.
+@warning_ignore("unused_private_class_variable")
 var _animationPlayer : AnimationPlayer;
 ## The main overhead. Access this to access all [StateMachine] objects.[br]This is useful in case
 ## you want to affect the [State] of other [StateMachine], within other [State] objects.
+@warning_ignore("unused_private_class_variable")
 var _stateOverhead : StateOverhead;
 ## The id of the [StateMachine] this [State] is in.
+@warning_ignore("unused_private_class_variable")
 var _machine_id : String;
 
 var lock : bool = false;

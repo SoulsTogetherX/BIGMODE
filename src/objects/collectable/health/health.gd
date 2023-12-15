@@ -19,7 +19,7 @@ func _ready() -> void:
 		[":DDDD", 0.8],
 		];
 
-func _on_collect(body: Node2D) -> void:
+func _on_collect(_body: Node2D) -> void:
 	GlobalInfo.increase_score(500);
 	
 	GlobalInfo.player_health += 1;
@@ -32,5 +32,5 @@ func _on_collect(body: Node2D) -> void:
 	await $sound.finished;
 	queue_free();
 
-func _on_entered(body: Node2D) -> void:
+func _on_entered(_body: Node2D) -> void:
 	pass;

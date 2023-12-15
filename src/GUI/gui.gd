@@ -8,8 +8,6 @@ extends CanvasLayer
 const HEARTH_WIDTH : int = 32;
 
 func _ready() -> void:
-	TimeManager.toggle_timer();
-	
 	update_score();
 	update_health_max(-1);
 	update_health(-1);
@@ -18,13 +16,13 @@ func _ready() -> void:
 	GlobalInfo.updated_max_health.connect(update_health_max);
 	GlobalInfo.updated_health.connect(update_health);
 
-func _process(delta: float) -> void:
-	time_label.text = TimeManager.get_timer_string(false, true, true, true, true);
+func _process(_delta: float) -> void:
+	time_label.text = TimeManager.get_timer_string(false, true, true, true);
 
 func update_score() -> void:
 	score_label.text = "%06d" % [GlobalInfo.score];
 
-func update_health_max(old : int) -> void:
+func update_health_max(_old : int) -> void:
 	if GlobalInfo.player_health <= 0:
 		health_back.visible = false;
 		return;

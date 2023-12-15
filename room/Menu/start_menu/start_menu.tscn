@@ -10,16 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://xsloct884g8v" path="res://asset/sprites/GUI/start_menu/UI Credits.png" id="4_tnyt2"]
 [ext_resource type="Texture2D" uid="uid://bjr0wqr54eyei" path="res://asset/sprites/GUI/start_menu/Subtext.png" id="7_2w2gy"]
 
-[sub_resource type="SystemFont" id="SystemFont_3x6ul"]
+[sub_resource type="SystemFont" id="SystemFont_f45am"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t7yow"]
-font = SubResource("SystemFont_3x6ul")
+font = SubResource("SystemFont_f45am")
 font_size = 40
 
-[sub_resource type="SystemFont" id="SystemFont_bmpl6"]
+[sub_resource type="SystemFont" id="SystemFont_1u6bp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kjqo3"]
-font = SubResource("SystemFont_bmpl6")
+font = SubResource("SystemFont_1u6bp")
 font_size = 40
 
 [node name="StartMenu" type="Node2D"]

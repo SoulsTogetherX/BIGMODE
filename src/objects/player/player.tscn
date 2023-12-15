@@ -1,6 +1,7 @@
-[gd_scene load_steps=52 format=3 uid="uid://1l3xe5hihuta"]
+[gd_scene load_steps=51 format=3 uid="uid://1l3xe5hihuta"]
 
 [ext_resource type="Script" path="res://src/objects/player/player.gd" id="1_h5kqw"]
+[ext_resource type="LabelSettings" uid="uid://b18qh3kex4h20" path="res://asset/font/standard_font_small.tres" id="2_3jbi1"]
 [ext_resource type="AudioStream" uid="uid://bty4n6oo5jleb" path="res://asset/sounds/hurt/player_hurt.wav" id="2_6u70r"]
 [ext_resource type="Texture2D" uid="uid://bj5bgnb0vngqv" path="res://asset/sprites/player/david_spritesheet.png" id="2_e2nie"]
 [ext_resource type="PackedScene" uid="uid://cy6wdj1eolk4p" path="res://src/custom_nodes/emiter/emitter.tscn" id="2_qo5up"]
@@ -37,12 +38,6 @@
 [ext_resource type="Script" path="res://src/objects/player/state/body/ded.gd" id="32_yap5s"]
 [ext_resource type="Script" path="res://src/objects/player/state/victory.gd" id="34_g80pl"]
 [ext_resource type="PackedScene" uid="uid://dswddrk6bhuqm" path="res://src/objects/projectiles/David/bullet.tscn" id="35_cmp0g"]
-
-[sub_resource type="SystemFont" id="SystemFont_uhc4g"]
-subpixel_positioning = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_ywm34"]
-font = SubResource("SystemFont_uhc4g")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tsla"]
 size = Vector2(25.375, 40)
@@ -305,11 +300,10 @@ z_index = 1
 collision_layer = 2
 collision_mask = 49
 script = ExtResource("1_h5kqw")
-settings = SubResource("LabelSettings_ywm34")
+settings = ExtResource("2_3jbi1")
 
 [node name="hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6u70r")
-volume_db = -10.0
 pitch_scale = 1.2
 bus = &"SFX"
 
@@ -320,7 +314,7 @@ bus = &"SFX"
 
 [node name="foot_steps" parent="." node_paths=PackedStringArray("_particles") instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
-volume_db = -5.0
+volume_db = 5.0
 pitch_scale = 1.4
 bus = &"SFX"
 _particles = NodePath("../turn_node/WalkParticle")
@@ -328,20 +322,21 @@ audios = Array[AudioStream]([ExtResource("3_yh6hu"), ExtResource("4_73evq"), Ext
 
 [node name="jump" parent="." instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
-volume_db = -5.0
+volume_db = 5.0
 pitch_scale = 0.5
 bus = &"SFX"
 audios = Array[AudioStream]([ExtResource("6_xpakn"), ExtResource("7_i3prd"), ExtResource("8_5skmr"), ExtResource("9_jtkep")])
 
 [node name="land" parent="." instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
+volume_db = 10.0
 pitch_scale = 0.65
 bus = &"SFX"
 audios = Array[AudioStream]([ExtResource("10_f6it4"), ExtResource("11_45om5"), ExtResource("12_n670b"), ExtResource("13_qvo43")])
 
 [node name="gun_shot" parent="." instance=ExtResource("2_qo5up")]
 position = Vector2(0, -33)
-volume_db = -20.0
+volume_db = -5.0
 pitch_scale = 0.6
 bus = &"SFX"
 audios = Array[AudioStream]([ExtResource("14_buhvo"), ExtResource("15_6s3cv"), ExtResource("16_hcwrn"), ExtResource("17_3u2qa"), ExtResource("18_n73su"), ExtResource("19_h8whg")])
@@ -418,6 +413,7 @@ wait_time = 0.25
 one_shot = true
 
 [node name="I_frames" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [node name="body" type="Node" parent="." node_paths=PackedStringArray("_actor", "_animationPlayer")]

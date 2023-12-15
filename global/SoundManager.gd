@@ -11,11 +11,6 @@ func set_music(audio : AudioStream):
 	position = 0;
 	stream = audio;
 
-func set_volume(vol : float):
-	music_volume = vol;
-	if music_volume == -40.0:
-		volume_db = -80;
-
 func play_music():
 	volume_db = music_volume;
 	play();

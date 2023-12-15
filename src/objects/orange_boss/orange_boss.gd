@@ -14,9 +14,11 @@ var health : int;
 @onready var find_ground: RayCast2D = $find_ground;
 @onready var blast_particles : Array[CPUParticles2D] = [$Sprite2D/BlastParticle_1, $Sprite2D/BlastParticle_2, $Sprite2D/BlastParticle_3];
 @onready var intro: Emitter = $Intro;
+@onready var smoke_particle: ParticleClear = $Sprite2D/SmokeParticle
 
 @export var floor_mid_marker : Marker2D;
 @export var warning : Node2D;
+@export var light_manager : Node2D;
 @export var activate_area : Area2D;
 
 var health_bar : TextureProgressBar;
@@ -35,6 +37,10 @@ func shot_at() -> void:
 			die();
 			return;
 		switch_phase(phase + 1);
+	elif phase == 2 && health < 70:
+		smoke_particle.emitting = true;
+	
+	
 	hurt_animate()
 
 func hurt_animate() -> void:
@@ -151,8 +157,9 @@ func activate_spikes() -> void:
 		activated_spikes.front().retract_spikes();
 		activated_spikes.pop_front();
 
+
 const minon_scene : PackedScene = preload("res://src/objects/minon/minon.tscn");
-func spawn_minons(spawn_falling : bool = false) -> void:
+func spawn_minons(_spawn_falling : bool = false) -> void:
 	for node_info in get_tree().get_nodes_in_group("spawner_node"):
 		var minion : Minon = minon_scene.instantiate();
 		get_tree().current_scene.add_child(minion);
@@ -161,6 +168,8 @@ func spawn_minons(spawn_falling : bool = false) -> void:
 		minion.move = true;
 		minion.fall_move = true;
 		minion.face_left = node_info.get_meta("left", false);
+		
+		minion.spawn_health = true;
 		
 		minion.add_to_group("Cleanable");
 
@@ -227,7 +236,7 @@ const STAGE_DELAYS : Array[Array] = [
 	],
 ]
 
-const STAGE_HEALHS : Array[int]   = [1,1,1]#[125, 160, 170];
+const STAGE_HEALHS : Array[int]   = [125, 160, 170];
 const STAGE_COLORS : Array[Color] = [Color.SEA_GREEN, Color.DARK_ORANGE, Color.RED];
 const STAGE_RANGES : Array[int]   = [150, 200, 300];
 
@@ -423,11 +432,11 @@ const priorities = [
 ]
 
 var stage_lock : bool = false;
-func switch_phase(switch_phase : int) -> void:
+func switch_phase(s_phase : int) -> void:
 	$StateOverhead/StateMachine/transition/Timer.stop();
 	stage_lock = true;
 	
-	phase = switch_phase;
+	phase = s_phase;
 	
 	max_health = STAGE_HEALHS[phase];
 	if GlobalInfo.enemy_hp_inc:
@@ -440,14 +449,21 @@ func switch_phase(switch_phase : int) -> void:
 	
 	if phase == 1:
 		$StateOverhead/StateMachine/transition.cutscene_2 = true;
+	elif phase == 2:
+		light_manager.run_lights();
+	
+	SoundManager.pitch_scale = 1.0 + (0.01 * phase);
 	
 	if health_bar:
-		GlobalInfo.camera.shake_event(Vector3(0.3, 0.3, 0.0), Vector3(5., 5., 0), Vector3.ZERO);
+		GlobalInfo.camera.shake_event(Vector3(0.5, 0.5, 0.0), Vector3(5., 5., 0), Vector3.ZERO);
 		
 		var tw = create_tween().set_parallel();
 		tw.tween_property(health_bar, "max_value", max_health, 0.8).set_delay(0.5);
 		tw.tween_property(health_bar, "value", health, 0.8).set_delay(0.5);
 		tw.tween_property(health_bar, "tint_progress", STAGE_COLORS[phase], 0.8).set_delay(0.5);
+		tw.tween_property(health_bar, "rotation_degrees", -2, 0.1).set_delay(0.40);
+		tw.tween_property(health_bar, "rotation_degrees", 1, 0.1).set_delay(0.55);
+		tw.tween_property(health_bar, "rotation_degrees", 0, 0.1).set_delay(0.70);
 		
 		await tw.finished;
 		
@@ -503,7 +519,7 @@ func prioirtize() -> Array[Array]:
 		weighted.append(weight / sum);
 	
 	var random : float = randf();
-	var selected_idx : int;
+	var selected_idx : int = 0;
 	for weight in weighted:
 		if random <= weight:
 			break;

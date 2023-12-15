@@ -19,11 +19,11 @@ func process_frame(_delta: float) -> State:
 	_actor.turn(_actor.get_local_mouse_position().x < 0);
 	_idle.reposition_gun();
 	
-	var bullet : HomingProject = bullet.instantiate();
-	get_tree().current_scene.add_child(bullet);
+	var bullet_ : HomingProject = bullet.instantiate();
+	get_tree().current_scene.add_child(bullet_);
 	
 	var shoot_pos = _actor.davids_gun.get_node("shoot_pos");
-	bullet.global_position = shoot_pos.global_position;
+	bullet_.global_position = shoot_pos.global_position;
 	
 	var velocity : Vector2 = Vector2.RIGHT.rotated(_actor.davids_gun.global_rotation) * bullet_speed;
 	var norm : Vector2 = velocity.normalized();
@@ -38,8 +38,8 @@ func process_frame(_delta: float) -> State:
 	else:
 		velocity.y += _actor.velocity.y;
 	
-	bullet.set_starting_velocity(velocity.angle(), velocity.length());
-	bullet.set_timer(2.5);
+	bullet_.set_starting_velocity(velocity.angle(), velocity.length());
+	bullet_.set_timer(2.5);
 	
 	if _actor.turn_node.scale.x:
 		_actor.velocity -= Vector2.RIGHT\
@@ -48,7 +48,7 @@ func process_frame(_delta: float) -> State:
 		
 	_actor.fix_speed_when_next_on_ground = true;
 	_actor._shoot_message(\
-						bullet.global_position +\
+						bullet_.global_position +\
 						Vector2(sign(_actor.get_local_mouse_position().x)\
 						* 20, -30)\
 						);

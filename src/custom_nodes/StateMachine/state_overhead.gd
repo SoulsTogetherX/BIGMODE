@@ -25,7 +25,6 @@ var _usesAnimationPlayer : bool:
 ## Shown in the editor window when [member _usesActor] is [code]true[/code].
 var _actor;
 var _animationPlayer;
-var _drawMod;
 var _state_machines : Dictionary;
 
 signal state_changed(machine_id : String);
@@ -74,9 +73,10 @@ func _ready() -> void:
 		return;
 	
 	if _usesActor && not _actor.is_inside_tree():
-		_actor.ready;
+		await _actor.ready;
+	
 	if _usesAnimationPlayer && not _animationPlayer.is_inside_tree():
-		_animationPlayer.ready;
+		await _animationPlayer.ready;
 	
 	for machine in get_children():
 		if machine is StateMachine:
@@ -171,7 +171,7 @@ func find_state(state_id : String) -> String:
 ## Checks to see if this [StateOverhead] has a [StateBase], with the given id, attached to
 ## a [StateMachine] object, with the given id.
 func has_machine_state(machine_id : String, state_id : String) -> bool:
-	return true;
+	return _state_machines.has(machine_id) && _state_machines[machine_id].has_state(state_id);
 
 ## Checks if the running [StateBase]'s name identifier is equal to a passed [String] object.
 func is_in_state(machine_id : String, state_id : String) -> bool:

@@ -4,6 +4,7 @@ extends State
 @export var transition : State;
 
 @export var speed     : float = 300;
+
 var _velocity_x : float;
 var target_x : float;
 var can_move : bool = false;
@@ -21,6 +22,8 @@ func enter() -> void:
 	fall.return_state = self;
 	_animationPlayer.play("start_walk");
 	_actor.turn(_velocity_x > 0);
+	
+	
 	
 	await get_tree().create_timer(0.3).timeout;
 	can_move = true;

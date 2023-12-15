@@ -9,6 +9,8 @@ var collect_quote : QuotesInfo = QuotesInfo.new();
 
 @export var message : String = "";
 
+@onready var audio : AudioStreamPlayer = $AudioStreamPlayer
+
 func _ready() -> void:
 	collect_quote.quotes = [
 		["ZOOM!", 3],
@@ -27,14 +29,18 @@ func _ready() -> void:
 
 func _collect_message() -> void:
 	if message != "":
-		TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, -30), message, 10);
+		TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, -30), message, 10, 3);
 		message = "";
 		return;
 	
 	TextSpawner.new(settings).spawn(get_tree(), global_position + Vector2(0, -30), collect_quote.pick_random(), 10);
 
-func _on_collect(body: Node2D) -> void:
+func _on_collect(_body: Node2D) -> void:
 	_collect_message();
+	
+	audio.pitch_scale = 1.9 + randf() * 0.2;
+	audio.play();
+	
 	if slow_down:
 		GlobalInfo.camera.zoom_event(Vector2(0.1, 0.1), Vector2(1.1, 1.1));
 		TimeManager.instant_time_scale(slow_down_ratio, slow_down_time, true);

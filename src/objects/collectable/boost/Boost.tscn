@@ -1,22 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0qveeimm6dhd"]
 
 [ext_resource type="Script" path="res://src/objects/collectable/boost/Boost.gd" id="1_f6q2g"]
+[ext_resource type="LabelSettings" uid="uid://cfxe3p8wtgsny" path="res://asset/font/standard_font_large.tres" id="2_hujtk"]
 [ext_resource type="PackedScene" uid="uid://ck2fvp4120xx1" path="res://src/objects/collectable/collect.tscn" id="2_obmug"]
 [ext_resource type="Texture2D" uid="uid://deyyskgqqgxvb" path="res://asset/sprites/collectables/Collectables and coffee.png" id="2_yb028"]
-
-[sub_resource type="SystemFont" id="SystemFont_cglb3"]
-subpixel_positioning = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_hy2i6"]
-font = SubResource("SystemFont_cglb3")
-font_size = 64
+[ext_resource type="AudioStream" uid="uid://7v0ttr5vlcdk" path="res://asset/sounds/coffee/coffee_grab.wav" id="5_0g6dt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_01qnf"]
 radius = 14.0
 
 [node name="Boost" type="Node2D"]
 script = ExtResource("1_f6q2g")
-settings = SubResource("LabelSettings_hy2i6")
+settings = ExtResource("2_hujtk")
 
 [node name="Coffee" type="Sprite2D" parent="."]
 position = Vector2(-1, -13)
@@ -30,3 +25,8 @@ _actor = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collect"]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_01qnf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0g6dt")
+volume_db = -15.0
+pitch_scale = 2.0

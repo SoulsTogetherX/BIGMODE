@@ -5,5 +5,10 @@ func get_id():
 
 func enter() -> void:
 	$"../../../victory_sound".play();
-	await $"../../../victory_sound".finished;
+	await get_tree().create_timer(4.07).timeout;
+	
+	prints(owner, owner.owner);
 	owner.owner.switch_to_end();
+
+func process_frame(_delta : float) -> State:
+	return null;
